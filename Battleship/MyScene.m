@@ -8,6 +8,8 @@
 
 #import "MyScene.h"
 
+// Okay.
+
 // Enum representing what is contained within the array at this specific position for terrain
 typedef enum
 {
