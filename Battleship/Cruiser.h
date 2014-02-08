@@ -7,6 +7,7 @@
 //
 
 #import "Ship.h"
+#import "ShipSegment.h"
 
 @interface Cruiser : Ship
 

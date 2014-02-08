@@ -47,6 +47,7 @@
 		871F9B7518A2FFD1006F2682 /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B6518A2FFD1006F2682 /* Range.m */; };
 		871F9B7618A2FFD1006F2682 /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B6718A2FFD1006F2682 /* Ship.m */; };
 		871F9B7718A2FFD1006F2682 /* TorpedoBoat.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B6C18A2FFD1006F2682 /* TorpedoBoat.m */; };
+		874004FF18A6023600B64536 /* ShipSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 874004FE18A6023600B64536 /* ShipSegment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,10 +119,11 @@
 		871F9B6718A2FFD1006F2682 /* Ship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ship.m; sourceTree = "<group>"; };
 		871F9B6818A2FFD1006F2682 /* ShipArmourType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipArmourType.h; sourceTree = "<group>"; };
 		871F9B6918A2FFD1006F2682 /* ShipRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipRotation.h; sourceTree = "<group>"; };
-		871F9B6A18A2FFD1006F2682 /* ShipSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipSegment.h; sourceTree = "<group>"; };
 		871F9B6B18A2FFD1006F2682 /* TorpedoBoat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorpedoBoat.h; sourceTree = "<group>"; };
 		871F9B6C18A2FFD1006F2682 /* TorpedoBoat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorpedoBoat.m; sourceTree = "<group>"; };
 		871F9B6D18A2FFD1006F2682 /* WeaponType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeaponType.h; sourceTree = "<group>"; };
+		874004FE18A6023600B64536 /* ShipSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipSegment.m; sourceTree = "<group>"; };
+		8740050118A6A66A00B64536 /* ShipSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipSegment.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +269,7 @@
 		871F9B7818A2FFDD006F2682 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8740050118A6A66A00B64536 /* ShipSegment.h */,
 				871F9B5418A2FFD1006F2682 /* Coordinate.h */,
 				871F9B5518A2FFD1006F2682 /* Coordinate.m */,
 				871F9B5618A2FFD1006F2682 /* Cruiser.h */,
@@ -281,6 +284,7 @@
 				871F9B5F18A2FFD1006F2682 /* Mine.h */,
 				871F9B6018A2FFD1006F2682 /* MineLayer.h */,
 				871F9B6118A2FFD1006F2682 /* MineLayer.m */,
+				874004FE18A6023600B64536 /* ShipSegment.m */,
 				871F9B6218A2FFD1006F2682 /* RadarBoat.h */,
 				871F9B6318A2FFD1006F2682 /* RadarBoat.m */,
 				871F9B6418A2FFD1006F2682 /* Range.h */,
@@ -289,7 +293,6 @@
 				871F9B6718A2FFD1006F2682 /* Ship.m */,
 				871F9B6818A2FFD1006F2682 /* ShipArmourType.h */,
 				871F9B6918A2FFD1006F2682 /* ShipRotation.h */,
-				871F9B6A18A2FFD1006F2682 /* ShipSegment.h */,
 				871F9B6B18A2FFD1006F2682 /* TorpedoBoat.h */,
 				871F9B6C18A2FFD1006F2682 /* TorpedoBoat.m */,
 				871F9B6D18A2FFD1006F2682 /* WeaponType.h */,
@@ -413,6 +416,7 @@
 				871F9B7318A2FFD1006F2682 /* MineLayer.m in Sources */,
 				871F9B7718A2FFD1006F2682 /* TorpedoBoat.m in Sources */,
 				51171538189A390200BE75A9 /* MyScene.m in Sources */,
+				874004FF18A6023600B64536 /* ShipSegment.m in Sources */,
 				871F9B7518A2FFD1006F2682 /* Range.m in Sources */,
 				871F9B7018A2FFD1006F2682 /* Destroyer.m in Sources */,
 				871F9B7118A2FFD1006F2682 /* Fleet.m in Sources */,

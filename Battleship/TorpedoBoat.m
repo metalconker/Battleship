@@ -7,6 +7,7 @@
 //
 
 #import "TorpedoBoat.h"
+#import "ShipSegment.h"
 
 @implementation TorpedoBoat
 

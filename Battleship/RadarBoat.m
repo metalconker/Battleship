@@ -7,6 +7,7 @@
 //
 
 #import "RadarBoat.h"
+#import "ShipSegment.h"
 
 @implementation RadarBoat
 
