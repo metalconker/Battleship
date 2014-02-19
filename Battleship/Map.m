@@ -55,26 +55,29 @@
 
 -(void) initializeCoral {
     NSMutableSet *coralPositions = [[NSMutableSet alloc] init];
-    
-    while ([coralPositions count] < 24)
-    {
-        int xCoord = 10 + arc4random_uniform(10);
-        int yCoord = 3 + arc4random_uniform(24);
+    while ([coralPositions count] < 24)    {
+        int yCoord = 10 + arc4random_uniform(10);
+        int xCoord = 3 + arc4random_uniform(24);
+        int breakFlag = 0;
         Coordinate *c = [[Coordinate alloc]initWithXCoordinate:xCoord YCoordinate:yCoord initiallyFacing:NONE];
-        
-        for (Coordinate *contained in coralPositions)
-        {
-            if ([contained xCoord] == [c xCoord] && [contained yCoord] == [c yCoord])
+        for (Coordinate *contained in coralPositions) {
+            if (contained.xCoord == c.xCoord && contained.yCoord == c.yCoord) {
+                breakFlag = 1;
                 continue;
+            }
+        }
+        if (breakFlag == 1) {
+            continue;
         }
         [coralPositions addObject:c];
     }
     for (Coordinate *contained in coralPositions)
     {
-        int y = [contained yCoord];
         Terrain t = CORAL;
-        [_grid[y] removeObjectAtIndex:[contained xCoord]];
-        [_grid[y] insertObject:[NSNumber numberWithInt:t] atIndex:[contained xCoord]];
+        printf("%d,", contained.xCoord);
+        printf("%d\n", contained.yCoord);
+        [_grid[contained.xCoord] removeObjectAtIndex:contained.yCoord];
+        [_grid[contained.xCoord] insertObject:[NSNumber numberWithInt:t] atIndex:contained.yCoord];
     }
 }
 @end

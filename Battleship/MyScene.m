@@ -53,7 +53,6 @@ static NSString * const kShipNodeName = @"movable";
             for (int j = 0; j < GRID_SIZE; j++)
             {
                 ter =  [game.hostView.grid[i][j] intValue];
-                printf("%d\n", ter);
                 switch (ter)
                 {
                     case HOST_BASE:
