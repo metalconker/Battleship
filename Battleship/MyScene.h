@@ -7,7 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-
+#import "BattleshipGame.h"
 @interface MyScene : SKScene
 
 @end

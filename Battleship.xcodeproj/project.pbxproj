@@ -48,6 +48,7 @@
 		871F9B7618A2FFD1006F2682 /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B6718A2FFD1006F2682 /* Ship.m */; };
 		871F9B7718A2FFD1006F2682 /* TorpedoBoat.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B6C18A2FFD1006F2682 /* TorpedoBoat.m */; };
 		874004FF18A6023600B64536 /* ShipSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 874004FE18A6023600B64536 /* ShipSegment.m */; };
+		8783319018B4526500E77455 /* BattleshipGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 8783318F18B4526500E77455 /* BattleshipGame.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +125,9 @@
 		871F9B6D18A2FFD1006F2682 /* WeaponType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeaponType.h; sourceTree = "<group>"; };
 		874004FE18A6023600B64536 /* ShipSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipSegment.m; sourceTree = "<group>"; };
 		8740050118A6A66A00B64536 /* ShipSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipSegment.h; sourceTree = "<group>"; };
+		8783318D18B451A400E77455 /* TerrainType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainType.h; sourceTree = "<group>"; };
+		8783318E18B4526500E77455 /* BattleshipGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleshipGame.h; sourceTree = "<group>"; };
+		8783318F18B4526500E77455 /* BattleshipGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleshipGame.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +273,9 @@
 		871F9B7818A2FFDD006F2682 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8783318E18B4526500E77455 /* BattleshipGame.h */,
+				8783318F18B4526500E77455 /* BattleshipGame.m */,
+				8783318D18B451A400E77455 /* TerrainType.h */,
 				8740050118A6A66A00B64536 /* ShipSegment.h */,
 				871F9B5418A2FFD1006F2682 /* Coordinate.h */,
 				871F9B5518A2FFD1006F2682 /* Coordinate.m */,
@@ -416,6 +423,7 @@
 				871F9B7318A2FFD1006F2682 /* MineLayer.m in Sources */,
 				871F9B7718A2FFD1006F2682 /* TorpedoBoat.m in Sources */,
 				51171538189A390200BE75A9 /* MyScene.m in Sources */,
+				8783319018B4526500E77455 /* BattleshipGame.m in Sources */,
 				874004FF18A6023600B64536 /* ShipSegment.m in Sources */,
 				871F9B7518A2FFD1006F2682 /* Range.m in Sources */,
 				871F9B7018A2FFD1006F2682 /* Destroyer.m in Sources */,
