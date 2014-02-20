@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "Map.h"
 #import "Fleet.h"
+#import "Ship.h"
 
 @interface BattleshipGame : NSObject
 
 @property (strong, nonatomic) Map* hostView;
 @property (strong, nonatomic) Map* joinView;
+@property (strong, nonatomic) Ship* belongs;
 
 -(instancetype) init;
 @end
