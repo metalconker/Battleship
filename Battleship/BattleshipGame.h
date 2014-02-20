@@ -15,7 +15,6 @@
 
 @property (strong, nonatomic) Map* hostView;
 @property (strong, nonatomic) Map* joinView;
-@property (strong, nonatomic) Ship* belongs;
 
 -(instancetype) init;
 @end
