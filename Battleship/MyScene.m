@@ -299,6 +299,69 @@ static NSString * const kShipNodeName = @"movable";
     }
 }
 
+-(void)initLittleMap
+{
+    
+    // Make this map movable and sticks to a particular position (bottom right, bottom left, top right, top left)
+    
+    // get the screen width and screen height
+    int squareSize = self.frame.size.width/4;
+    
+    // make a square based on this size
+    // resize the sprite images according to this size by dividing by 30
+    float spriteSquareSize = squareSize / 30;
+    
+    // for all terrain in terrain array
+    TerrainType ter;
+    NSMutableArray *innerArray;
+    SKSpriteNode *sprite;
+    
+    for (int i = 0; i < [terrainArray count]; i++)
+    {
+        innerArray = [terrainArray objectAtIndex:i];
+        
+        for (int j = 0; j < [innerArray count]; j++)
+        {
+            ter = [[innerArray objectAtIndex:j] intValue];
+            
+            switch (ter)
+            {
+                case base1:
+                    // draw base 1
+                    break;
+                    
+                case base2:
+                    // draw base 2
+                    break;
+                    
+                case coral:
+                    // if coral is seen by the ships of THIS player, draw coral. else draw water
+                    break;
+                    
+                default:
+                    // draw water
+                    break;
+                    
+            }
+        }
+    }
+    
+    
+    
+    // for this player's ships'
+    
+    // get the x and y position of this ship
+    
+    // draw colored ship on mini map at this position
+    
+    // for enemy's ships
+    
+    // if visible by this players ships
+    
+    // draw other colors ship on mini map
+    
+}
+
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
