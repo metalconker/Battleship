@@ -10,8 +10,6 @@
 
 @interface Cruiser()
 
-
-
 @end
 
 @implementation Cruiser
@@ -24,8 +22,19 @@
         self.speed = 10;
         self.shipArmourType = HEAVY_ARMOUR;
         for (int i = 0; i < self.size; i++) {
-            ShipSegment* nextSeg = [[ShipSegment alloc] init];
-            nextSeg.segmentArmourType = HEAVY_ARMOUR;
+            Coordinate* segCoord = [[Coordinate alloc] init];
+            segCoord.direction = initialPosition.direction;
+            switch (segCoord.direction) {
+                case NORTH:
+                    segCoord.xCoord = initialPosition.xCoord - i;
+                    break;
+                case SOUTH:
+                    segCoord.xCoord = initialPosition.xCoord + i;
+                    break;
+                default:
+                    break;
+            }
+            ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:HEAVY_ARMOUR andShipName:@"Cruiser" andPosition:i atLocation:segCoord];
             self.blocks[i] = nextSeg;
         }
         [self.weapons addObject:[NSNumber numberWithInt:HEAVY_CANNON]];

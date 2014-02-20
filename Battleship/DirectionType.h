@@ -15,7 +15,8 @@ typedef enum directionType
     NORTH,
     SOUTH,
     EAST,
-    WEST
+    WEST,
+    NONE
 } Direction;
 
 @end

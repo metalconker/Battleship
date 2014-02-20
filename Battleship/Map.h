@@ -7,9 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "TerrainType.h"
+#import "Coordinate.h"
 @interface Map : NSObject
 
-@property (strong, nonatomic) NSArray* grid;
+#define GRID_SIZE 30
+#define BASE_LENGTH 10
+#define BASE_START 10
+#define BASE_END 19
 
+@property (strong, nonatomic) NSMutableArray* grid;
+
+-(instancetype) init;
 @end

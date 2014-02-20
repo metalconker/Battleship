@@ -1,3 +1,4 @@
+
 //
 //  ShipSegment.h
 //  Battleship
@@ -8,8 +9,18 @@
 
 #import <Foundation/Foundation.h>
 #import "ShipArmourType.h"
+#import "Coordinate.h"
+
 @interface ShipSegment : NSObject
 
 @property ShipArmour segmentArmourType;
+@property int block;
+@property NSString *shipName;
+@property (strong, nonatomic) Coordinate* location;
+-(instancetype) initWithArmour:(ShipArmour) armour
+                   andShipName:(NSString*) name
+                   andPosition:(int)cell
+                        atLocation:(Coordinate*) initialLocation;
 
 @end
+
