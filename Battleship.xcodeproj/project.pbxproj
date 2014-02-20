@@ -29,6 +29,11 @@
 		516A0D78189A4B80000396ED /* MidBase.png in Resources */ = {isa = PBXBuildFile; fileRef = 516A0D73189A4B80000396ED /* MidBase.png */; };
 		516A0D79189A4B80000396ED /* Coral.png in Resources */ = {isa = PBXBuildFile; fileRef = 516A0D74189A4B80000396ED /* Coral.png */; };
 		516A0D7A189A4B80000396ED /* PureWater.png in Resources */ = {isa = PBXBuildFile; fileRef = 516A0D75189A4B80000396ED /* PureWater.png */; };
+		519FF92118AC23DD005D5164 /* Torpedo Ship 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 519FF91C18AC23DD005D5164 /* Torpedo Ship 2.png */; };
+		519FF92218AC23DD005D5164 /* Radar Boat 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 519FF91D18AC23DD005D5164 /* Radar Boat 2.png */; };
+		519FF92318AC23DD005D5164 /* Destoyer Ship 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 519FF91E18AC23DD005D5164 /* Destoyer Ship 2.png */; };
+		519FF92418AC23DD005D5164 /* Cruiser 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 519FF91F18AC23DD005D5164 /* Cruiser 2.png */; };
+		519FF92518AC23DD005D5164 /* Mine Ship 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 519FF92018AC23DD005D5164 /* Mine Ship 2.png */; };
 		51C2398E189C923500B5D430 /* Cruiser.png in Resources */ = {isa = PBXBuildFile; fileRef = 51C23989189C923500B5D430 /* Cruiser.png */; };
 		51C2398F189C923500B5D430 /* Destroyer.png in Resources */ = {isa = PBXBuildFile; fileRef = 51C2398A189C923500B5D430 /* Destroyer.png */; };
 		51C23990189C923500B5D430 /* MineLayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 51C2398B189C923500B5D430 /* MineLayer.png */; };
@@ -90,6 +95,11 @@
 		516A0D73189A4B80000396ED /* MidBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MidBase.png; sourceTree = "<group>"; };
 		516A0D74189A4B80000396ED /* Coral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coral.png; sourceTree = "<group>"; };
 		516A0D75189A4B80000396ED /* PureWater.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PureWater.png; sourceTree = "<group>"; };
+		519FF91C18AC23DD005D5164 /* Torpedo Ship 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Torpedo Ship 2.png"; path = "../../../Ships/Torpedo Ship 2.png"; sourceTree = "<group>"; };
+		519FF91D18AC23DD005D5164 /* Radar Boat 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Radar Boat 2.png"; path = "../../../Ships/Radar Boat 2.png"; sourceTree = "<group>"; };
+		519FF91E18AC23DD005D5164 /* Destoyer Ship 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Destoyer Ship 2.png"; path = "../../../Ships/Destoyer Ship 2.png"; sourceTree = "<group>"; };
+		519FF91F18AC23DD005D5164 /* Cruiser 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Cruiser 2.png"; path = "../../../Ships/Cruiser 2.png"; sourceTree = "<group>"; };
+		519FF92018AC23DD005D5164 /* Mine Ship 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Mine Ship 2.png"; path = "../../../Ships/Mine Ship 2.png"; sourceTree = "<group>"; };
 		51C23989189C923500B5D430 /* Cruiser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cruiser.png; sourceTree = "<group>"; };
 		51C2398A189C923500B5D430 /* Destroyer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Destroyer.png; sourceTree = "<group>"; };
 		51C2398B189C923500B5D430 /* MineLayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MineLayer.png; sourceTree = "<group>"; };
@@ -252,6 +262,11 @@
 		51C23988189C922A00B5D430 /* Ships */ = {
 			isa = PBXGroup;
 			children = (
+				519FF91C18AC23DD005D5164 /* Torpedo Ship 2.png */,
+				519FF91D18AC23DD005D5164 /* Radar Boat 2.png */,
+				519FF91E18AC23DD005D5164 /* Destoyer Ship 2.png */,
+				519FF91F18AC23DD005D5164 /* Cruiser 2.png */,
+				519FF92018AC23DD005D5164 /* Mine Ship 2.png */,
 				51C23989189C923500B5D430 /* Cruiser.png */,
 				51C2398A189C923500B5D430 /* Destroyer.png */,
 				51C2398B189C923500B5D430 /* MineLayer.png */,
@@ -384,8 +399,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				516A0D77189A4B80000396ED /* BaseTop.png in Resources */,
+				519FF92418AC23DD005D5164 /* Cruiser 2.png in Resources */,
 				51C23999189C9C1900B5D430 /* Pew.png in Resources */,
+				519FF92118AC23DD005D5164 /* Torpedo Ship 2.png in Resources */,
 				51171529189A390200BE75A9 /* InfoPlist.strings in Resources */,
+				519FF92518AC23DD005D5164 /* Mine Ship 2.png in Resources */,
+				519FF92218AC23DD005D5164 /* Radar Boat 2.png in Resources */,
 				51C23990189C923500B5D430 /* MineLayer.png in Resources */,
 				5117153C189A390200BE75A9 /* Images.xcassets in Resources */,
 				516A0D76189A4B80000396ED /* BaseBottom.png in Resources */,
@@ -396,6 +415,7 @@
 				516A0D7A189A4B80000396ED /* PureWater.png in Resources */,
 				516A0D79189A4B80000396ED /* Coral.png in Resources */,
 				516A0D78189A4B80000396ED /* MidBase.png in Resources */,
+				519FF92318AC23DD005D5164 /* Destoyer Ship 2.png in Resources */,
 				51C23992189C923500B5D430 /* TorpedoBoat.png in Resources */,
 				51171532189A390200BE75A9 /* Main.storyboard in Resources */,
 				51C2398F189C923500B5D430 /* Destroyer.png in Resources */,

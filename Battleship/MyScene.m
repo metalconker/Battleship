@@ -100,16 +100,16 @@ static NSString * const kShipNodeName = @"movable";
     int height30 = self.frame.size.height / 30;
     
     // Loading the images of the ships
-    NSArray *imageNames = @[@"Cruiser",
-                            @"Cruiser",
-                            @"Destroyer",
-                            @"Destroyer",
-                            @"Destroyer",
-                            @"TorpedoBoat",
-                            @"TorpedoBoat",
-                            @"MineLayer",
-                            @"MineLayer",
-                            @"RadarBoat"];
+    NSArray *imageNames = @[@"Cruiser 2",
+                            @"Cruiser 2",
+                            @"Destoyer Ship 2",
+                            @"Destoyer Ship 2",
+                            @"Destoyer Ship 2",
+                            @"Torpedo Ship 2",
+                            @"Torpedo Ship 2",
+                            @"Mine Ship 2",
+                            @"Mine Ship 2",
+                            @"Radar Boat 2"];
     
     // Copy the player base array
     NSMutableArray *shuffle = [[NSMutableArray alloc] initWithArray:player1BasePositions copyItems:YES];
@@ -142,8 +142,8 @@ static NSString * const kShipNodeName = @"movable";
         width = pos / 30;
         height = pos % 30;
         
-        sprite.yScale = 2.10;
-        sprite.xScale = 1.55;
+        sprite.yScale = 1;
+        sprite.xScale = 1;
         sprite.position = CGPointMake(width*width30 + sprite.frame.size.width/2, height*height30 + sprite.frame.size.height/2);
         [self addChild:sprite];
         
