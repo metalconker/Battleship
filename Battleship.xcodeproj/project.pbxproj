@@ -29,11 +29,6 @@
 		516A0D78189A4B80000396ED /* MidBase.png in Resources */ = {isa = PBXBuildFile; fileRef = 516A0D73189A4B80000396ED /* MidBase.png */; };
 		516A0D79189A4B80000396ED /* Coral.png in Resources */ = {isa = PBXBuildFile; fileRef = 516A0D74189A4B80000396ED /* Coral.png */; };
 		516A0D7A189A4B80000396ED /* PureWater.png in Resources */ = {isa = PBXBuildFile; fileRef = 516A0D75189A4B80000396ED /* PureWater.png */; };
-		519FF92118AC23DD005D5164 /* Torpedo Ship 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 519FF91C18AC23DD005D5164 /* Torpedo Ship 2.png */; };
-		519FF92218AC23DD005D5164 /* Radar Boat 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 519FF91D18AC23DD005D5164 /* Radar Boat 2.png */; };
-		519FF92318AC23DD005D5164 /* Destoyer Ship 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 519FF91E18AC23DD005D5164 /* Destoyer Ship 2.png */; };
-		519FF92418AC23DD005D5164 /* Cruiser 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 519FF91F18AC23DD005D5164 /* Cruiser 2.png */; };
-		519FF92518AC23DD005D5164 /* Mine Ship 2.png in Resources */ = {isa = PBXBuildFile; fileRef = 519FF92018AC23DD005D5164 /* Mine Ship 2.png */; };
 		51C2398E189C923500B5D430 /* Cruiser.png in Resources */ = {isa = PBXBuildFile; fileRef = 51C23989189C923500B5D430 /* Cruiser.png */; };
 		51C2398F189C923500B5D430 /* Destroyer.png in Resources */ = {isa = PBXBuildFile; fileRef = 51C2398A189C923500B5D430 /* Destroyer.png */; };
 		51C23990189C923500B5D430 /* MineLayer.png in Resources */ = {isa = PBXBuildFile; fileRef = 51C2398B189C923500B5D430 /* MineLayer.png */; };
@@ -51,6 +46,10 @@
 		871F9B7518A2FFD1006F2682 /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B6518A2FFD1006F2682 /* Range.m */; };
 		871F9B7618A2FFD1006F2682 /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B6718A2FFD1006F2682 /* Ship.m */; };
 		871F9B7718A2FFD1006F2682 /* TorpedoBoat.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B6C18A2FFD1006F2682 /* TorpedoBoat.m */; };
+		872D6E9C18B7187000F32DF5 /* Destoyer Ship.png in Resources */ = {isa = PBXBuildFile; fileRef = 872D6E9818B7187000F32DF5 /* Destoyer Ship.png */; };
+		872D6E9D18B7187000F32DF5 /* Mine Ship.png in Resources */ = {isa = PBXBuildFile; fileRef = 872D6E9918B7187000F32DF5 /* Mine Ship.png */; };
+		872D6E9E18B7187000F32DF5 /* Radar Boat.png in Resources */ = {isa = PBXBuildFile; fileRef = 872D6E9A18B7187000F32DF5 /* Radar Boat.png */; };
+		872D6E9F18B7187000F32DF5 /* Torpedo Ship.png in Resources */ = {isa = PBXBuildFile; fileRef = 872D6E9B18B7187000F32DF5 /* Torpedo Ship.png */; };
 		874004FF18A6023600B64536 /* ShipSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 874004FE18A6023600B64536 /* ShipSegment.m */; };
 		876F661818B465B500AA34C4 /* Fleet.m in Sources */ = {isa = PBXBuildFile; fileRef = 876F661718B465B500AA34C4 /* Fleet.m */; };
 		8783319018B4526500E77455 /* BattleshipGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 8783318F18B4526500E77455 /* BattleshipGame.m */; };
@@ -95,11 +94,6 @@
 		516A0D73189A4B80000396ED /* MidBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MidBase.png; sourceTree = "<group>"; };
 		516A0D74189A4B80000396ED /* Coral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coral.png; sourceTree = "<group>"; };
 		516A0D75189A4B80000396ED /* PureWater.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PureWater.png; sourceTree = "<group>"; };
-		519FF91C18AC23DD005D5164 /* Torpedo Ship 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Torpedo Ship 2.png"; path = "../../../Ships/Torpedo Ship 2.png"; sourceTree = "<group>"; };
-		519FF91D18AC23DD005D5164 /* Radar Boat 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Radar Boat 2.png"; path = "../../../Ships/Radar Boat 2.png"; sourceTree = "<group>"; };
-		519FF91E18AC23DD005D5164 /* Destoyer Ship 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Destoyer Ship 2.png"; path = "../../../Ships/Destoyer Ship 2.png"; sourceTree = "<group>"; };
-		519FF91F18AC23DD005D5164 /* Cruiser 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Cruiser 2.png"; path = "../../../Ships/Cruiser 2.png"; sourceTree = "<group>"; };
-		519FF92018AC23DD005D5164 /* Mine Ship 2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Mine Ship 2.png"; path = "../../../Ships/Mine Ship 2.png"; sourceTree = "<group>"; };
 		51C23989189C923500B5D430 /* Cruiser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cruiser.png; sourceTree = "<group>"; };
 		51C2398A189C923500B5D430 /* Destroyer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Destroyer.png; sourceTree = "<group>"; };
 		51C2398B189C923500B5D430 /* MineLayer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MineLayer.png; sourceTree = "<group>"; };
@@ -131,6 +125,10 @@
 		871F9B6B18A2FFD1006F2682 /* TorpedoBoat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorpedoBoat.h; sourceTree = "<group>"; };
 		871F9B6C18A2FFD1006F2682 /* TorpedoBoat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorpedoBoat.m; sourceTree = "<group>"; };
 		871F9B6D18A2FFD1006F2682 /* WeaponType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeaponType.h; sourceTree = "<group>"; };
+		872D6E9818B7187000F32DF5 /* Destoyer Ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Destoyer Ship.png"; sourceTree = "<group>"; };
+		872D6E9918B7187000F32DF5 /* Mine Ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Mine Ship.png"; sourceTree = "<group>"; };
+		872D6E9A18B7187000F32DF5 /* Radar Boat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Radar Boat.png"; sourceTree = "<group>"; };
+		872D6E9B18B7187000F32DF5 /* Torpedo Ship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Torpedo Ship.png"; sourceTree = "<group>"; };
 		874004FE18A6023600B64536 /* ShipSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipSegment.m; sourceTree = "<group>"; };
 		876F661618B465B500AA34C4 /* Fleet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fleet.h; sourceTree = "<group>"; };
 		876F661718B465B500AA34C4 /* Fleet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fleet.m; sourceTree = "<group>"; };
@@ -262,14 +260,13 @@
 		51C23988189C922A00B5D430 /* Ships */ = {
 			isa = PBXGroup;
 			children = (
-				519FF91C18AC23DD005D5164 /* Torpedo Ship 2.png */,
-				519FF91D18AC23DD005D5164 /* Radar Boat 2.png */,
-				519FF91E18AC23DD005D5164 /* Destoyer Ship 2.png */,
-				519FF91F18AC23DD005D5164 /* Cruiser 2.png */,
-				519FF92018AC23DD005D5164 /* Mine Ship 2.png */,
 				51C23989189C923500B5D430 /* Cruiser.png */,
 				51C2398A189C923500B5D430 /* Destroyer.png */,
 				51C2398B189C923500B5D430 /* MineLayer.png */,
+				872D6E9818B7187000F32DF5 /* Destoyer Ship.png */,
+				872D6E9918B7187000F32DF5 /* Mine Ship.png */,
+				872D6E9A18B7187000F32DF5 /* Radar Boat.png */,
+				872D6E9B18B7187000F32DF5 /* Torpedo Ship.png */,
 				51C2398C189C923500B5D430 /* RadarBoat.png */,
 				51C2398D189C923500B5D430 /* TorpedoBoat.png */,
 			);
@@ -399,23 +396,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				516A0D77189A4B80000396ED /* BaseTop.png in Resources */,
-				519FF92418AC23DD005D5164 /* Cruiser 2.png in Resources */,
+				872D6E9D18B7187000F32DF5 /* Mine Ship.png in Resources */,
 				51C23999189C9C1900B5D430 /* Pew.png in Resources */,
-				519FF92118AC23DD005D5164 /* Torpedo Ship 2.png in Resources */,
 				51171529189A390200BE75A9 /* InfoPlist.strings in Resources */,
-				519FF92518AC23DD005D5164 /* Mine Ship 2.png in Resources */,
-				519FF92218AC23DD005D5164 /* Radar Boat 2.png in Resources */,
 				51C23990189C923500B5D430 /* MineLayer.png in Resources */,
+				872D6E9E18B7187000F32DF5 /* Radar Boat.png in Resources */,
 				5117153C189A390200BE75A9 /* Images.xcassets in Resources */,
+				872D6E9C18B7187000F32DF5 /* Destoyer Ship.png in Resources */,
 				516A0D76189A4B80000396ED /* BaseBottom.png in Resources */,
 				51C23995189C99E700B5D430 /* Jigglypuff sings Game of Thrones a capella.mp3 in Resources */,
+				872D6E9F18B7187000F32DF5 /* Torpedo Ship.png in Resources */,
 				5117153A189A390200BE75A9 /* Spaceship.png in Resources */,
 				51C2398E189C923500B5D430 /* Cruiser.png in Resources */,
 				51C23991189C923500B5D430 /* RadarBoat.png in Resources */,
 				516A0D7A189A4B80000396ED /* PureWater.png in Resources */,
 				516A0D79189A4B80000396ED /* Coral.png in Resources */,
 				516A0D78189A4B80000396ED /* MidBase.png in Resources */,
-				519FF92318AC23DD005D5164 /* Destoyer Ship 2.png in Resources */,
 				51C23992189C923500B5D430 /* TorpedoBoat.png in Resources */,
 				51171532189A390200BE75A9 /* Main.storyboard in Resources */,
 				51C2398F189C923500B5D430 /* Destroyer.png in Resources */,
