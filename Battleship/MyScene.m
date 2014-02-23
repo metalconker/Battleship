@@ -55,7 +55,7 @@ Fleet *testFleet;
     NSLog(@"this is getting called");
 }
 
-// Draws ship sprites to screen
+// Draws ship sprites to screen 
 - (void) initShipSprites {
     
     testFleet = [[Fleet alloc] initWithPlayerID:1];
