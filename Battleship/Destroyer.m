@@ -30,7 +30,7 @@
                 default:
                     break;
             }
-            ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:NORMAL_ARMOUR andShipName:@"Destroyer" andPosition:i atLocation:segCoord];
+            ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:NORMAL_ARMOUR andPosition:i atLocation:segCoord belongingToShip:self];
             self.blocks[i] = nextSeg;
         }
         [self.weapons addObject:[NSNumber numberWithInt:CANNON]];

@@ -18,8 +18,8 @@
 -(instancetype) init {
     self = [super init];
     if (self) {
-        //Fleet* hostFleet = [[Fleet alloc] initWithPlayerID:1];
-        //Fleet* joinFleet = [[Fleet alloc] initWithPlayerID:2];
+        Fleet* hostFleet = [[Fleet alloc] initWithPlayerID:1];
+        Fleet* joinFleet = [[Fleet alloc] initWithPlayerID:2];
         self.hostView = [[Map alloc] init];
         //[self updateMap: hostFleet];
         //[self updateMap: joinFleet];
