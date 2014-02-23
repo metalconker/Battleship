@@ -15,6 +15,8 @@ NSMutableArray *thisPlayer;
 // Position of player 1 base;
 NSMutableArray *player1BasePositions;
 
+Fleet *testFleet;
+
 @interface MyScene ()
 
 @property (nonatomic, strong) BattleshipGame *game;
@@ -32,12 +34,64 @@ NSMutableArray *player1BasePositions;
         _game = [[BattleshipGame alloc] init];
         // Terrain sprites
         [self initTerrainSprites];
+        // Ship sprites
+        [self initShipSprites];
         // MiniMap sprite
         [self initMiniMap];
         
     }
     
     return self;
+}
+
+// Draws ship sprites to screen
+- (void) initShipSprites {
+    
+    testFleet = [[Fleet alloc] initWithPlayerID:1];
+    
+    SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
+    Ship *ship;
+    
+    int widthDiv30 = self.frame.size.width / GRID_SIZE;
+    int heightDiv30 = self.frame.size.height / GRID_SIZE;
+    
+    for (int i=0 ; i < [testFleet.shipArray count]; i++)
+    {
+        ship = [testFleet.shipArray objectAtIndex:i];
+        
+        if ([ship isKindOfClass:[Cruiser class]])
+        {
+            sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Cruiser"];
+        }
+        
+        else if ([ship isKindOfClass:[Destroyer class]])
+        {
+            sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Destroyer"];
+        }
+            
+        else if ([ship isKindOfClass:[MineLayer class]])
+        {
+            sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MineLayer"];
+        }
+        
+        else if ([ship isKindOfClass:[RadarBoat class]])
+        {
+            sprite = [SKSpriteNode spriteNodeWithImageNamed:@"RadarBoat"];
+            
+        }
+        
+        else if ([ship isKindOfClass:[TorpedoBoat class]])
+        {
+            sprite = [SKSpriteNode spriteNodeWithImageNamed:@"TorpedoBoat"];
+        }
+        
+        sprite.name = ship.shipName;
+        sprite.position = CGPointMake(ship.location.xCoord*widthDiv30 + sprite.frame.size.width/2, ship.location.yCoord*heightDiv30 + sprite.frame.size.height/2);
+        [self addChild:sprite];
+        
+    }
+    
+    
 }
 
 // Draws terrain sprites to screen
@@ -60,37 +114,33 @@ NSMutableArray *player1BasePositions;
                 case HOST_BASE:
                     sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MidBase"];
                     sprite.name = @"hostbase";
-                    sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
                     sprite.zRotation =  M_PI / 2;
-                    [self addChild:sprite];
                     break;
                     
                 case JOIN_BASE:
-                    sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
                     sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MidBase"];
                     sprite.name = @"joinbase";
                     sprite.zRotation = 3 * M_PI / 2;
-                    [self addChild:sprite];
                     break;
                     
                     // need to add an if visible clause
                 case CORAL:
                     sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Coral"];
                     sprite.name = @"coral";
-                    sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
                     sprite.zRotation = 3 * M_PI / 2;
-                    [self addChild:sprite];
                     break;
                     
                 default:
                     sprite = [SKSpriteNode spriteNodeWithImageNamed:@"PureWater"];
                     sprite.name = @"water";
-                    sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
                     sprite.zRotation = M_PI / 2;
-                    [self addChild:sprite];
                     break;
                     
             }
+            sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
+            sprite.xScale = 1.7;
+            sprite.yScale = 2.1;
+            [self addChild:sprite];
         }
     }
 }
@@ -98,7 +148,7 @@ NSMutableArray *player1BasePositions;
 - (void)initMiniMap{
     
     // Initilize CGPoints
-    int mapSize = self.frame.size.height / 4;
+    int mapSize = self.frame.size.height / 6;
     self.miniMapPositions = [[NSMutableArray alloc] init];
     
     // Point locations
@@ -114,124 +164,50 @@ NSMutableArray *player1BasePositions;
     [self.miniMapPositions addObject:[NSValue valueWithCGPoint:point4]];
 
     // Mini Map
-    SKSpriteNode *image = [SKSpriteNode spriteNodeWithImageNamed:@"Mini Map"];
+    SKNode *image = [SKSpriteNode spriteNodeWithImageNamed:@"Mini Map"];
     image.name = @"Mini Map";
-    image.yScale = 0.3;
-    image.xScale = 0.3;
+    image.yScale = 0.4;
+    image.xScale = 0.4;
     image.position = [[self.miniMapPositions objectAtIndex:0] CGPointValue];
+    
+    // This will keep the dots as children of the image SKNode
+    [self initShipsMiniMap:image];
     [self addChild:image];
     
 }
 
-
-/*
- Initializes the ship locations on the base.
- This method uses a previously instantiated array of ship locations for the ships to be loaded.
- Right now it randomly loads them in a position on its base.
- */
-- (void)initShips {
-    
-    int width30 = self.frame.size.width / 30;
-    int height30 = self.frame.size.height / 30;
-    
-    // Loading the images of the ships
-    NSArray *imageNames = @[@"Cruiser 2",
-                            @"Cruiser 2",
-                            @"Destoyer Ship 2",
-                            @"Destoyer Ship 2",
-                            @"Destoyer Ship 2",
-                            @"Torpedo Ship 2",
-                            @"Torpedo Ship 2",
-                            @"Mine Ship 2",
-                            @"Mine Ship 2",
-                            @"Radar Boat 2"];
-    
-    // Copy the player base array
-    NSMutableArray *shuffle = [[NSMutableArray alloc] initWithArray:player1BasePositions copyItems:YES];
-    
-    // Counts the numner of positions
-    NSUInteger count = [shuffle count];
-    for (NSUInteger i = 0; i < count; ++i) {
-        // Select a random element between i and end of array to swap with.
-        NSInteger nElements = count - i;
-        NSInteger n = arc4random_uniform(nElements) + i;
-        [shuffle exchangeObjectAtIndex:i withObjectAtIndex:n];
-    }
-    
-    // Load the sprites
-    NSNumber *position;
-    int pos;
-    int width;
-    int height;
-    NSString *imageName;
-    SKSpriteNode *sprite;
-    
-    for (int i = 0; i < [shuffle count]; i++)
-    {
-        imageName = [imageNames objectAtIndex:i];
-        sprite = [SKSpriteNode spriteNodeWithImageNamed:imageName];
-        
-        position = [shuffle objectAtIndex:i];
-        pos = [position intValue];
-        
-        width = pos / 30;
-        height = pos % 30;
-        
-        sprite.yScale = 1;
-        sprite.xScale = 1;
-        sprite.position = CGPointMake(width*width30 + sprite.frame.size.width/2, height*height30 + sprite.frame.size.height/2);
-        [self addChild:sprite];
-        
-    }
-}
-
--(void)initLittleMap
+-(void)initShipsMiniMap:(SKNode*) miniMap
 {
     
     // Make this map movable and sticks to a particular position (bottom right, bottom left, top right, top left)
     
     // get the screen width and screen height
-    int squareSize = self.frame.size.width/4;
+    int miniMapDotPositions = miniMap.frame.size.height / 30;
     
     // make a square based on this size
     // resize the sprite images according to this size by dividing by 30
-    float spriteSquareSize = squareSize / 30;
+    //float spriteSquareSize = squareSize / 30;
     
-    // for all terrain in terrain array
-    Terrain ter;
-    NSMutableArray *innerArray;
-    SKSpriteNode *sprite;
+    // This player's ships
+    SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
+    Ship *ship;
     
-    for (int i = 0; i < [_game.hostView.grid count]; i++)
+    for (int i=0 ; i < [testFleet.shipArray count]; i++)
     {
-        innerArray = [_game.hostView.grid objectAtIndex:i];
+        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Green Dot"];
+        sprite.name = [NSString stringWithFormat:@"%@/Green Dot", ship.shipName];
+        sprite.yScale = 0.3;
+        sprite.xScale = 0.3;
+        ship = [testFleet.shipArray objectAtIndex:i];
+        sprite.position = CGPointMake(ship.location.xCoord*(miniMap.frame.size.height/10) - miniMap.frame.size.width*1.4, ship.location.yCoord*(miniMap.frame.size.height/10) - miniMap.frame.size.height*1.3);
+        [miniMap addChild:sprite];
         
-        for (int j = 0; j < [innerArray count]; j++)
-        {
-            ter = [[innerArray objectAtIndex:j] intValue];
-            
-            switch (ter)
-            {
-                case HOST_BASE:
-                    // draw base 1
-                    break;
-                    
-                case JOIN_BASE:
-                    // draw base 2
-                    break;
-                    
-                case CORAL:
-                    // if coral is seen by the ships of THIS player, draw coral. else draw water
-                    break;
-                    
-                default:
-                    // draw water
-                    break;
-                    
-            }
-        }
     }
     
+    // for all terrain in terrain array
+    //Terrain ter;
+    //NSMutableArray *innerArray;
+    //SKSpriteNode *sprite;
     
     
     // for this player's ships'
@@ -248,6 +224,7 @@ NSMutableArray *player1BasePositions;
     
 }
 
+bool miniMapTouched = false;
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
@@ -260,10 +237,12 @@ NSMutableArray *player1BasePositions;
         SKNode *node = [self nodeAtPoint:location];
         if (YES) NSLog(@"Node name where touch began: %@", node.name);
         
+        // If the initial touch was on the mini map
         if ([node.name isEqualToString:@"Mini Map"])
         {
             CGPoint position = [node position];
             NSLog(@"we are touching the mini map bitch");
+            miniMapTouched = true;
             //[node setPosition:CGPointMake(position.x + translation.x, position.y + translation.y)];
             
         }
@@ -289,6 +268,7 @@ NSMutableArray *player1BasePositions;
     CGPoint position = [node position];
     if (YES) NSLog(@"Node name where touch began: %@", node.name);
     
+    // Moves the mini map according to the finger moving it
     if ([node.name isEqualToString:@"Mini Map"])
     {
         NSLog(@"we are touching the mini map bitch");
@@ -298,56 +278,59 @@ NSMutableArray *player1BasePositions;
     
 }
 
+// Called when the finger is removed
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     
     UITouch *touch = [touches anyObject];
-	//CGPoint positionInScene = [touch locationInNode:self];
-	//CGPoint previousPosition = [touch previousLocationInNode:self];
     CGPoint location = [touch locationInNode:self];
-    
-	//CGPoint translation = CGPointMake(positionInScene.x - previousPosition.x, positionInScene.y - previousPosition.y);
-    
-    SKNode *node = [self nodeAtPoint:location];
-    //CGPoint position = [node position];
-    //if (YES) NSLog(@"Node name where touch began: %@", node.name);
-    
-    
-    
-    // Checking min distance between four locations on screen
-    if ([node.name isEqualToString:@"Mini Map"])
+    // If the mini map was initially touched
+    if (miniMapTouched)
     {
-        NSLog(@"NOT TOUCHING MINI MAP ANYMORE");
-        
-        CGFloat minDistance = FLT_MAX;
-        CGFloat temp;
-        CGFloat xDistance = 0;
-        CGFloat yDistance = 0;
-        CGPoint corner;
-        int pos;
-        
-        for (int i = 0; i < [self.miniMapPositions count]; i++)
+        [self setMiniMapLocation:location];
+    }
+    
+
+    
+}
+
+// Always set the minimap in a specific location - due to bugs with touching
+- (void) setMiniMapLocation:(CGPoint)location {
+    
+    SKNode* minimap = [self childNodeWithName:@"Mini Map"];
+    
+    CGFloat minDistance = FLT_MAX;
+    CGFloat temp;
+    CGFloat xDistance = 0;
+    CGFloat yDistance = 0;
+    CGPoint corner;
+    int pos;
+    
+    // Comparing to the destination nodes
+    for (int i = 0; i < [self.miniMapPositions count]; i++)
+    {
+        corner = [[self.miniMapPositions objectAtIndex:i] CGPointValue];
+        xDistance = corner.x - location.x;
+        yDistance = corner.y - location.y;
+        temp = sqrt((xDistance * xDistance) + (yDistance * yDistance));
+        if (temp < minDistance)
         {
-            corner = [[self.miniMapPositions objectAtIndex:i] CGPointValue];
-            xDistance = corner.x - location.x;
-            yDistance = corner.y - location.y;
-            temp = sqrt((xDistance * xDistance) + (yDistance * yDistance));
-            if (temp < minDistance)
-            {
-                pos = i;
-                minDistance = temp;
-            }
-            
+            pos = i;
+            minDistance = temp;
         }
         
-        [node setPosition:[[self.miniMapPositions objectAtIndex:pos] CGPointValue]];
-        
     }
+    [minimap setPosition:[[self.miniMapPositions objectAtIndex:pos] CGPointValue]];
+    miniMapTouched = false;
     
 }
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
     
+    
+}
+
+- (void) drawMiniMapPoints {
     
 }
 
