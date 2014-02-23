@@ -97,13 +97,28 @@ NSMutableArray *player1BasePositions;
 
 - (void)initMiniMap{
     
-    // Mini Map
+    // Initilize CGPoints
     int mapSize = self.frame.size.height / 4;
+    self.miniMapPositions = [[NSMutableArray alloc] init];
+    
+    // Point locations
+    CGPoint point1 = CGPointMake(self.frame.size.width - mapSize, self.frame.size.height - mapSize);
+    CGPoint point2 = CGPointMake(mapSize, self.frame.size.height - mapSize);
+    CGPoint point3 = CGPointMake(self.frame.size.width - mapSize, mapSize);
+    CGPoint point4 = CGPointMake(mapSize, mapSize);
+    
+    // Adding to array
+    [self.miniMapPositions addObject:[NSValue valueWithCGPoint:point1]];
+    [self.miniMapPositions addObject:[NSValue valueWithCGPoint:point2]];
+    [self.miniMapPositions addObject:[NSValue valueWithCGPoint:point3]];
+    [self.miniMapPositions addObject:[NSValue valueWithCGPoint:point4]];
+
+    // Mini Map
     SKSpriteNode *image = [SKSpriteNode spriteNodeWithImageNamed:@"Mini Map"];
     image.name = @"Mini Map";
     image.yScale = 0.3;
     image.xScale = 0.3;
-    image.position = CGPointMake(self.frame.size.width - mapSize, self.frame.size.height - mapSize);
+    image.position = [[self.miniMapPositions objectAtIndex:0] CGPointValue];
     [self addChild:image];
     
 }
@@ -247,7 +262,9 @@ NSMutableArray *player1BasePositions;
         
         if ([node.name isEqualToString:@"Mini Map"])
         {
+            CGPoint position = [node position];
             NSLog(@"we are touching the mini map bitch");
+            //[node setPosition:CGPointMake(position.x + translation.x, position.y + translation.y)];
             
         }
         
@@ -257,6 +274,74 @@ NSMutableArray *player1BasePositions;
     
     //[self runAction:[SKAction playSoundFileNamed:@"Pew_Pew-DKnight556-1379997159.mp3" waitForCompletion:NO]];
     
+    
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+	UITouch *touch = [touches anyObject];
+	CGPoint positionInScene = [touch locationInNode:self];
+	CGPoint previousPosition = [touch previousLocationInNode:self];
+    CGPoint location = [touch locationInNode:self];
+    
+	CGPoint translation = CGPointMake(positionInScene.x - previousPosition.x, positionInScene.y - previousPosition.y);
+    
+    SKNode *node = [self nodeAtPoint:location];
+    CGPoint position = [node position];
+    if (YES) NSLog(@"Node name where touch began: %@", node.name);
+    
+    if ([node.name isEqualToString:@"Mini Map"])
+    {
+        NSLog(@"we are touching the mini map bitch");
+        [node setPosition:CGPointMake(position.x + translation.x, position.y + translation.y)];
+        
+    }
+    
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [touches anyObject];
+	//CGPoint positionInScene = [touch locationInNode:self];
+	//CGPoint previousPosition = [touch previousLocationInNode:self];
+    CGPoint location = [touch locationInNode:self];
+    
+	//CGPoint translation = CGPointMake(positionInScene.x - previousPosition.x, positionInScene.y - previousPosition.y);
+    
+    SKNode *node = [self nodeAtPoint:location];
+    //CGPoint position = [node position];
+    //if (YES) NSLog(@"Node name where touch began: %@", node.name);
+    
+    
+    
+    // Checking min distance between four locations on screen
+    if ([node.name isEqualToString:@"Mini Map"])
+    {
+        NSLog(@"NOT TOUCHING MINI MAP ANYMORE");
+        
+        CGFloat minDistance = FLT_MAX;
+        CGFloat temp;
+        CGFloat xDistance = 0;
+        CGFloat yDistance = 0;
+        CGPoint corner;
+        int pos;
+        
+        for (int i = 0; i < [self.miniMapPositions count]; i++)
+        {
+            corner = [[self.miniMapPositions objectAtIndex:i] CGPointValue];
+            xDistance = corner.x - location.x;
+            yDistance = corner.y - location.y;
+            temp = sqrt((xDistance * xDistance) + (yDistance * yDistance));
+            if (temp < minDistance)
+            {
+                pos = i;
+                minDistance = temp;
+            }
+            
+        }
+        
+        [node setPosition:[[self.miniMapPositions objectAtIndex:pos] CGPointValue]];
+        
+    }
     
 }
 

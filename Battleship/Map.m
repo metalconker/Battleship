@@ -33,6 +33,7 @@
         [self initializeBase:@"join"];
         [self initializeCoral];
     }
+    
     return self;
 }
 

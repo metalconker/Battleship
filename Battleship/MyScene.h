@@ -10,4 +10,6 @@
 #import "BattleshipGame.h"
 @interface MyScene : SKScene
 
+@property (strong, nonatomic) NSMutableArray* miniMapPositions;
+
 @end
