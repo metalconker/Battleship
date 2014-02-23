@@ -11,6 +11,7 @@
 
 @implementation RadarBoat
 
+#pragma mark - IS EXTENDED RADAR ON IS BROKEN
 - (instancetype)initWithLocation:(Coordinate *)initialPosition
 {
     self = [super initWithLocation:initialPosition];
@@ -38,7 +39,7 @@
         self.radarRange.rangeHeight = 6;
         self.radarRange.rangeWidth = 3;
         self.radarRange.startRange = 1;
-        self.isExtendedRadarOn = NO;
+        //self.isExtendedRadarOn = NO;
         self.canonRange.rangeHeight = 5;
         self.canonRange.rangeWidth = 3;
         self.canonRange.startRange = -1;

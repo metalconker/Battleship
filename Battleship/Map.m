@@ -33,6 +33,7 @@
         [self initializeBase:@"join"];
         [self initializeCoral];
     }
+    
     return self;
 }
 
@@ -80,4 +81,6 @@
         [_grid[contained.xCoord] insertObject:[NSNumber numberWithInt:t] atIndex:contained.yCoord];
     }
 }
+
+
 @end

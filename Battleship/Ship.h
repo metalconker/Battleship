@@ -24,6 +24,7 @@
 @property Coordinate *location;
 @property Range *radarRange;
 @property Range *canonRange;
+@property NSString *shipName;
 
 - (instancetype) initWithLocation: (Coordinate*) initialPosition;
 - (void)move: (Coordinate *)destination;
