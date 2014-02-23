@@ -8,20 +8,6 @@
 
 #import "MyScene.h"
 
-// Okay.
-
-// Enum representing what is contained within the array at this specific position for terrain
-typedef enum
-{
-    base1,
-    base2,
-    coral,
-    water
-    
-} TerrainType;
-
-// Terrain Array that is accessible
-NSMutableArray *terrainArray;
 
 // Ship Array of this player
 NSMutableArray *thisPlayer;
@@ -29,12 +15,9 @@ NSMutableArray *thisPlayer;
 // Position of player 1 base;
 NSMutableArray *player1BasePositions;
 
-// Tracks the movable ship
-static NSString * const kShipNodeName = @"movable";
-
 @interface MyScene ()
 
-@property (nonatomic, strong) SKSpriteNode *selectedShip;
+@property (nonatomic, strong) BattleshipGame *game;
 
 @end
 
@@ -42,50 +25,87 @@ static NSString * const kShipNodeName = @"movable";
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
+        
+        // Initializing the background - more time efficient as only loads the textures once
         self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
-        BattleshipGame *game = [[BattleshipGame alloc] init];
-        SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
-        Terrain ter;
-        int widthDiv30 = self.frame.size.width / GRID_SIZE;
-        int heightDiv30 = self.frame.size.height / GRID_SIZE;
-        for (int i = 0; i < GRID_SIZE; i++)
+        // Creates the battleship game
+        _game = [[BattleshipGame alloc] init];
+        // Terrain sprites
+        [self initTerrainSprites];
+        // MiniMap sprite
+        [self initMiniMap];
+        
+    }
+    
+    return self;
+}
+
+// Draws terrain sprites to screen
+- (void) initTerrainSprites {
+
+    // Initilizes the different sprites
+    SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
+    // Containers
+    Terrain ter;
+    int widthDiv30 = self.frame.size.width / GRID_SIZE;
+    int heightDiv30 = self.frame.size.height / GRID_SIZE;
+    // Drawing the sprites to screen in position
+    for (int i = 0; i < GRID_SIZE; i++)
+    {
+        for (int j = 0; j < GRID_SIZE; j++)
         {
-            for (int j = 0; j < GRID_SIZE; j++)
+            ter =  [_game.hostView.grid[i][j] intValue];
+            switch (ter)
             {
-                ter =  [game.hostView.grid[i][j] intValue];
-                switch (ter)
-                {
-                    case HOST_BASE:
-                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MidBase"];
-                        sprite.zRotation = M_PI / 2;
-                        break;
-                        
-                    case JOIN_BASE:
-                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MidBase"];
-                        sprite.zRotation = 3 * M_PI / 2;
-                        break;
-                        
-                    case CORAL:
-                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Coral"];
-                        sprite.zRotation = 3 * M_PI / 2;
-                        break;
-                        
-                    default:
-                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"PureWater"];
-                        sprite.zRotation = M_PI / 2;
-                        break;
-                        
-                }
-                sprite.yScale = 2.13;
-                sprite.xScale = 1.55;
-                sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
-                [self addChild:sprite];
+                case HOST_BASE:
+                    sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MidBase"];
+                    sprite.name = @"hostbase";
+                    sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
+                    sprite.zRotation =  M_PI / 2;
+                    [self addChild:sprite];
+                    break;
+                    
+                case JOIN_BASE:
+                    sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
+                    sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MidBase"];
+                    sprite.name = @"joinbase";
+                    sprite.zRotation = 3 * M_PI / 2;
+                    [self addChild:sprite];
+                    break;
+                    
+                    // need to add an if visible clause
+                case CORAL:
+                    sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Coral"];
+                    sprite.name = @"coral";
+                    sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
+                    sprite.zRotation = 3 * M_PI / 2;
+                    [self addChild:sprite];
+                    break;
+                    
+                default:
+                    sprite = [SKSpriteNode spriteNodeWithImageNamed:@"PureWater"];
+                    sprite.name = @"water";
+                    sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
+                    sprite.zRotation = M_PI / 2;
+                    [self addChild:sprite];
+                    break;
+                    
             }
         }
-
-    
     }
-    return self;
+}
+
+- (void)initMiniMap{
+    
+    // Mini Map
+    int mapSize = self.frame.size.height / 4;
+    SKSpriteNode *image = [SKSpriteNode spriteNodeWithImageNamed:@"Mini Map"];
+    image.name = @"Mini Map";
+    image.yScale = 0.3;
+    image.xScale = 0.3;
+    image.position = CGPointMake(self.frame.size.width - mapSize, self.frame.size.height - mapSize);
+    [self addChild:image];
+    
 }
 
 
@@ -163,13 +183,13 @@ static NSString * const kShipNodeName = @"movable";
     float spriteSquareSize = squareSize / 30;
     
     // for all terrain in terrain array
-    TerrainType ter;
+    Terrain ter;
     NSMutableArray *innerArray;
     SKSpriteNode *sprite;
     
-    for (int i = 0; i < [terrainArray count]; i++)
+    for (int i = 0; i < [_game.hostView.grid count]; i++)
     {
-        innerArray = [terrainArray objectAtIndex:i];
+        innerArray = [_game.hostView.grid objectAtIndex:i];
         
         for (int j = 0; j < [innerArray count]; j++)
         {
@@ -177,15 +197,15 @@ static NSString * const kShipNodeName = @"movable";
             
             switch (ter)
             {
-                case base1:
+                case HOST_BASE:
                     // draw base 1
                     break;
                     
-                case base2:
+                case JOIN_BASE:
                     // draw base 2
                     break;
                     
-                case coral:
+                case CORAL:
                     // if coral is seen by the ships of THIS player, draw coral. else draw water
                     break;
                     
@@ -218,25 +238,24 @@ static NSString * const kShipNodeName = @"movable";
     /* Called when a touch begins */
     
     for (UITouch *touch in touches) {
+        
         CGPoint location = [touch locationInNode:self];
+        NSLog(@"Location of touch: %@", NSStringFromCGPoint(location));
         
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Pew"];
+        SKNode *node = [self nodeAtPoint:location];
+        if (YES) NSLog(@"Node name where touch began: %@", node.name);
         
-        sprite.position = location;
+        if ([node.name isEqualToString:@"Mini Map"])
+        {
+            NSLog(@"we are touching the mini map bitch");
+            
+        }
         
-//        sprite.yScale = 2.1;
-//        sprite.xScale = 1.55;
-        
-        //SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-        
-        //[sprite runAction:[SKAction repeatActionForever:action]];
-        
-        [self addChild:sprite];
         
         
     }
     
-    [self runAction:[SKAction playSoundFileNamed:@"Pew_Pew-DKnight556-1379997159.mp3" waitForCompletion:NO]];
+    //[self runAction:[SKAction playSoundFileNamed:@"Pew_Pew-DKnight556-1379997159.mp3" waitForCompletion:NO]];
     
     
 }

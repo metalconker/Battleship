@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TerrainType.h"
 #import "Coordinate.h"
+#import <SpriteKit/SpriteKit.h>
 @interface Map : NSObject
 
 #define GRID_SIZE 30
