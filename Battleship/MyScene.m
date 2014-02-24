@@ -81,6 +81,12 @@ Fleet *testFleet;
     return self;
 }
 
+- (void)didMoveToView:(SKView *)view{
+    
+    _pinchRecognizer = [[UIPinchGestureRecognizer alloc] initWithTarget:self action: @selector (handlePinch:)];
+    [[self view] addGestureRecognizer:_pinchRecognizer];
+    NSLog(@"this is getting called");
+}
 
 /*
  Initializes the ship locations on the base.
