@@ -27,7 +27,6 @@
 		516A0D76189A4B80000396ED /* BaseBottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 516A0D71189A4B80000396ED /* BaseBottom.png */; };
 		516A0D77189A4B80000396ED /* BaseTop.png in Resources */ = {isa = PBXBuildFile; fileRef = 516A0D72189A4B80000396ED /* BaseTop.png */; };
 		516A0D78189A4B80000396ED /* MidBase.png in Resources */ = {isa = PBXBuildFile; fileRef = 516A0D73189A4B80000396ED /* MidBase.png */; };
-		516A0D79189A4B80000396ED /* Coral.png in Resources */ = {isa = PBXBuildFile; fileRef = 516A0D74189A4B80000396ED /* Coral.png */; };
 		516A0D7A189A4B80000396ED /* PureWater.png in Resources */ = {isa = PBXBuildFile; fileRef = 516A0D75189A4B80000396ED /* PureWater.png */; };
 		51C2398E189C923500B5D430 /* Cruiser.png in Resources */ = {isa = PBXBuildFile; fileRef = 51C23989189C923500B5D430 /* Cruiser.png */; };
 		51C2398F189C923500B5D430 /* Destroyer.png in Resources */ = {isa = PBXBuildFile; fileRef = 51C2398A189C923500B5D430 /* Destroyer.png */; };
@@ -99,7 +98,6 @@
 		516A0D71189A4B80000396ED /* BaseBottom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = BaseBottom.png; path = Battleship/BaseBottom.png; sourceTree = SOURCE_ROOT; };
 		516A0D72189A4B80000396ED /* BaseTop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BaseTop.png; sourceTree = "<group>"; };
 		516A0D73189A4B80000396ED /* MidBase.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MidBase.png; sourceTree = "<group>"; };
-		516A0D74189A4B80000396ED /* Coral.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Coral.png; sourceTree = "<group>"; };
 		516A0D75189A4B80000396ED /* PureWater.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PureWater.png; sourceTree = "<group>"; };
 		51C23989189C923500B5D430 /* Cruiser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cruiser.png; sourceTree = "<group>"; };
 		51C2398A189C923500B5D430 /* Destroyer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Destroyer.png; sourceTree = "<group>"; };
@@ -260,13 +258,19 @@
 		516A0D70189A4B5C000396ED /* Sprites */ = {
 			isa = PBXGroup;
 			children = (
+				51BE51DE18BABE5200DCA584 /* waterBackground.png */,
+				51BE51DF18BABE5200DCA584 /* waterBackground@2x.png */,
+				51BE51E018BABE5200DCA584 /* background.png */,
+				51BE51E118BABE5200DCA584 /* coral.png */,
+				51BE51E218BABE5200DCA584 /* coral@2x.png */,
+				51BE51E318BABE5200DCA584 /* water.png */,
+				51BE51E418BABE5200DCA584 /* water@2x.png */,
 				51C425A618B6AF2400655F23 /* Minimap */,
 				51C23998189C9C1900B5D430 /* Pew.png */,
 				51C23988189C922A00B5D430 /* Ships */,
 				516A0D71189A4B80000396ED /* BaseBottom.png */,
 				516A0D72189A4B80000396ED /* BaseTop.png */,
 				516A0D73189A4B80000396ED /* MidBase.png */,
-				516A0D74189A4B80000396ED /* Coral.png */,
 				516A0D75189A4B80000396ED /* PureWater.png */,
 			);
 			name = Sprites;
@@ -425,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51C4259F18B6AEFE00655F23 /* Coral Mini.png in Resources */,
+				51BE51F218BABE8E00DCA584 /* Destroyer.png in Resources */,
 				51C425A118B6AEFE00655F23 /* Green Dot.png in Resources */,
 				516A0D77189A4B80000396ED /* BaseTop.png in Resources */,
 				872D6E9D18B7187000F32DF5 /* Mine Ship.png in Resources */,
@@ -439,12 +444,15 @@
 				51C23995189C99E700B5D430 /* Jigglypuff sings Game of Thrones a capella.mp3 in Resources */,
 				872D6E9F18B7187000F32DF5 /* Torpedo Ship.png in Resources */,
 				5117153A189A390200BE75A9 /* Spaceship.png in Resources */,
+				51BE51E618BABE5200DCA584 /* waterBackground@2x.png in Resources */,
+				51BE51F418BABE8E00DCA584 /* RadarBoat.png in Resources */,
 				516A0D7A189A4B80000396ED /* PureWater.png in Resources */,
-				516A0D79189A4B80000396ED /* Coral.png in Resources */,
 				516A0D78189A4B80000396ED /* MidBase.png in Resources */,
 				51C23992189C923500B5D430 /* TorpedoBoat.png in Resources */,
 				51171532189A390200BE75A9 /* Main.storyboard in Resources */,
+				51BE51EB18BABE5200DCA584 /* water@2x.png in Resources */,
 				51C425A018B6AEFE00655F23 /* Green Base.png in Resources */,
+				51BE51E718BABE5200DCA584 /* background.png in Resources */,
 				51C23997189C9A9700B5D430 /* Pew_Pew-DKnight556-1379997159.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
