@@ -11,9 +11,9 @@
 
 @implementation TorpedoBoat
 
-- (instancetype)initWithLocation:(Coordinate *)initialPosition
+- (instancetype)initWithLocation:(Coordinate *)initialPosition andName:(NSString *)nameOfShip
 {
-    self = [super initWithLocation:initialPosition];
+    self = [super initWithLocation:initialPosition andName:nameOfShip];
     if (self) {
         self.size = 3;
         self.speed = 9;
@@ -31,7 +31,7 @@
                 default:
                     break;
             }
-            ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:NORMAL_ARMOUR andPosition:i atLocation:segCoord belongingToShip:self];
+            ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:NORMAL_ARMOUR andPosition:i atLocation:segCoord belongingToShip:nameOfShip];
             self.blocks[i] = nextSeg;
         }
         [self.weapons addObject:[NSNumber numberWithInt:CANNON]];

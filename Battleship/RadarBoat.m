@@ -12,9 +12,9 @@
 @implementation RadarBoat
 
 #pragma mark - IS EXTENDED RADAR ON IS BROKEN
-- (instancetype)initWithLocation:(Coordinate *)initialPosition
+- (instancetype)initWithLocation:(Coordinate *)initialPosition andName:(NSString *)nameOfShip
 {
-    self = [super initWithLocation:initialPosition];
+    self = [super initWithLocation:initialPosition andName:nameOfShip];
     if (self) {
         self.size = 3;
         self.speed = 3;
@@ -32,14 +32,11 @@
                 default:
                     break;
             }
-            ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:NORMAL_ARMOUR andPosition:i atLocation:segCoord belongingToShip:self];
+            ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:NORMAL_ARMOUR andPosition:i atLocation:segCoord belongingToShip:nameOfShip];
             self.blocks[i] = nextSeg;
         }
         [self.weapons addObject:[NSNumber numberWithInt:CANNON]];
-        self.radarRange.rangeHeight = 6;
-        self.radarRange.rangeWidth = 3;
-        self.radarRange.startRange = 1;
-        //self.isExtendedRadarOn = NO;
+        self.extendedRadarOn = NO;
         self.canonRange.rangeHeight = 5;
         self.canonRange.rangeWidth = 3;
         self.canonRange.startRange = -1;
@@ -47,15 +44,15 @@
     return self;
 }
 
-@synthesize isExtendedRadarOn;
+@synthesize extendedRadarOn;
 
-- (BOOL) isExtendedRadarOn
+- (BOOL) extendedRadarOn
 {
-    return self.isExtendedRadarOn;
+    return self.extendedRadarOn;
 }
 
-- (void) setIsExtendedRadarOn:(BOOL)isExtendedRadarOn {
-    if (self.isExtendedRadarOn) {
+- (void) setExtendedRadarOn:(BOOL)isExtendedRadarOn {
+    if (isExtendedRadarOn) {
         self.speed = 0;
         self.radarRange.rangeHeight = 9;
         

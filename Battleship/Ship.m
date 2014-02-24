@@ -10,12 +10,11 @@
 
 @implementation Ship
 
--(instancetype) initWithLocation:(Coordinate *)initialPosition {
+-(instancetype) initWithLocation:(Coordinate *)initialPosition andName:(NSString *)nameOfShip {
     self = [super init];
     if (self) {
-        _location.xCoord = initialPosition.xCoord;
-        _location.yCoord = initialPosition.yCoord;
-        _location.direction = initialPosition.direction;
+        _shipName = nameOfShip;
+        _location = initialPosition;
         self.blocks = [[NSMutableArray alloc] init];
         self.weapons = [[NSMutableArray alloc] init];
     }

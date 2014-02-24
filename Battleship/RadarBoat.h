@@ -10,8 +10,8 @@
 
 @interface RadarBoat : Ship
 
-@property BOOL isExtendedRadarOn;
+@property BOOL extendedRadarOn;
 
-- (instancetype)initWithLocation:(Coordinate *)initialPosition;
+- (instancetype)initWithLocation:(Coordinate *)initialPosition andName:(NSString *)nameOfShip;
 
 @end

@@ -10,6 +10,6 @@
 
 @interface TorpedoBoat : Ship
 
-- (instancetype)initWithLocation:(Coordinate *)initialPosition;
+- (instancetype)initWithLocation:(Coordinate *)initialPosition andName:(NSString *)nameOfShip;
 
 @end
