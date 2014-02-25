@@ -12,9 +12,9 @@
 @implementation RadarBoat
 
 #pragma mark - IS EXTENDED RADAR ON IS BROKEN
-- (instancetype)initWithLocation:(Coordinate *)initialPosition
+- (instancetype)initWithLocation:(Coordinate *)initialPosition andName:(NSString *)nameOfShip
 {
-    self = [super initWithLocation:initialPosition];
+    self = [super initWithLocation:initialPosition andName:nameOfShip];
     if (self) {
         self.size = 3;
         self.speed = 3;
@@ -22,24 +22,28 @@
         for (int i = 0; i < self.size; i++) {
             Coordinate* segCoord = [[Coordinate alloc] init];
             segCoord.direction = initialPosition.direction;
+            segCoord.xCoord = initialPosition.xCoord;
             switch (segCoord.direction) {
                 case NORTH:
-                    segCoord.xCoord = initialPosition.xCoord - i;
+                    segCoord.yCoord = initialPosition.yCoord - i;
                     break;
                 case SOUTH:
-                    segCoord.xCoord = initialPosition.xCoord + i;
+                    segCoord.yCoord = initialPosition.yCoord + i;
                     break;
                 default:
                     break;
             }
-            ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:NORMAL_ARMOUR andShipName:@"RadarBoat" andPosition:i atLocation:segCoord];
+            ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:NORMAL_ARMOUR andPosition:i atLocation:segCoord belongingToShip:nameOfShip];
+            if (i == self.size -1) {
+                nextSeg.isTail = YES;
+            }
+            else {
+                nextSeg.isTail = NO;
+            }
             self.blocks[i] = nextSeg;
         }
         [self.weapons addObject:[NSNumber numberWithInt:CANNON]];
-        self.radarRange.rangeHeight = 6;
-        self.radarRange.rangeWidth = 3;
-        self.radarRange.startRange = 1;
-        //self.isExtendedRadarOn = NO;
+        self.extendedRadarOn = NO;
         self.canonRange.rangeHeight = 5;
         self.canonRange.rangeWidth = 3;
         self.canonRange.startRange = -1;
@@ -47,15 +51,15 @@
     return self;
 }
 
-@synthesize isExtendedRadarOn;
+@synthesize extendedRadarOn;
 
-- (BOOL) isExtendedRadarOn
+- (BOOL) extendedRadarOn
 {
-    return self.isExtendedRadarOn;
+    return self.extendedRadarOn;
 }
 
-- (void) setIsExtendedRadarOn:(BOOL)isExtendedRadarOn {
-    if (self.isExtendedRadarOn) {
+- (void) setExtendedRadarOn:(BOOL)isExtendedRadarOn {
+    if (isExtendedRadarOn) {
         self.speed = 0;
         self.radarRange.rangeHeight = 9;
         

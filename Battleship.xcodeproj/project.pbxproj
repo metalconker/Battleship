@@ -25,18 +25,18 @@
 		5117154F189A390200BE75A9 /* BattleshipTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5117154E189A390200BE75A9 /* BattleshipTests.m */; };
 		51C23995189C99E700B5D430 /* Jigglypuff sings Game of Thrones a capella.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 51C23994189C99E700B5D430 /* Jigglypuff sings Game of Thrones a capella.mp3 */; };
 		51C23997189C9A9700B5D430 /* Pew_Pew-DKnight556-1379997159.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 51C23996189C9A9700B5D430 /* Pew_Pew-DKnight556-1379997159.mp3 */; };
-		871F9B6E18A2FFD1006F2682 /* Coordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B5518A2FFD1006F2682 /* Coordinate.m */; };
-		871F9B6F18A2FFD1006F2682 /* Cruiser.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B5718A2FFD1006F2682 /* Cruiser.m */; };
-		871F9B7018A2FFD1006F2682 /* Destroyer.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B5918A2FFD1006F2682 /* Destroyer.m */; };
-		871F9B7218A2FFD1006F2682 /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B5E18A2FFD1006F2682 /* Map.m */; };
-		871F9B7318A2FFD1006F2682 /* MineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B6118A2FFD1006F2682 /* MineLayer.m */; };
-		871F9B7418A2FFD1006F2682 /* RadarBoat.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B6318A2FFD1006F2682 /* RadarBoat.m */; };
-		871F9B7518A2FFD1006F2682 /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B6518A2FFD1006F2682 /* Range.m */; };
-		871F9B7618A2FFD1006F2682 /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B6718A2FFD1006F2682 /* Ship.m */; };
-		871F9B7718A2FFD1006F2682 /* TorpedoBoat.m in Sources */ = {isa = PBXBuildFile; fileRef = 871F9B6C18A2FFD1006F2682 /* TorpedoBoat.m */; };
-		874004FF18A6023600B64536 /* ShipSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 874004FE18A6023600B64536 /* ShipSegment.m */; };
-		876F661818B465B500AA34C4 /* Fleet.m in Sources */ = {isa = PBXBuildFile; fileRef = 876F661718B465B500AA34C4 /* Fleet.m */; };
-		8783319018B4526500E77455 /* BattleshipGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 8783318F18B4526500E77455 /* BattleshipGame.m */; };
+		87AD0BE318BC6B29001BCD2F /* BattleshipGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BC418BC6B28001BCD2F /* BattleshipGame.m */; };
+		87AD0BE418BC6B29001BCD2F /* Coordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BC618BC6B28001BCD2F /* Coordinate.m */; };
+		87AD0BE518BC6B29001BCD2F /* Cruiser.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BC818BC6B28001BCD2F /* Cruiser.m */; };
+		87AD0BE618BC6B29001BCD2F /* Destroyer.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BCA18BC6B28001BCD2F /* Destroyer.m */; };
+		87AD0BE718BC6B29001BCD2F /* Fleet.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BCD18BC6B28001BCD2F /* Fleet.m */; };
+		87AD0BE818BC6B29001BCD2F /* Map.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BCF18BC6B28001BCD2F /* Map.m */; };
+		87AD0BE918BC6B29001BCD2F /* MineLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BD218BC6B28001BCD2F /* MineLayer.m */; };
+		87AD0BEA18BC6B29001BCD2F /* RadarBoat.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BD418BC6B28001BCD2F /* RadarBoat.m */; };
+		87AD0BEB18BC6B29001BCD2F /* Range.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BD618BC6B28001BCD2F /* Range.m */; };
+		87AD0BEC18BC6B29001BCD2F /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BD818BC6B28001BCD2F /* Ship.m */; };
+		87AD0BED18BC6B29001BCD2F /* ShipSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BDC18BC6B28001BCD2F /* ShipSegment.m */; };
+		87AD0BEE18BC6B29001BCD2F /* TorpedoBoat.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BDF18BC6B28001BCD2F /* TorpedoBoat.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,36 +74,36 @@
 		5117154E189A390200BE75A9 /* BattleshipTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BattleshipTests.m; sourceTree = "<group>"; };
 		51C23994189C99E700B5D430 /* Jigglypuff sings Game of Thrones a capella.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Jigglypuff sings Game of Thrones a capella.mp3"; sourceTree = "<group>"; };
 		51C23996189C9A9700B5D430 /* Pew_Pew-DKnight556-1379997159.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pew_Pew-DKnight556-1379997159.mp3"; sourceTree = "<group>"; };
-		871F9B5418A2FFD1006F2682 /* Coordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coordinate.h; sourceTree = "<group>"; };
-		871F9B5518A2FFD1006F2682 /* Coordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coordinate.m; sourceTree = "<group>"; };
-		871F9B5618A2FFD1006F2682 /* Cruiser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cruiser.h; sourceTree = "<group>"; };
-		871F9B5718A2FFD1006F2682 /* Cruiser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cruiser.m; sourceTree = "<group>"; };
-		871F9B5818A2FFD1006F2682 /* Destroyer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Destroyer.h; sourceTree = "<group>"; };
-		871F9B5918A2FFD1006F2682 /* Destroyer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Destroyer.m; sourceTree = "<group>"; };
-		871F9B5A18A2FFD1006F2682 /* DirectionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionType.h; sourceTree = "<group>"; };
-		871F9B5D18A2FFD1006F2682 /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Map.h; sourceTree = "<group>"; };
-		871F9B5E18A2FFD1006F2682 /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Map.m; sourceTree = "<group>"; };
-		871F9B5F18A2FFD1006F2682 /* Mine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mine.h; sourceTree = "<group>"; };
-		871F9B6018A2FFD1006F2682 /* MineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MineLayer.h; sourceTree = "<group>"; };
-		871F9B6118A2FFD1006F2682 /* MineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MineLayer.m; sourceTree = "<group>"; };
-		871F9B6218A2FFD1006F2682 /* RadarBoat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RadarBoat.h; sourceTree = "<group>"; };
-		871F9B6318A2FFD1006F2682 /* RadarBoat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RadarBoat.m; sourceTree = "<group>"; };
-		871F9B6418A2FFD1006F2682 /* Range.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Range.h; sourceTree = "<group>"; };
-		871F9B6518A2FFD1006F2682 /* Range.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Range.m; sourceTree = "<group>"; };
-		871F9B6618A2FFD1006F2682 /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
-		871F9B6718A2FFD1006F2682 /* Ship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ship.m; sourceTree = "<group>"; };
-		871F9B6818A2FFD1006F2682 /* ShipArmourType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipArmourType.h; sourceTree = "<group>"; };
-		871F9B6918A2FFD1006F2682 /* ShipRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipRotation.h; sourceTree = "<group>"; };
-		871F9B6B18A2FFD1006F2682 /* TorpedoBoat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TorpedoBoat.h; sourceTree = "<group>"; };
-		871F9B6C18A2FFD1006F2682 /* TorpedoBoat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TorpedoBoat.m; sourceTree = "<group>"; };
-		871F9B6D18A2FFD1006F2682 /* WeaponType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeaponType.h; sourceTree = "<group>"; };
-		874004FE18A6023600B64536 /* ShipSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipSegment.m; sourceTree = "<group>"; };
-		876F661618B465B500AA34C4 /* Fleet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fleet.h; sourceTree = "<group>"; };
-		876F661718B465B500AA34C4 /* Fleet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fleet.m; sourceTree = "<group>"; };
-		8783318D18B451A400E77455 /* TerrainType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TerrainType.h; sourceTree = "<group>"; };
-		8783318E18B4526500E77455 /* BattleshipGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleshipGame.h; sourceTree = "<group>"; };
-		8783318F18B4526500E77455 /* BattleshipGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattleshipGame.m; sourceTree = "<group>"; };
-		8783319118B4606D00E77455 /* ShipSegment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShipSegment.h; sourceTree = "<group>"; };
+		87AD0BC318BC6B28001BCD2F /* BattleshipGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BattleshipGame.h; path = Model/BattleshipGame.h; sourceTree = "<group>"; };
+		87AD0BC418BC6B28001BCD2F /* BattleshipGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BattleshipGame.m; path = Model/BattleshipGame.m; sourceTree = "<group>"; };
+		87AD0BC518BC6B28001BCD2F /* Coordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Coordinate.h; path = Model/Coordinate.h; sourceTree = "<group>"; };
+		87AD0BC618BC6B28001BCD2F /* Coordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Coordinate.m; path = Model/Coordinate.m; sourceTree = "<group>"; };
+		87AD0BC718BC6B28001BCD2F /* Cruiser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Cruiser.h; path = Model/Cruiser.h; sourceTree = "<group>"; };
+		87AD0BC818BC6B28001BCD2F /* Cruiser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Cruiser.m; path = Model/Cruiser.m; sourceTree = "<group>"; };
+		87AD0BC918BC6B28001BCD2F /* Destroyer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Destroyer.h; path = Model/Destroyer.h; sourceTree = "<group>"; };
+		87AD0BCA18BC6B28001BCD2F /* Destroyer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Destroyer.m; path = Model/Destroyer.m; sourceTree = "<group>"; };
+		87AD0BCB18BC6B28001BCD2F /* DirectionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DirectionType.h; path = Model/DirectionType.h; sourceTree = "<group>"; };
+		87AD0BCC18BC6B28001BCD2F /* Fleet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Fleet.h; path = Model/Fleet.h; sourceTree = "<group>"; };
+		87AD0BCD18BC6B28001BCD2F /* Fleet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Fleet.m; path = Model/Fleet.m; sourceTree = "<group>"; };
+		87AD0BCE18BC6B28001BCD2F /* Map.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Map.h; path = Model/Map.h; sourceTree = "<group>"; };
+		87AD0BCF18BC6B28001BCD2F /* Map.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Map.m; path = Model/Map.m; sourceTree = "<group>"; };
+		87AD0BD018BC6B28001BCD2F /* Mine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mine.h; path = Model/Mine.h; sourceTree = "<group>"; };
+		87AD0BD118BC6B28001BCD2F /* MineLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MineLayer.h; path = Model/MineLayer.h; sourceTree = "<group>"; };
+		87AD0BD218BC6B28001BCD2F /* MineLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MineLayer.m; path = Model/MineLayer.m; sourceTree = "<group>"; };
+		87AD0BD318BC6B28001BCD2F /* RadarBoat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RadarBoat.h; path = Model/RadarBoat.h; sourceTree = "<group>"; };
+		87AD0BD418BC6B28001BCD2F /* RadarBoat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RadarBoat.m; path = Model/RadarBoat.m; sourceTree = "<group>"; };
+		87AD0BD518BC6B28001BCD2F /* Range.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Range.h; path = Model/Range.h; sourceTree = "<group>"; };
+		87AD0BD618BC6B28001BCD2F /* Range.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Range.m; path = Model/Range.m; sourceTree = "<group>"; };
+		87AD0BD718BC6B28001BCD2F /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Ship.h; path = Model/Ship.h; sourceTree = "<group>"; };
+		87AD0BD818BC6B28001BCD2F /* Ship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Ship.m; path = Model/Ship.m; sourceTree = "<group>"; };
+		87AD0BD918BC6B28001BCD2F /* ShipArmourType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShipArmourType.h; path = Model/ShipArmourType.h; sourceTree = "<group>"; };
+		87AD0BDA18BC6B28001BCD2F /* ShipRotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShipRotation.h; path = Model/ShipRotation.h; sourceTree = "<group>"; };
+		87AD0BDB18BC6B28001BCD2F /* ShipSegment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShipSegment.h; path = Model/ShipSegment.h; sourceTree = "<group>"; };
+		87AD0BDC18BC6B28001BCD2F /* ShipSegment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShipSegment.m; path = Model/ShipSegment.m; sourceTree = "<group>"; };
+		87AD0BDD18BC6B28001BCD2F /* TerrainType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TerrainType.h; path = Model/TerrainType.h; sourceTree = "<group>"; };
+		87AD0BDE18BC6B28001BCD2F /* TorpedoBoat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TorpedoBoat.h; path = Model/TorpedoBoat.h; sourceTree = "<group>"; };
+		87AD0BDF18BC6B28001BCD2F /* TorpedoBoat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TorpedoBoat.m; path = Model/TorpedoBoat.m; sourceTree = "<group>"; };
+		87AD0BE218BC6B28001BCD2F /* WeaponType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeaponType.h; path = Model/WeaponType.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,36 +221,36 @@
 		871F9B7818A2FFDD006F2682 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				876F661618B465B500AA34C4 /* Fleet.h */,
-				876F661718B465B500AA34C4 /* Fleet.m */,
-				8783318E18B4526500E77455 /* BattleshipGame.h */,
-				8783318F18B4526500E77455 /* BattleshipGame.m */,
-				8783318D18B451A400E77455 /* TerrainType.h */,
-				871F9B5418A2FFD1006F2682 /* Coordinate.h */,
-				871F9B5518A2FFD1006F2682 /* Coordinate.m */,
-				871F9B5618A2FFD1006F2682 /* Cruiser.h */,
-				871F9B5718A2FFD1006F2682 /* Cruiser.m */,
-				871F9B5818A2FFD1006F2682 /* Destroyer.h */,
-				871F9B5918A2FFD1006F2682 /* Destroyer.m */,
-				871F9B5A18A2FFD1006F2682 /* DirectionType.h */,
-				871F9B5D18A2FFD1006F2682 /* Map.h */,
-				871F9B5E18A2FFD1006F2682 /* Map.m */,
-				871F9B5F18A2FFD1006F2682 /* Mine.h */,
-				871F9B6018A2FFD1006F2682 /* MineLayer.h */,
-				871F9B6118A2FFD1006F2682 /* MineLayer.m */,
-				874004FE18A6023600B64536 /* ShipSegment.m */,
-				8783319118B4606D00E77455 /* ShipSegment.h */,
-				871F9B6218A2FFD1006F2682 /* RadarBoat.h */,
-				871F9B6318A2FFD1006F2682 /* RadarBoat.m */,
-				871F9B6418A2FFD1006F2682 /* Range.h */,
-				871F9B6518A2FFD1006F2682 /* Range.m */,
-				871F9B6618A2FFD1006F2682 /* Ship.h */,
-				871F9B6718A2FFD1006F2682 /* Ship.m */,
-				871F9B6818A2FFD1006F2682 /* ShipArmourType.h */,
-				871F9B6918A2FFD1006F2682 /* ShipRotation.h */,
-				871F9B6B18A2FFD1006F2682 /* TorpedoBoat.h */,
-				871F9B6C18A2FFD1006F2682 /* TorpedoBoat.m */,
-				871F9B6D18A2FFD1006F2682 /* WeaponType.h */,
+				87AD0BC318BC6B28001BCD2F /* BattleshipGame.h */,
+				87AD0BC418BC6B28001BCD2F /* BattleshipGame.m */,
+				87AD0BC518BC6B28001BCD2F /* Coordinate.h */,
+				87AD0BC618BC6B28001BCD2F /* Coordinate.m */,
+				87AD0BC718BC6B28001BCD2F /* Cruiser.h */,
+				87AD0BC818BC6B28001BCD2F /* Cruiser.m */,
+				87AD0BC918BC6B28001BCD2F /* Destroyer.h */,
+				87AD0BCA18BC6B28001BCD2F /* Destroyer.m */,
+				87AD0BCB18BC6B28001BCD2F /* DirectionType.h */,
+				87AD0BCC18BC6B28001BCD2F /* Fleet.h */,
+				87AD0BCD18BC6B28001BCD2F /* Fleet.m */,
+				87AD0BCE18BC6B28001BCD2F /* Map.h */,
+				87AD0BCF18BC6B28001BCD2F /* Map.m */,
+				87AD0BD018BC6B28001BCD2F /* Mine.h */,
+				87AD0BD118BC6B28001BCD2F /* MineLayer.h */,
+				87AD0BD218BC6B28001BCD2F /* MineLayer.m */,
+				87AD0BD318BC6B28001BCD2F /* RadarBoat.h */,
+				87AD0BD418BC6B28001BCD2F /* RadarBoat.m */,
+				87AD0BD518BC6B28001BCD2F /* Range.h */,
+				87AD0BD618BC6B28001BCD2F /* Range.m */,
+				87AD0BD718BC6B28001BCD2F /* Ship.h */,
+				87AD0BD818BC6B28001BCD2F /* Ship.m */,
+				87AD0BD918BC6B28001BCD2F /* ShipArmourType.h */,
+				87AD0BDA18BC6B28001BCD2F /* ShipRotation.h */,
+				87AD0BDB18BC6B28001BCD2F /* ShipSegment.h */,
+				87AD0BDC18BC6B28001BCD2F /* ShipSegment.m */,
+				87AD0BDD18BC6B28001BCD2F /* TerrainType.h */,
+				87AD0BDE18BC6B28001BCD2F /* TorpedoBoat.h */,
+				87AD0BDF18BC6B28001BCD2F /* TorpedoBoat.m */,
+				87AD0BE218BC6B28001BCD2F /* WeaponType.h */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -354,22 +354,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				871F9B7618A2FFD1006F2682 /* Ship.m in Sources */,
-				871F9B7418A2FFD1006F2682 /* RadarBoat.m in Sources */,
-				876F661818B465B500AA34C4 /* Fleet.m in Sources */,
-				871F9B7318A2FFD1006F2682 /* MineLayer.m in Sources */,
-				871F9B7718A2FFD1006F2682 /* TorpedoBoat.m in Sources */,
+				87AD0BE718BC6B29001BCD2F /* Fleet.m in Sources */,
 				51171538189A390200BE75A9 /* MyScene.m in Sources */,
-				8783319018B4526500E77455 /* BattleshipGame.m in Sources */,
-				874004FF18A6023600B64536 /* ShipSegment.m in Sources */,
-				871F9B7518A2FFD1006F2682 /* Range.m in Sources */,
-				871F9B7018A2FFD1006F2682 /* Destroyer.m in Sources */,
-				871F9B7218A2FFD1006F2682 /* Map.m in Sources */,
-				871F9B6F18A2FFD1006F2682 /* Cruiser.m in Sources */,
+				87AD0BE518BC6B29001BCD2F /* Cruiser.m in Sources */,
+				87AD0BE418BC6B29001BCD2F /* Coordinate.m in Sources */,
 				51171535189A390200BE75A9 /* ViewController.m in Sources */,
+				87AD0BED18BC6B29001BCD2F /* ShipSegment.m in Sources */,
+				87AD0BEC18BC6B29001BCD2F /* Ship.m in Sources */,
+				87AD0BE318BC6B29001BCD2F /* BattleshipGame.m in Sources */,
+				87AD0BEB18BC6B29001BCD2F /* Range.m in Sources */,
+				87AD0BEA18BC6B29001BCD2F /* RadarBoat.m in Sources */,
+				87AD0BE818BC6B29001BCD2F /* Map.m in Sources */,
+				87AD0BEE18BC6B29001BCD2F /* TorpedoBoat.m in Sources */,
 				5117152F189A390200BE75A9 /* AppDelegate.m in Sources */,
-				871F9B6E18A2FFD1006F2682 /* Coordinate.m in Sources */,
 				5117152B189A390200BE75A9 /* main.m in Sources */,
+				87AD0BE918BC6B29001BCD2F /* MineLayer.m in Sources */,
+				87AD0BE618BC6B29001BCD2F /* Destroyer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

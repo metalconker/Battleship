@@ -26,7 +26,8 @@
 @property Range *canonRange;
 @property NSString *shipName;
 
-- (instancetype) initWithLocation: (Coordinate*) initialPosition;
+- (instancetype) initWithLocation: (Coordinate*) initialPosition
+                          andName:(NSString*) nameOfShip;
 - (void)move: (Coordinate *)destination;
 - (void)repair;
 - (void)rotate: (Rotation)destination;

@@ -11,9 +11,9 @@
 
 @implementation TorpedoBoat
 
-- (instancetype)initWithLocation:(Coordinate *)initialPosition
+- (instancetype)initWithLocation:(Coordinate *)initialPosition andName:(NSString *)nameOfShip
 {
-    self = [super initWithLocation:initialPosition];
+    self = [super initWithLocation:initialPosition andName:nameOfShip];
     if (self) {
         self.size = 3;
         self.speed = 9;
@@ -21,17 +21,24 @@
         for (int i = 0; i < self.size; i++) {
             Coordinate* segCoord = [[Coordinate alloc] init];
             segCoord.direction = initialPosition.direction;
+            segCoord.xCoord = initialPosition.xCoord;
             switch (segCoord.direction) {
                 case NORTH:
-                    segCoord.xCoord = initialPosition.xCoord - i;
+                    segCoord.yCoord = initialPosition.yCoord - i;
                     break;
                 case SOUTH:
-                    segCoord.xCoord = initialPosition.xCoord + i;
+                    segCoord.yCoord = initialPosition.yCoord + i;
                     break;
                 default:
                     break;
             }
-            ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:NORMAL_ARMOUR andShipName:@"TorpedoBoat" andPosition:i atLocation:segCoord];
+            ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:NORMAL_ARMOUR andPosition:i atLocation:segCoord belongingToShip:nameOfShip];
+            if (i == self.size -1) {
+                nextSeg.isTail = YES;
+            }
+            else {
+                nextSeg.isTail = NO;
+            }
             self.blocks[i] = nextSeg;
         }
         [self.weapons addObject:[NSNumber numberWithInt:CANNON]];

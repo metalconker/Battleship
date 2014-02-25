@@ -11,6 +11,6 @@
 @interface MineLayer : Ship
 
 @property int numMines;
-- (instancetype)initWithLocation:(Coordinate *)initialPosition;
+- (instancetype)initWithLocation:(Coordinate *)initialPosition andName:(NSString *)nameOfShip;
 
 @end

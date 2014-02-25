@@ -18,11 +18,11 @@
 -(instancetype) init {
     self = [super init];
     if (self) {
-        //Fleet* hostFleet = [[Fleet alloc] initWithPlayerID:1];
-        //Fleet* joinFleet = [[Fleet alloc] initWithPlayerID:2];
+        Fleet* hostFleet = [[Fleet alloc] initWithPlayerID:1];
+        Fleet* joinFleet = [[Fleet alloc] initWithPlayerID:2];
         self.hostView = [[Map alloc] init];
-        //[self updateMap: hostFleet];
-        //[self updateMap: joinFleet];
+        [self updateMap: hostFleet];
+        [self updateMap: joinFleet];
     }
     return self;
 }
@@ -30,6 +30,7 @@
 -(void)updateMap:(Fleet*) updatedFleet{
     for(Ship* ship in updatedFleet.shipArray) {
         for(ShipSegment* seg in ship.blocks) {
+            printf("%d, %d\n", seg.location.xCoord, seg.location.yCoord);
             [_hostView.grid[seg.location.xCoord] removeObjectAtIndex:seg.location.yCoord];
             [_hostView.grid[seg.location.xCoord] insertObject:seg atIndex:seg.location.yCoord];
         }

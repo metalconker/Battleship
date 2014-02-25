@@ -10,11 +10,11 @@
 
 @implementation ShipSegment
 
--(instancetype)initWithArmour:(ShipArmour)armour andShipName:(NSString *)name andPosition:(int)cell atLocation:(Coordinate*)initialLocation {
+-(instancetype)initWithArmour:(ShipArmour)armour andPosition:(int)cell atLocation:(Coordinate*)initialLocation belongingToShip:(NSString *)ship {
     self = [super init];
     if (self) {
         _segmentArmourType = armour;
-        _shipName = name;
+        _shipName = ship;
         _block = cell;
         _location = initialLocation;
     }

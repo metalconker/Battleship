@@ -15,12 +15,13 @@
 
 @property ShipArmour segmentArmourType;
 @property int block;
-@property NSString *shipName;
+@property (strong, nonatomic) NSString* shipName;
 @property (strong, nonatomic) Coordinate* location;
+@property BOOL isTail;
 -(instancetype) initWithArmour:(ShipArmour) armour
-                   andShipName:(NSString*) name
                    andPosition:(int)cell
-                        atLocation:(Coordinate*) initialLocation;
+                    atLocation:(Coordinate*) initialLocation
+               belongingToShip:(NSString*) ship;
 
 @end
 

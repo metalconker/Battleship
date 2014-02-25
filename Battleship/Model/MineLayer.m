@@ -10,9 +10,9 @@
 
 @implementation MineLayer
 
-- (instancetype)initWithLocation:(Coordinate *)initialPosition
+- (instancetype)initWithLocation:(Coordinate *)initialPosition andName:(NSString *)nameOfShip
 {
-    self = [super initWithLocation:initialPosition];
+    self = [super initWithLocation:initialPosition andName:nameOfShip];
     if (self) {
         self.size = 2;
         self.speed = 6;
@@ -20,17 +20,24 @@
         for (int i = 0; i < self.size; i++) {
             Coordinate* segCoord = [[Coordinate alloc] init];
             segCoord.direction = initialPosition.direction;
+            segCoord.xCoord = initialPosition.xCoord;
             switch (segCoord.direction) {
                 case NORTH:
-                    segCoord.xCoord = initialPosition.xCoord - i;
+                    segCoord.yCoord = initialPosition.yCoord - i;
                     break;
                 case SOUTH:
-                    segCoord.xCoord = initialPosition.xCoord + i;
+                    segCoord.yCoord = initialPosition.yCoord + i;
                     break;
                 default:
                     break;
             }
-            ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:HEAVY_ARMOUR andShipName:@"MineLayer" andPosition:i atLocation:segCoord];
+            ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:HEAVY_ARMOUR andPosition:i atLocation:segCoord belongingToShip:nameOfShip];
+            if (i == self.size -1) {
+                nextSeg.isTail = YES;
+            }
+            else {
+                nextSeg.isTail = NO;
+            }
             self.blocks[i] = nextSeg;
         }
         [self.weapons addObject:[NSNumber numberWithInt:CANNON]];

@@ -29,7 +29,7 @@ Fleet *testFleet;
 
 @implementation MyScene
 
--(id)initWithSize:(CGSize)size {    
+-(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
         // Initializing the background - more time efficient as only loads the textures once
@@ -57,56 +57,57 @@ Fleet *testFleet;
 
 // Draws ship sprites to screen
 - (void) initShipSprites {
-    
-    testFleet = [[Fleet alloc] initWithPlayerID:1];
-    
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
-    Ship *ship;
-    
     int widthDiv30 = self.frame.size.width / GRID_SIZE;
     int heightDiv30 = self.frame.size.height / GRID_SIZE;
-    
-    for (int i=0 ; i < [testFleet.shipArray count]; i++)
+    ShipSegment *s;
+    for (int i = 0; i < GRID_SIZE; i++)
     {
-        ship = [testFleet.shipArray objectAtIndex:i];
-        
-        if ([ship isKindOfClass:[Cruiser class]])
+        for (int j = 0; j < GRID_SIZE; j++)
         {
-            sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Cruiser"];
-        }
-        
-        else if ([ship isKindOfClass:[Destroyer class]])
-        {
-            sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Destroyer"];
-        }
             
-        else if ([ship isKindOfClass:[MineLayer class]])
-        {
-            sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MineLayer"];
+            if ([_game.hostView.grid[i][j] isKindOfClass:[ShipSegment class]])
+            {
+                s = _game.hostView.grid[i][j];
+                if (s.isTail) {
+                    if (s.isTail && ([s.shipName isEqualToString:@"c1"] || [s.shipName isEqualToString:@"c2"]))
+                    {
+                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Cruiser"];
+                    }
+                    else if (s.isTail && ([s.shipName isEqualToString:@"d1"] || [s.shipName isEqualToString:@"d2"] || [s.shipName isEqualToString:@"d3"]))
+                    {
+                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Destroyer"];
+                    }
+                    else if (s.isTail && ([s.shipName isEqualToString:@"m1"] || [s.shipName isEqualToString:@"m2"]))
+                    {
+                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MineLayer"];
+                    }
+                    else if (s.isTail && [s.shipName isEqualToString:@"r1"])
+                    {
+                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"RadarBoat"];
+                        
+                    }
+                    else if (s.isTail && ([s.shipName isEqualToString:@"t1"] || [s.shipName isEqualToString:@"t2"]))
+                    {
+                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"TorpedoBoat"];
+                    }
+                    sprite.name = s.shipName;
+                    sprite.position = CGPointMake(s.location.xCoord*widthDiv30 + sprite.frame.size.width/2, s.location.yCoord*heightDiv30 + sprite.frame.size.height/2);
+                    [self addChild:sprite];
+                }
+            }
         }
-        
-        else if ([ship isKindOfClass:[RadarBoat class]])
-        {
-            sprite = [SKSpriteNode spriteNodeWithImageNamed:@"RadarBoat"];
-            
-        }
-        
-        else if ([ship isKindOfClass:[TorpedoBoat class]])
-        {
-            sprite = [SKSpriteNode spriteNodeWithImageNamed:@"TorpedoBoat"];
-        }
-        
-        sprite.name = ship.shipName;
-        sprite.position = CGPointMake(ship.location.xCoord*widthDiv30 + sprite.frame.size.width/2, ship.location.yCoord*heightDiv30 + sprite.frame.size.height/2);
-        [self addChild:sprite];
-        
     }
-    
-    
 }
-
 SKSpriteNode *bg1;
 SKSpriteNode *bg2;
+
+
+
+
+
+
+
 
 // Draws terrain sprites to screen
 - (void) initTerrainSprites {
@@ -121,11 +122,10 @@ SKSpriteNode *bg2;
     bg2.anchorPoint = CGPointZero;
     bg2.position = CGPointMake(bg1.size.width-1, 0);
     [self addChild:bg2];
-
+    
     // Initilizes the different sprites
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
     // Containers
-    Terrain ter;
     int widthDiv30 = self.frame.size.width / GRID_SIZE;
     int heightDiv30 = self.frame.size.height / GRID_SIZE;
     // Drawing the sprites to screen in position
@@ -133,48 +133,50 @@ SKSpriteNode *bg2;
     {
         for (int j = 0; j < GRID_SIZE; j++)
         {
-            ter =  [_game.hostView.grid[i][j] intValue];
-            switch (ter)
-            {
-                case HOST_BASE:
-                    sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MidBase"];
-                    sprite.name = @"hostbase";
-                    sprite.zRotation =  M_PI / 2;
-                    sprite.xScale = 1.7;
-                    sprite.yScale = 2.1;
-                    sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
-                    [self addChild:sprite];
-                    break;
-                    
-                case JOIN_BASE:
-                    sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MidBase"];
-                    sprite.name = @"joinbase";
-                    sprite.zRotation = 3 * M_PI / 2;
-                    sprite.xScale = 1.7;
-                    sprite.yScale = 2.1;
-                    sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
-                    [self addChild:sprite];
-                    break;
-                    
-                    // need to add an if visible clause
-                case CORAL:
-                    sprite = [SKSpriteNode spriteNodeWithImageNamed:@"coral"];
-                    sprite.name = @"coral";
-                    sprite.zRotation = M_PI / 2;
-                    sprite.xScale = 0.248;
-                    sprite.yScale = 0.338;
-                    sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
-                    [self addChild:sprite];
-                    break;
-                    
-                default:
-                    //sprite = [SKSpriteNode spriteNodeWithImageNamed:@"water"];
-                    //sprite.name = @"water";
-                    //sprite.zRotation = M_PI / 2;
-                    //sprite.xScale = 0.248;
-                    //sprite.yScale = 0.338;
-                    break;
-                    
+            if ([_game.hostView.grid[i][j] isKindOfClass:[NSNumber class]]) {
+                Terrain terType = [_game.hostView.grid[i][j] intValue];
+                switch (terType)
+                {
+                    case HOST_BASE:
+                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MidBase"];
+                        sprite.name = @"hostbase";
+                        sprite.zRotation =  M_PI / 2;
+                        sprite.xScale = 1.7;
+                        sprite.yScale = 2.1;
+                        sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
+                        [self addChild:sprite];
+                        break;
+                        
+                    case JOIN_BASE:
+                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MidBase"];
+                        sprite.name = @"joinbase";
+                        sprite.zRotation = 3 * M_PI / 2;
+                        sprite.xScale = 1.7;
+                        sprite.yScale = 2.1;
+                        sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
+                        [self addChild:sprite];
+                        break;
+                        
+                        // need to add an if visible clause
+                    case CORAL:
+                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"coral"];
+                        sprite.name = @"coral";
+                        sprite.zRotation = M_PI / 2;
+                        sprite.xScale = 0.248;
+                        sprite.yScale = 0.338;
+                        sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
+                        [self addChild:sprite];
+                        break;
+                        
+                    default:
+                        //sprite = [SKSpriteNode spriteNodeWithImageNamed:@"water"];
+                        //sprite.name = @"water";
+                        //sprite.zRotation = M_PI / 2;
+                        //sprite.xScale = 0.248;
+                        //sprite.yScale = 0.338;
+                        break;
+                        
+                }
             }
         }
     }
@@ -197,7 +199,7 @@ SKSpriteNode *bg2;
     [self.miniMapPositions addObject:[NSValue valueWithCGPoint:point2]];
     [self.miniMapPositions addObject:[NSValue valueWithCGPoint:point3]];
     [self.miniMapPositions addObject:[NSValue valueWithCGPoint:point4]];
-
+    
     // Mini Map
     SKNode *image = [SKSpriteNode spriteNodeWithImageNamed:@"Mini Map"];
     image.name = @"Mini Map";
@@ -296,12 +298,12 @@ float mapScaleX;
 float mapScaleY;
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-	UITouch *touch = [touches anyObject];
-	CGPoint positionInScene = [touch locationInNode:self];
-	CGPoint previousPosition = [touch previousLocationInNode:self];
+    UITouch *touch = [touches anyObject];
+    CGPoint positionInScene = [touch locationInNode:self];
+    CGPoint previousPosition = [touch previousLocationInNode:self];
     CGPoint location = [touch locationInNode:self];
     
-	CGPoint translation = CGPointMake(positionInScene.x - previousPosition.x, positionInScene.y - previousPosition.y);
+    CGPoint translation = CGPointMake(positionInScene.x - previousPosition.x, positionInScene.y - previousPosition.y);
     
     SKNode *node = [self nodeAtPoint:location];
     CGPoint position = [node position];
@@ -317,10 +319,10 @@ float mapScaleY;
     
     // If the touches increase to greater than 2
     //if ([touches count] > 1 || [touches count] == 0)
-   // {
-     //   [self setMiniMapLocation:location];;
+    // {
+    //   [self setMiniMapLocation:location];;
     //}
-
+    
     
 }
 
@@ -335,7 +337,7 @@ float mapScaleY;
         [self setMiniMapLocation:location];
     }
     
-
+    
     
 }
 
@@ -430,27 +432,27 @@ float scale;
     
     NSLog(@"%f",recognizer.scale);
     
-//    scale=scale*recognizer.scale;
-//    
-//    
-//    mCurrentScale += [recognizer scale] - mLastScale;
-//    mLastScale = [recognizer scale];
-//    if (recognizer.state == UIGestureRecognizerStateBegan)
-//    {
-//        //get midpoint
-//        CGPoint zero=[recognizer locationOfTouch:0 inView:self.view];
-//        CGPoint one=[recognizer locationOfTouch:1 inView:self.view];
-//        float x=zero.x+one.x;
-//        float y=zero.y+one.y;
-//        mid.x=x/2;
-//        mid.y=y/2;
-//    }
-//    else if (recognizer.state == UIGestureRecognizerStateEnded)
-//    {
-//        mLastScale = 1.0;
-//    }
-//    
-//    self.scaleMode = scale;
+    //    scale=scale*recognizer.scale;
+    //
+    //
+    //    mCurrentScale += [recognizer scale] - mLastScale;
+    //    mLastScale = [recognizer scale];
+    //    if (recognizer.state == UIGestureRecognizerStateBegan)
+    //    {
+    //        //get midpoint
+    //        CGPoint zero=[recognizer locationOfTouch:0 inView:self.view];
+    //        CGPoint one=[recognizer locationOfTouch:1 inView:self.view];
+    //        float x=zero.x+one.x;
+    //        float y=zero.y+one.y;
+    //        mid.x=x/2;
+    //        mid.y=y/2;
+    //    }
+    //    else if (recognizer.state == UIGestureRecognizerStateEnded)
+    //    {
+    //        mLastScale = 1.0;
+    //    }
+    //
+    //    self.scaleMode = scale;
     //NSString *xPosString = [NSString stringWithFormat:@"%.2f",mid.x];
     //NSString *yPosString = [NSString stringWithFormat:@"%.2f",mid.y];
     //xPosLabel.text=xPosString;
