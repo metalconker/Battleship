@@ -227,6 +227,27 @@ SKSpriteNode *bg2;
     
     // This player's ships
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
+    ShipSegment *s;
+    for (int i = 0; i < GRID_SIZE; i++)
+    {
+        for (int j = 0; j < GRID_SIZE; j++)
+        {
+            
+            if ([_game.hostView.grid[i][j] isKindOfClass:[ShipSegment class]])
+            {
+                s = _game.hostView.grid[i][j];
+                if (s.isTail) {
+                    sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Green Dot"];
+                    sprite.name = [NSString stringWithFormat:@"%@/Green Dot", s.shipName];
+                    sprite.yScale = 0.3;
+                    sprite.xScale = 0.3;
+                    sprite.position = CGPointMake(s.location.xCoord*(miniMap.frame.size.height/10) - miniMap.frame.size.width*1.4, s.location.yCoord*(miniMap.frame.size.height/10) - miniMap.frame.size.height*1.3);
+                    [miniMap addChild:sprite];
+                }
+            }
+        }
+    }
+/*
     Ship *ship;
     
     for (int i=0 ; i < [testFleet.shipArray count]; i++)
@@ -240,7 +261,7 @@ SKSpriteNode *bg2;
         [miniMap addChild:sprite];
         
     }
-    
+    */
     // for all terrain in terrain array
     //Terrain ter;
     //NSMutableArray *innerArray;
