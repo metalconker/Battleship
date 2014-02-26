@@ -21,6 +21,8 @@
 
 @implementation MyScene
 
+SKNode *overallImage;
+
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
@@ -28,17 +30,34 @@
         self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
         // Creates the battleship game
         _game = [[BattleshipGame alloc] init];
+        
+        // Creates the overall background sprite.
+        //SKNode *backgroundOverall;
+        
+        // Not my code
+        overallImage = [[SKNode alloc] init];
+        
+        // Visual Bar sprite
+        [self initVisualBar];
+        
+        ////overallImage.anchorPoint = CGPointZero;
+        //overallImage.position = CGPointMake(0, 0);
+        [self addChild:overallImage];
+        
         // Terrain sprites
         [self initTerrainSprites];
         // Ship sprites
         [self initShipSprites];
         //MiniMap sprite
         [self initMiniMap];
+        
         Coordinate* testOrigin = [[Coordinate alloc] initWithXCoordinate:10 YCoordinate:1 initiallyFacing: NORTH];
         Coordinate* testDestination = [[Coordinate alloc] initWithXCoordinate:15 YCoordinate:17 initiallyFacing: NORTH];
         [_game moveShipfrom:testOrigin to:testDestination];
         //[self initTerrainSprites];
         [self initShipSprites];
+        
+        [self addChild:visualBar];
     }
     
     return self;
@@ -58,7 +77,7 @@
 // Draws ship sprites to screen
 - (void) initShipSprites {
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
-    int widthDiv30 = self.frame.size.width / GRID_SIZE;
+    int widthDiv30 = (self.frame.size.width-visualBar.frame.size.width) / GRID_SIZE;
     int heightDiv30 = self.frame.size.height / GRID_SIZE;
 
     for (int i = 0; i < GRID_SIZE; i++)
@@ -94,7 +113,7 @@
                     }
                     sprite.name = s.shipName;
                     sprite.position = CGPointMake(s.location.xCoord*widthDiv30 + sprite.frame.size.width/2, s.location.yCoord*heightDiv30 + sprite.frame.size.height/2);
-                    [self addChild:sprite];
+                    [overallImage addChild:sprite];
                 }
             }
         }
@@ -102,7 +121,7 @@
 }
 
 // Draws terrain sprites to screen
-- (void) initTerrainSprites {
+- (void) initTerrainSprites{
     
     // Not my code
     _bg1 = [SKSpriteNode spriteNodeWithImageNamed:@"waterBackground"];
@@ -118,7 +137,7 @@
     // Initilizes the different sprites
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
     // Containers
-    int widthDiv30 = self.frame.size.width / GRID_SIZE;
+    int widthDiv30 = (self.frame.size.width-visualBar.frame.size.width) / GRID_SIZE;
     int heightDiv30 = self.frame.size.height / GRID_SIZE;
     // Drawing the sprites to screen in position
     for (int i = 0; i < GRID_SIZE; i++)
@@ -136,7 +155,7 @@
                         sprite.xScale = 1.7;
                         sprite.yScale = 2.1;
                         sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
-                        [self addChild:sprite];
+                        [overallImage addChild:sprite];
                         break;
                         
                     case JOIN_BASE:
@@ -146,7 +165,7 @@
                         sprite.xScale = 1.7;
                         sprite.yScale = 2.1;
                         sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
-                        [self addChild:sprite];
+                        [overallImage addChild:sprite];
                         break;
                         
                         // need to add an if visible clause
@@ -157,7 +176,7 @@
                         sprite.xScale = 0.248;
                         sprite.yScale = 0.338;
                         sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
-                        [self addChild:sprite];
+                        [overallImage addChild:sprite];
                         break;
                         
                     default:
@@ -174,6 +193,20 @@
     }
 }
 
+// Initializes the visual bar
+- (void)initVisualBar{
+    
+    visualBar = [SKSpriteNode spriteNodeWithImageNamed:@"Mini Map"];
+    visualBar.name = @"Visual Bar";
+    visualBar.yScale = 5;
+    visualBar.xScale = 0.5;
+    //visualBar.anchorPoint = CGPointZero;
+    visualBar.position = CGPointMake(self.frame.size.width - visualBar.frame.size.width/2, visualBar.frame.size.height/2);
+    
+    //visualBar.position = CGPointMake(0, 0);
+    
+}
+
 - (void)initMiniMap{
     
     // Initilize CGPoints
@@ -181,9 +214,9 @@
     self.miniMapPositions = [[NSMutableArray alloc] init];
     
     // Point locations
-    CGPoint point1 = CGPointMake(self.frame.size.width - mapSize, self.frame.size.height - mapSize);
+    CGPoint point1 = CGPointMake(self.frame.size.width - mapSize - visualBar.frame.size.width, self.frame.size.height - mapSize);
     CGPoint point2 = CGPointMake(mapSize, self.frame.size.height - mapSize);
-    CGPoint point3 = CGPointMake(self.frame.size.width - mapSize, mapSize);
+    CGPoint point3 = CGPointMake(self.frame.size.width - mapSize - visualBar.frame.size.width, mapSize);
     CGPoint point4 = CGPointMake(mapSize, mapSize);
     
     // Adding to array
@@ -279,6 +312,8 @@ bool miniMapTouched = false;
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
+    SKSpriteNode *shipDisplay;
+    
     for (UITouch *touch in touches) {
         
         CGPoint location = [touch locationInNode:self];
@@ -297,7 +332,14 @@ bool miniMapTouched = false;
             
         }
         
-        
+        if ([node.name isEqualToString:@"c1"])
+        {
+            NSLog(@"This is getting called");
+            shipDisplay = [SKSpriteNode spriteNodeWithImageNamed:@"Cruiser"];
+            shipDisplay.zRotation = M_PI / 2;
+            shipDisplay.position = CGPointMake(self.frame.size.width - shipDisplay.size.width/2 - visualBar.frame.size.width/2, self.frame.size.height/2);
+            [self addChild:shipDisplay];
+        }
         
     }
     
