@@ -56,11 +56,27 @@
         NSLog(@"%@", s.shipName);
     }
     else {
-        s = [_joinFleet getShipWithCoord:destination];
+        s = [_joinFleet getShipWithCoord:origin];
     }
     [self removeShipFromMap: s];
     [s positionShip: destination];
     [self updateMap:_hostFleet];
     [self updateMap:_joinFleet];
+}
+
+-(NSMutableArray*) getValidMovesfrom:(Coordinate*)origin {
+    Ship* s;
+    if (_hostsTurn) {
+        s = [_hostFleet getShipWithCoord:origin];
+        NSLog(@"%@", s.shipName);
+    }
+    else {
+        s = [_joinFleet getShipWithCoord:origin];
+    }
+    NSMutableArray *validMoves = [s getHeadLocationsOfMove];
+    for (Coordinate* loc in validMoves) {
+        if (_hostView.grid[loc.xCoord][loc.yCoord])
+    }
+    
 }
 @end

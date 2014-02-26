@@ -55,4 +55,81 @@
  //abstract class
 }
 
+-(NSMutableArray *)getHeadLocationsOfMove {
+    NSMutableArray* possibleMoves = [[NSMutableArray alloc] init];
+    Coordinate* headLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+    ShipSegment* headSeg = self.blocks[0];
+    headLocation = headSeg.location;
+    for (int i = -1; i <= 1; i++) {
+        if (i != 0) {
+            switch (headLocation.direction) {
+                case NORTH | SOUTH:
+                    headLocation.xCoord = headSeg.location.xCoord + i;
+                    break;
+                case WEST | EAST:
+                    headLocation.yCoord = headSeg.location.yCoord + i;
+                    break;
+                default:
+                    break;
+            }
+            [possibleMoves addObject:headLocation];
+        }
+    }
+    headLocation = headSeg.location;
+    switch (headLocation.direction) {
+        case NORTH | SOUTH:
+            headLocation.xCoord = headSeg.location.xCoord;
+            break;
+        case WEST | EAST:
+            headLocation.yCoord = headSeg.location.yCoord;
+            break;
+        default:
+            break;
+    }
+    for (int i = -1; i <= self.speed; i++) {
+        if (i != 0) {
+            switch (headLocation.direction) {
+                case NORTH:
+                    headLocation.yCoord = headSeg.location.yCoord + i;
+                    break;
+                case SOUTH:
+                    headLocation.yCoord = headSeg.location.yCoord - i;
+                    break;
+                case WEST:
+                    headLocation.xCoord = headSeg.location.xCoord - i;
+                    break;
+                case EAST:
+                    headLocation.xCoord = headSeg.location.xCoord + i;
+                    break;
+                default:
+                    break;
+    
+            }
+            [possibleMoves addObject:headLocation];
+        }
+    }
+    for (Coordinate *headLocation in possibleMoves) {
+        Coordinate *tailLocation;
+        switch (headLocation.direction) {
+            case NORTH:
+                tailLocation.xCoord = headLocation.xCoord - (self.size - 1);
+                break;
+            case SOUTH:
+                tailLocation.xCoord = headLocation.xCoord + (self.size - 1);
+                break;
+            case WEST:
+                tailLocation.yCoord = headLocation.xCoord + (self.size - 1);
+                break;
+            case EAST:
+                tailLocation.xCoord = headLocation.xCoord - (self.size - 1);
+                break;
+            default:
+                break;
+        }
+        if (![headLocation isWithinMap] || ![tailLocation isWithinMap]) {
+            [possibleMoves removeObject:headLocation];
+        }
+    }
+    return possibleMoves;
+}
 @end

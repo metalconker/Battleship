@@ -22,4 +22,11 @@
     return self;
 }
 
+-(BOOL) isWithinMap {
+    if (_xCoord >= 0 && _xCoord <= 29 && _yCoord >= 0 && _yCoord <= 29) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
 @end

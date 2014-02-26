@@ -17,4 +17,6 @@
 - (instancetype) initWithXCoordinate: (int)xCoordinate
                          YCoordinate:(int) yCoordinate
                           initiallyFacing:(Direction) facingDirection;
+- (BOOL) isWithinMap;
+
 @end

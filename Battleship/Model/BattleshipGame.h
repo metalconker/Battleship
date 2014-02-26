@@ -19,4 +19,5 @@
 -(instancetype) init;
 -(void)moveShipfrom: (Coordinate*) origin
                  to:(Coordinate*) destination;
+-(NSMutableArray*) getVal
 @end

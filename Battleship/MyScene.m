@@ -8,22 +8,14 @@
 
 #import "MyScene.h"
 
-
-// Ship Array of this player
-NSMutableArray *thisPlayer;
-
-// Position of player 1 base;
-NSMutableArray *player1BasePositions;
-
-Fleet *testFleet;
-
-
 @interface MyScene()
 
 - (IBAction)handlePinch:(UIPinchGestureRecognizer *)recognizer;
 
 @property (nonatomic, strong) BattleshipGame *game;
 @property UIPinchGestureRecognizer *pinchRecognizer;
+@property SKSpriteNode *bg1;
+@property SKSpriteNode *bg2;
 
 @end
 
@@ -37,15 +29,15 @@ Fleet *testFleet;
         // Creates the battleship game
         _game = [[BattleshipGame alloc] init];
         // Terrain sprites
-        //[self initTerrainSprites];
+        [self initTerrainSprites];
         // Ship sprites
-        //[self initShipSprites];
-        // MiniMap sprite
+        [self initShipSprites];
+        //MiniMap sprite
         [self initMiniMap];
         Coordinate* testOrigin = [[Coordinate alloc] initWithXCoordinate:10 YCoordinate:1 initiallyFacing: NORTH];
         Coordinate* testDestination = [[Coordinate alloc] initWithXCoordinate:15 YCoordinate:17 initiallyFacing: NORTH];
         [_game moveShipfrom:testOrigin to:testDestination];
-        [self initTerrainSprites];
+        //[self initTerrainSprites];
         [self initShipSprites];
     }
     
@@ -59,12 +51,16 @@ Fleet *testFleet;
     NSLog(@"this is getting called");
 }
 
+- (void) updateShipPosition {
+    
+}
+
 // Draws ship sprites to screen
 - (void) initShipSprites {
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
     int widthDiv30 = self.frame.size.width / GRID_SIZE;
     int heightDiv30 = self.frame.size.height / GRID_SIZE;
-    ShipSegment *s;
+
     for (int i = 0; i < GRID_SIZE; i++)
     {
         for (int j = 0; j < GRID_SIZE; j++)
@@ -72,7 +68,7 @@ Fleet *testFleet;
             
             if ([_game.hostView.grid[i][j] isKindOfClass:[ShipSegment class]])
             {
-                s = _game.hostView.grid[i][j];
+                ShipSegment *s = _game.hostView.grid[i][j];
                 if (s.isTail) {
                     if (s.isTail && ([s.shipName isEqualToString:@"c1"] || [s.shipName isEqualToString:@"c2"]))
                     {
@@ -104,29 +100,20 @@ Fleet *testFleet;
         }
     }
 }
-SKSpriteNode *bg1;
-SKSpriteNode *bg2;
-
-
-
-
-
-
-
 
 // Draws terrain sprites to screen
 - (void) initTerrainSprites {
     
     // Not my code
-    bg1 = [SKSpriteNode spriteNodeWithImageNamed:@"waterBackground"];
-    bg1.anchorPoint = CGPointZero;
-    bg1.position = CGPointMake(0, 0);
-    [self addChild:bg1];
+    _bg1 = [SKSpriteNode spriteNodeWithImageNamed:@"waterBackground"];
+    _bg1.anchorPoint = CGPointZero;
+    _bg1.position = CGPointMake(0, 0);
+    [self addChild:_bg1];
     
-    bg2 = [SKSpriteNode spriteNodeWithImageNamed:@"waterBackground"];
-    bg2.anchorPoint = CGPointZero;
-    bg2.position = CGPointMake(bg1.size.width-1, 0);
-    [self addChild:bg2];
+    _bg2 = [SKSpriteNode spriteNodeWithImageNamed:@"waterBackground"];
+    _bg2.anchorPoint = CGPointZero;
+    _bg2.position = CGPointMake(_bg1.size.width-1, 0);
+    [self addChild:_bg2];
     
     // Initilizes the different sprites
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
@@ -362,9 +349,6 @@ float mapScaleY;
     {
         [self setMiniMapLocation:location];
     }
-    
-    
-    
 }
 
 // Always set the minimap in a specific location - due to bugs with touching
@@ -405,15 +389,15 @@ bool down = false;
     /* Called before each frame is rendered */
     
     // Not my code
-    bg1.position = CGPointMake(bg1.position.x-0.5, bg1.position.y);
-    bg2.position = CGPointMake(bg2.position.x-0.5, bg2.position.y);
+    _bg1.position = CGPointMake(_bg1.position.x-0.5, _bg1.position.y);
+    _bg2.position = CGPointMake(_bg2.position.x-0.5, _bg2.position.y);
     
-    if (bg1.position.x < -bg1.size.width){
-        bg1.position = CGPointMake(bg2.position.x + bg2.size.width, bg1.position.y);
+    if (_bg1.position.x < -_bg1.size.width){
+        _bg1.position = CGPointMake(_bg2.position.x + _bg2.size.width, _bg1.position.y);
     }
     
-    if (bg2.position.x < -bg2.size.width) {
-        bg2.position = CGPointMake(bg1.position.x + bg1.size.width, bg2.position.y);
+    if (_bg2.position.x < -_bg2.size.width) {
+        _bg2.position = CGPointMake(_bg1.position.x + _bg1.size.width, _bg2.position.y);
     }
     
 }
@@ -436,21 +420,21 @@ float scale;
     
     //NSLog(@"Pinch");
     
-    if (bg1.xScale < 2 && bg1.yScale < 2 && recognizer.scale > 1)
+    if (_bg1.xScale < 2 && _bg1.yScale < 2 && recognizer.scale > 1)
     {
-        bg1.xScale = bg1.xScale + (0.01);
-        bg1.yScale = bg1.yScale + (0.01);
+        _bg1.xScale = _bg1.xScale + (0.01);
+        _bg1.yScale = _bg1.yScale + (0.01);
     }
     
-    if (bg1.xScale > 1 && bg1.yScale > 1 && recognizer.scale < 1)
+    if (_bg1.xScale > 1 && _bg1.yScale > 1 && recognizer.scale < 1)
     {
-        bg1.xScale = bg1.xScale - (0.01);
-        bg1.yScale = bg1.yScale - (0.01);
+        _bg1.xScale = _bg1.xScale - (0.01);
+        _bg1.yScale = _bg1.yScale - (0.01);
         
-        if (bg1.xScale < 1 || bg1.yScale < 1)
+        if (_bg1.xScale < 1 || _bg1.yScale < 1)
         {
-            bg1.xScale = 1;
-            bg1.yScale = 1;
+            _bg1.xScale = 1;
+            _bg1.yScale = 1;
         }
     }
     

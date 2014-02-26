@@ -31,6 +31,7 @@
 - (void)positionShip: (Coordinate *)destination;
 - (void)repair;
 - (void)rotate: (Rotation)destination;
+- (NSMutableArray*) getHeadLocationsOfMove;
 
 @end
 
