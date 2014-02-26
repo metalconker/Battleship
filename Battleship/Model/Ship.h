@@ -28,7 +28,7 @@
 
 - (instancetype) initWithLocation: (Coordinate*) initialPosition
                           andName:(NSString*) nameOfShip;
-- (void)move: (Coordinate *)destination;
+- (void)positionShip: (Coordinate *)destination;
 - (void)repair;
 - (void)rotate: (Rotation)destination;
 

@@ -31,9 +31,24 @@
     }
 }
 
--(void)move:(Coordinate *)destination {
+-(void)positionShip:(Coordinate *)destination {
     _location.xCoord = destination.xCoord;
     _location.yCoord = destination.yCoord;
+    _location.direction = destination.direction;
+    int i = 0;
+    for (ShipSegment* seg in self.blocks) {
+        switch (destination.direction) {
+            case NORTH:
+                seg.location.yCoord = destination.yCoord - i;
+                break;
+            case SOUTH:
+                seg.location.yCoord = destination.yCoord + i;
+                break;
+            default:
+                break;
+        }
+        i++;
+    }
 }
 
 -(void)rotate:(Rotation) destination {

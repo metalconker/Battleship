@@ -17,4 +17,6 @@
 @property (strong, nonatomic) Map* joinView;
 
 -(instancetype) init;
+-(void)moveShipfrom: (Coordinate*) origin
+                 to:(Coordinate*) destination;
 @end

@@ -50,8 +50,6 @@
             mineLayer2 = [[Coordinate alloc] initWithXCoordinate:11 YCoordinate:27 initiallyFacing:SOUTH];
             radar1 = [[Coordinate alloc] initWithXCoordinate:10 YCoordinate:26 initiallyFacing:SOUTH];
         }
-        
-        // TODO: Problem is happening in here
         Cruiser *c1 = [[Cruiser alloc] initWithLocation: cruiser1 andName: @"c1"];
         Cruiser *c2 = [[Cruiser alloc] initWithLocation: cruiser2 andName:@"c2"];
         Destroyer *d1 = [[Destroyer alloc] initWithLocation: destroyer1 andName:@"d1"];
@@ -72,5 +70,15 @@
     return self;
 }
 
+-(Ship*) getShipWithCoord:(Coordinate *)location {
+    for (Ship *s in _shipArray) {
+        for (ShipSegment *seg in s.blocks) {
+            if (seg.location.xCoord == location.xCoord && seg.location.yCoord == location.yCoord) {
+                return s;
+            }
+        }
+    }
+    return Nil;
+}
 
 @end

@@ -20,5 +20,6 @@
 @property (strong, nonatomic) NSArray* shipArray;
 
 - (instancetype)initWithPlayerID:(int)playerID;
+- (Ship*)getShipWithCoord:(Coordinate*) location;
 
 @end

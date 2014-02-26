@@ -37,12 +37,16 @@ Fleet *testFleet;
         // Creates the battleship game
         _game = [[BattleshipGame alloc] init];
         // Terrain sprites
-        [self initTerrainSprites];
+        //[self initTerrainSprites];
         // Ship sprites
-        [self initShipSprites];
+        //[self initShipSprites];
         // MiniMap sprite
         [self initMiniMap];
-        
+        Coordinate* testOrigin = [[Coordinate alloc] initWithXCoordinate:10 YCoordinate:1 initiallyFacing: NORTH];
+        Coordinate* testDestination = [[Coordinate alloc] initWithXCoordinate:15 YCoordinate:17 initiallyFacing: NORTH];
+        [_game moveShipfrom:testOrigin to:testDestination];
+        [self initTerrainSprites];
+        [self initShipSprites];
     }
     
     return self;
@@ -84,6 +88,7 @@ Fleet *testFleet;
                     }
                     else if (s.isTail && [s.shipName isEqualToString:@"r1"])
                     {
+                        NSLog(@"%d, %d\n", s.location.xCoord, s.location.yCoord);
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"RadarBoat"];
                         
                     }
