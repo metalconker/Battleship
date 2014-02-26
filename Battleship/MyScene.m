@@ -17,6 +17,8 @@ NSMutableArray *player1BasePositions;
 
 Fleet *testFleet;
 
+SKSpriteNode *visualBar;
+
 
 @interface MyScene()
 
@@ -29,6 +31,8 @@ Fleet *testFleet;
 
 @implementation MyScene
 
+SKNode *overallImage;
+
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
@@ -36,17 +40,34 @@ Fleet *testFleet;
         self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
         // Creates the battleship game
         _game = [[BattleshipGame alloc] init];
+        
+        // Creates the overall background sprite.
+        //SKNode *backgroundOverall;
+        
+        // Not my code
+        overallImage = [[SKNode alloc] init];
+        
+        // Visual Bar sprite
+        [self initVisualBar];
+        
+        ////overallImage.anchorPoint = CGPointZero;
+        //overallImage.position = CGPointMake(0, 0);
+        [self addChild:overallImage];
+        
         // Terrain sprites
-        //[self initTerrainSprites];
+        [self initTerrainSprites];
         // Ship sprites
-        //[self initShipSprites];
+        [self initShipSprites];
         // MiniMap sprite
         [self initMiniMap];
+        
         Coordinate* testOrigin = [[Coordinate alloc] initWithXCoordinate:10 YCoordinate:1 initiallyFacing: NORTH];
         Coordinate* testDestination = [[Coordinate alloc] initWithXCoordinate:15 YCoordinate:17 initiallyFacing: NORTH];
         [_game moveShipfrom:testOrigin to:testDestination];
-        [self initTerrainSprites];
+        //[self initTerrainSprites];
         [self initShipSprites];
+        
+        [self addChild:visualBar];
     }
     
     return self;
@@ -62,7 +83,7 @@ Fleet *testFleet;
 // Draws ship sprites to screen
 - (void) initShipSprites {
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
-    int widthDiv30 = self.frame.size.width / GRID_SIZE;
+    int widthDiv30 = (self.frame.size.width-visualBar.frame.size.width) / GRID_SIZE;
     int heightDiv30 = self.frame.size.height / GRID_SIZE;
     ShipSegment *s;
     for (int i = 0; i < GRID_SIZE; i++)
@@ -98,7 +119,7 @@ Fleet *testFleet;
                     }
                     sprite.name = s.shipName;
                     sprite.position = CGPointMake(s.location.xCoord*widthDiv30 + sprite.frame.size.width/2, s.location.yCoord*heightDiv30 + sprite.frame.size.height/2);
-                    [self addChild:sprite];
+                    [overallImage addChild:sprite];
                 }
             }
         }
@@ -107,31 +128,26 @@ Fleet *testFleet;
 SKSpriteNode *bg1;
 SKSpriteNode *bg2;
 
-
-
-
-
-
-
-
 // Draws terrain sprites to screen
-- (void) initTerrainSprites {
+- (void) initTerrainSprites{
     
     // Not my code
     bg1 = [SKSpriteNode spriteNodeWithImageNamed:@"waterBackground"];
     bg1.anchorPoint = CGPointZero;
-    bg1.position = CGPointMake(0, 0);
-    [self addChild:bg1];
+    //bg1.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    bg1.name = @"bg1";
+    [overallImage addChild:bg1];
     
     bg2 = [SKSpriteNode spriteNodeWithImageNamed:@"waterBackground"];
     bg2.anchorPoint = CGPointZero;
-    bg2.position = CGPointMake(bg1.size.width-1, 0);
-    [self addChild:bg2];
+    bg2.position = CGPointMake(bg1.frame.size.width-1, 0);
+    bg2.name = @"bg2";
+    [overallImage addChild:bg2];
     
     // Initilizes the different sprites
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
     // Containers
-    int widthDiv30 = self.frame.size.width / GRID_SIZE;
+    int widthDiv30 = (self.frame.size.width-visualBar.frame.size.width) / GRID_SIZE;
     int heightDiv30 = self.frame.size.height / GRID_SIZE;
     // Drawing the sprites to screen in position
     for (int i = 0; i < GRID_SIZE; i++)
@@ -149,7 +165,7 @@ SKSpriteNode *bg2;
                         sprite.xScale = 1.7;
                         sprite.yScale = 2.1;
                         sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
-                        [self addChild:sprite];
+                        [overallImage addChild:sprite];
                         break;
                         
                     case JOIN_BASE:
@@ -159,7 +175,7 @@ SKSpriteNode *bg2;
                         sprite.xScale = 1.7;
                         sprite.yScale = 2.1;
                         sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
-                        [self addChild:sprite];
+                        [overallImage addChild:sprite];
                         break;
                         
                         // need to add an if visible clause
@@ -170,7 +186,7 @@ SKSpriteNode *bg2;
                         sprite.xScale = 0.248;
                         sprite.yScale = 0.338;
                         sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
-                        [self addChild:sprite];
+                        [overallImage addChild:sprite];
                         break;
                         
                     default:
@@ -187,6 +203,20 @@ SKSpriteNode *bg2;
     }
 }
 
+// Initializes the visual bar
+- (void)initVisualBar{
+    
+    visualBar = [SKSpriteNode spriteNodeWithImageNamed:@"Mini Map"];
+    visualBar.name = @"Visual Bar";
+    visualBar.yScale = 5;
+    visualBar.xScale = 0.5;
+    //visualBar.anchorPoint = CGPointZero;
+    visualBar.position = CGPointMake(self.frame.size.width - visualBar.frame.size.width/2, visualBar.frame.size.height/2);
+    
+    //visualBar.position = CGPointMake(0, 0);
+    
+}
+
 - (void)initMiniMap{
     
     // Initilize CGPoints
@@ -194,9 +224,9 @@ SKSpriteNode *bg2;
     self.miniMapPositions = [[NSMutableArray alloc] init];
     
     // Point locations
-    CGPoint point1 = CGPointMake(self.frame.size.width - mapSize, self.frame.size.height - mapSize);
+    CGPoint point1 = CGPointMake(self.frame.size.width - mapSize - visualBar.frame.size.width, self.frame.size.height - mapSize);
     CGPoint point2 = CGPointMake(mapSize, self.frame.size.height - mapSize);
-    CGPoint point3 = CGPointMake(self.frame.size.width - mapSize, mapSize);
+    CGPoint point3 = CGPointMake(self.frame.size.width - mapSize - visualBar.frame.size.width, mapSize);
     CGPoint point4 = CGPointMake(mapSize, mapSize);
     
     // Adding to array
@@ -292,6 +322,8 @@ bool miniMapTouched = false;
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
+    SKSpriteNode *shipDisplay;
+    
     for (UITouch *touch in touches) {
         
         CGPoint location = [touch locationInNode:self];
@@ -310,7 +342,14 @@ bool miniMapTouched = false;
             
         }
         
-        
+        if ([node.name isEqualToString:@"c1"])
+        {
+            NSLog(@"This is getting called");
+            shipDisplay = [SKSpriteNode spriteNodeWithImageNamed:@"Cruiser"];
+            shipDisplay.zRotation = M_PI / 2;
+            shipDisplay.position = CGPointMake(self.frame.size.width - shipDisplay.size.width/2 - visualBar.frame.size.width/2, self.frame.size.height/2);
+            [self addChild:shipDisplay];
+        }
         
     }
     
@@ -408,12 +447,12 @@ bool down = false;
     bg1.position = CGPointMake(bg1.position.x-0.5, bg1.position.y);
     bg2.position = CGPointMake(bg2.position.x-0.5, bg2.position.y);
     
-    if (bg1.position.x < -bg1.size.width){
+    if (bg1.position.x < -bg1.frame.size.width){
         bg1.position = CGPointMake(bg2.position.x + bg2.size.width, bg1.position.y);
     }
     
     if (bg2.position.x < -bg2.size.width) {
-        bg2.position = CGPointMake(bg1.position.x + bg1.size.width, bg2.position.y);
+        bg2.position = CGPointMake(bg1.position.x + bg1.frame.size.width, bg2.position.y);
     }
     
 }
@@ -436,21 +475,21 @@ float scale;
     
     //NSLog(@"Pinch");
     
-    if (bg1.xScale < 2 && bg1.yScale < 2 && recognizer.scale > 1)
+    if (overallImage.xScale < 2 && overallImage.yScale < 2 && recognizer.scale > 1)
     {
-        bg1.xScale = bg1.xScale + (0.01);
-        bg1.yScale = bg1.yScale + (0.01);
+        overallImage.xScale = overallImage.xScale + (0.01);
+        overallImage.yScale = overallImage.yScale + (0.01);
     }
     
-    if (bg1.xScale > 1 && bg1.yScale > 1 && recognizer.scale < 1)
+    if (overallImage.xScale > 1 && overallImage.yScale > 1 && recognizer.scale < 1)
     {
-        bg1.xScale = bg1.xScale - (0.01);
-        bg1.yScale = bg1.yScale - (0.01);
+        overallImage.xScale = overallImage.xScale - (0.01);
+        overallImage.yScale = overallImage.yScale - (0.01);
         
-        if (bg1.xScale < 1 || bg1.yScale < 1)
+        if (overallImage.xScale < 1 || overallImage.yScale < 1)
         {
-            bg1.xScale = 1;
-            bg1.yScale = 1;
+            overallImage.xScale = 1;
+            overallImage.yScale = 1;
         }
     }
     
