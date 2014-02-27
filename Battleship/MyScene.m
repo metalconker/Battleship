@@ -318,9 +318,14 @@ SKSpriteNode *bg2;
 }
 
 bool miniMapTouched = false;
+bool shipClicked = false;
+SKNode *node;
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
+    
+    int widthDiv30 = (self.frame.size.width-visualBar.frame.size.width) / GRID_SIZE;
+    int heightDiv30 = self.frame.size.height / GRID_SIZE;
     
     SKSpriteNode *shipDisplay;
     
@@ -329,7 +334,9 @@ bool miniMapTouched = false;
         CGPoint location = [touch locationInNode:self];
         NSLog(@"Location of touch: %@", NSStringFromCGPoint(location));
         
-        SKNode *node = [self nodeAtPoint:location];
+        Coordinate *newMove = [self fromTextureToCoordinate:location];
+        
+        node = [self nodeAtPoint:location];
         if (YES) NSLog(@"Node name where touch began: %@", node.name);
         
         // If the initial touch was on the mini map
@@ -349,6 +356,13 @@ bool miniMapTouched = false;
             shipDisplay.zRotation = M_PI / 2;
             shipDisplay.position = CGPointMake(self.frame.size.width - shipDisplay.size.width/2 - visualBar.frame.size.width/2, self.frame.size.height/2);
             [self addChild:shipDisplay];
+            shipClicked = true;
+        }
+        
+        if (shipClicked)
+        {
+            
+            node.position = CGPointMake(newMove.xCoord*widthDiv30 + node.frame.size.width/2, newMove.yCoord*heightDiv30 + node.frame.size.height/2);
         }
         
     }
@@ -401,9 +415,6 @@ float mapScaleY;
     {
         [self setMiniMapLocation:location];
     }
-    
-    
-    
 }
 
 // Always set the minimap in a specific location - due to bugs with touching
@@ -521,6 +532,20 @@ float scale;
     //NSString *xPosString = [NSString stringWithFormat:@"%.2f",mid.x];
     //NSString *yPosString = [NSString stringWithFormat:@"%.2f",mid.y];
     //xPosLabel.text=xPosString;
+    
+}
+
+- (Coordinate*) fromTextureToCoordinate:(CGPoint) point {
+    
+    float height = self.frame.size.height/30;
+    float width = (self.frame.size.width - visualBar.size.width)/30;
+    
+    int coordinateWidth = point.x / width;
+    int coordinateHeight = point.y / height;
+    
+    NSLog(@"Coordinate width: %d, Coordinate height: %d", coordinateWidth, coordinateHeight);
+    
+    return [[Coordinate alloc] initWithXCoordinate:coordinateWidth YCoordinate:coordinateHeight initiallyFacing: NONE];
     
 }
 
