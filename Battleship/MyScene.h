@@ -14,6 +14,7 @@
 #import "TorpedoBoat.h"
 #import "RadarBoat.h"
 #import "MineLayer.h"
+#import "Helpers.h"
 @interface MyScene : SKScene
 
 @property (strong, nonatomic) NSMutableArray* miniMapPositions;
