@@ -23,6 +23,8 @@
 		51171545189A390200BE75A9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51171520189A390200BE75A9 /* UIKit.framework */; };
 		5117154D189A390200BE75A9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5117154B189A390200BE75A9 /* InfoPlist.strings */; };
 		5117154F189A390200BE75A9 /* BattleshipTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5117154E189A390200BE75A9 /* BattleshipTests.m */; };
+		5155192218C087540019BEE6 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5155192118C087540019BEE6 /* Helpers.m */; };
+		5155192618C08C010019BEE6 /* Inits.m in Sources */ = {isa = PBXBuildFile; fileRef = 5155192518C08C010019BEE6 /* Inits.m */; };
 		51C23995189C99E700B5D430 /* Jigglypuff sings Game of Thrones a capella.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 51C23994189C99E700B5D430 /* Jigglypuff sings Game of Thrones a capella.mp3 */; };
 		51C23997189C9A9700B5D430 /* Pew_Pew-DKnight556-1379997159.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 51C23996189C9A9700B5D430 /* Pew_Pew-DKnight556-1379997159.mp3 */; };
 		87AD0BE318BC6B29001BCD2F /* BattleshipGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BC418BC6B28001BCD2F /* BattleshipGame.m */; };
@@ -72,6 +74,10 @@
 		5117154A189A390200BE75A9 /* BattleshipTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BattleshipTests-Info.plist"; sourceTree = "<group>"; };
 		5117154C189A390200BE75A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5117154E189A390200BE75A9 /* BattleshipTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BattleshipTests.m; sourceTree = "<group>"; };
+		5155192018C087540019BEE6 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Helpers.h; path = HelperFunctions/Helpers.h; sourceTree = "<group>"; };
+		5155192118C087540019BEE6 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Helpers.m; path = HelperFunctions/Helpers.m; sourceTree = "<group>"; };
+		5155192418C08C010019BEE6 /* Inits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Inits.h; path = Initialization/Inits.h; sourceTree = "<group>"; };
+		5155192518C08C010019BEE6 /* Inits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Inits.m; path = Initialization/Inits.m; sourceTree = "<group>"; };
 		51C23994189C99E700B5D430 /* Jigglypuff sings Game of Thrones a capella.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Jigglypuff sings Game of Thrones a capella.mp3"; sourceTree = "<group>"; };
 		51C23996189C9A9700B5D430 /* Pew_Pew-DKnight556-1379997159.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pew_Pew-DKnight556-1379997159.mp3"; sourceTree = "<group>"; };
 		87AD0BC318BC6B28001BCD2F /* BattleshipGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BattleshipGame.h; path = Model/BattleshipGame.h; sourceTree = "<group>"; };
@@ -165,6 +171,8 @@
 		51171524189A390200BE75A9 /* Battleship */ = {
 			isa = PBXGroup;
 			children = (
+				5155192318C08BE10019BEE6 /* Initialization */,
+				5155191F18C087040019BEE6 /* HelperFunctions */,
 				871F9B7818A2FFDD006F2682 /* Model */,
 				51C23993189C99DE00B5D430 /* Sounds */,
 				5117152D189A390200BE75A9 /* AppDelegate.h */,
@@ -207,6 +215,24 @@
 				5117154B189A390200BE75A9 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5155191F18C087040019BEE6 /* HelperFunctions */ = {
+			isa = PBXGroup;
+			children = (
+				5155192018C087540019BEE6 /* Helpers.h */,
+				5155192118C087540019BEE6 /* Helpers.m */,
+			);
+			name = HelperFunctions;
+			sourceTree = "<group>";
+		};
+		5155192318C08BE10019BEE6 /* Initialization */ = {
+			isa = PBXGroup;
+			children = (
+				5155192418C08C010019BEE6 /* Inits.h */,
+				5155192518C08C010019BEE6 /* Inits.m */,
+			);
+			name = Initialization;
 			sourceTree = "<group>";
 		};
 		51C23993189C99DE00B5D430 /* Sounds */ = {
@@ -356,6 +382,8 @@
 			files = (
 				87AD0BE718BC6B29001BCD2F /* Fleet.m in Sources */,
 				51171538189A390200BE75A9 /* MyScene.m in Sources */,
+				5155192218C087540019BEE6 /* Helpers.m in Sources */,
+				5155192618C08C010019BEE6 /* Inits.m in Sources */,
 				87AD0BE518BC6B29001BCD2F /* Cruiser.m in Sources */,
 				87AD0BE418BC6B29001BCD2F /* Coordinate.m in Sources */,
 				51171535189A390200BE75A9 /* ViewController.m in Sources */,
