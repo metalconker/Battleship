@@ -60,7 +60,7 @@ SKSpriteNode *visualBar;
         // Ship sprites
         [self initShipSprites];
         Coordinate* testOrigin = [[Coordinate alloc] initWithXCoordinate:10 YCoordinate:3 initiallyFacing:NONE];
-        [_game getValidMovesFrom:testOrigin withRadarPositions:false];
+        [_game getValidActionsFrom:testOrigin];
         // MiniMap sprite
         [self initMiniMap];
         [self addChild:visualBar];

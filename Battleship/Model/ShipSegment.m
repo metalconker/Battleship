@@ -10,7 +10,7 @@
 
 @implementation ShipSegment
 
--(instancetype)initWithArmour:(ShipArmour)armour andPosition:(int)cell atLocation:(Coordinate*)initialLocation belongingToShip:(NSString *)ship {
+-(instancetype)initWithArmour:(ShipArmour)armour andPosition:(int)cell atLocation:(Coordinate*)initialLocation belongingToShip:(NSString *)ship withShipSize:(int)shipSize {
     self = [super init];
     if (self) {
         _segmentArmourType = armour;
