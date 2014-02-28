@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "MyScene.h"
 
 @import AVFoundation;
 
@@ -55,7 +54,7 @@
         skView.showsNodeCount = YES;
         
         // Create and configure the scene.
-        SKScene * scene = [MyScene sceneWithSize:skView.bounds.size];
+        SKScene * scene = [StartScreen sceneWithSize:skView.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
         
         // Present the scene.
