@@ -42,7 +42,8 @@
             }
             self.blocks[i] = nextSeg;
         }
-        [self.weapons addObject:[NSNumber numberWithInt:CANNON]];
+        [self.viableActions addObject:@"Fire with Cannon"];
+        [self.viableActions addObject:@"Turn on Extended Radar"];
         self.extendedRadarOn = NO;
         self.canonRange.rangeHeight = 5;
         self.canonRange.rangeWidth = 3;

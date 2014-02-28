@@ -41,8 +41,8 @@
             }
             self.blocks[i] = nextSeg;
         }
-        [self.weapons addObject:[NSNumber numberWithInt:CANNON]];
-        [self.weapons addObject:[NSNumber numberWithInt:TORPEDO]];
+        [self.viableActions addObject:@"Fire with Cannon"];
+        [self.viableActions addObject:@"Fire with Torpedo"];
         self.radarRange.rangeHeight = 6;
         self.radarRange.rangeWidth = 3;
         self.radarRange.startRange = 1;

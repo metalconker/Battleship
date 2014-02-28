@@ -64,8 +64,7 @@
     [self updateMap:_joinFleet];
 }
 
-//still need to rule out blocked moves
--(NSMutableArray*) getValidMovesFrom:(Coordinate*)origin {
+-(NSMutableArray*) getValidMovesFrom:(Coordinate*)origin withRadarPositions:(BOOL)radarPositions {
     Ship* s;
     if (_hostsTurn) {
         s = [_hostFleet getShipWithCoord:origin];
@@ -101,59 +100,64 @@
         Coordinate *c = move[0];
         [validSegmentLocations addObject:c];
     }
-    NSMutableArray *segmentsWithinMoveRange = [[NSMutableArray alloc] init];
-    for (Coordinate* headLocation in validSegmentLocations) {
-        [segmentsWithinMoveRange addObject:headLocation];
-        if (headLocation.direction == NORTH) {
-            if (headLocation.xCoord+1 == s.location.xCoord || headLocation.xCoord-1 == s.location.xCoord) {
-                for (int i = 1; i < s.size; i++) {
-                    Coordinate* segLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
-                    segLocation.xCoord = headLocation.xCoord;
-                    segLocation.yCoord = headLocation.yCoord - i;
-                    segLocation.direction = headLocation.direction;
-                    [segmentsWithinMoveRange addObject:segLocation];
-                }
-            }
-        }
-        else if (headLocation.direction == SOUTH) {
-            if (headLocation.xCoord+1 == s.location.xCoord || headLocation.xCoord-1 == s.location.xCoord) {
-                for (int i = 1; i < s.size; i++) {
-                    Coordinate* segLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
-                    segLocation.xCoord = headLocation.xCoord;
-                    segLocation.yCoord = headLocation.yCoord + i;
-                    segLocation.direction = headLocation.direction;
-                    [segmentsWithinMoveRange addObject:segLocation];
-                }
-            }
-        }
-        else if (headLocation.direction == WEST) {
-            if (headLocation.yCoord+1 == s.location.yCoord || headLocation.yCoord-1 == s.location.yCoord) {
-                for (int i = 1; i < s.size; i++) {
-                    Coordinate* segLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
-                    segLocation.xCoord = headLocation.xCoord + i;
-                    segLocation.yCoord = headLocation.yCoord;
-                    segLocation.direction = headLocation.direction;
-                    [segmentsWithinMoveRange addObject:segLocation];
-                }
-            }
-        }
-        else if (headLocation.direction == EAST) {
-            if (headLocation.xCoord+1 == s.location.yCoord || headLocation.xCoord-1 == s.location.yCoord) {
-                for (int i = 1; i < s.size; i++) {
-                    Coordinate* segLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
-                    segLocation.xCoord = headLocation.xCoord;
-                    segLocation.yCoord = headLocation.yCoord;
-                    segLocation.direction = headLocation.direction;
-                    [segmentsWithinMoveRange addObject:segLocation];
-                }
-            }
-        }
-        
-    }
-    for (Coordinate *c in segmentsWithinMoveRange) {
+    for (Coordinate *c in validSegmentLocations) {
         NSLog(@"%d, %d", c.xCoord, c.yCoord);
     }
-    return segmentsWithinMoveRange;
+    if (!radarPositions) {
+        return validSegmentLocations;
+    }
+    else {
+        NSMutableArray *segmentsWithinMoveRange = [[NSMutableArray alloc] init];
+        for (Coordinate* headLocation in validSegmentLocations) {
+            [segmentsWithinMoveRange addObject:headLocation];
+            if (headLocation.direction == NORTH) {
+                if (headLocation.xCoord+1 == s.location.xCoord || headLocation.xCoord-1 == s.location.xCoord) {
+                    for (int i = 1; i < s.size; i++) {
+                        Coordinate* segLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+                        segLocation.xCoord = headLocation.xCoord;
+                        segLocation.yCoord = headLocation.yCoord - i;
+                        segLocation.direction = headLocation.direction;
+                        [segmentsWithinMoveRange addObject:segLocation];
+                    }
+                }
+            }
+            else if (headLocation.direction == SOUTH) {
+                if (headLocation.xCoord+1 == s.location.xCoord || headLocation.xCoord-1 == s.location.xCoord) {
+                    for (int i = 1; i < s.size; i++) {
+                        Coordinate* segLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+                        segLocation.xCoord = headLocation.xCoord;
+                        segLocation.yCoord = headLocation.yCoord + i;
+                        segLocation.direction = headLocation.direction;
+                        [segmentsWithinMoveRange addObject:segLocation];
+                    }
+                }
+            }
+            else if (headLocation.direction == WEST) {
+                if (headLocation.yCoord+1 == s.location.yCoord || headLocation.yCoord-1 == s.location.yCoord) {
+                    for (int i = 1; i < s.size; i++) {
+                        Coordinate* segLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+                        segLocation.xCoord = headLocation.xCoord + i;
+                        segLocation.yCoord = headLocation.yCoord;
+                        segLocation.direction = headLocation.direction;
+                        [segmentsWithinMoveRange addObject:segLocation];
+                    }
+                }
+            }
+            else if (headLocation.direction == EAST) {
+                if (headLocation.xCoord+1 == s.location.yCoord || headLocation.xCoord-1 == s.location.yCoord) {
+                    for (int i = 1; i < s.size; i++) {
+                        Coordinate* segLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+                        segLocation.xCoord = headLocation.xCoord;
+                        segLocation.yCoord = headLocation.yCoord;
+                        segLocation.direction = headLocation.direction;
+                        [segmentsWithinMoveRange addObject:segLocation];
+                    }
+                }
+            }
+            
+        }
+        return segmentsWithinMoveRange;
+    }
 }
 
 -(Coordinate*) getCoordOfShip: (NSString*) shipName {

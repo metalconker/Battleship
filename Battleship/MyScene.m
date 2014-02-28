@@ -60,7 +60,7 @@ SKSpriteNode *visualBar;
         // Ship sprites
         [self initShipSprites];
         Coordinate* testOrigin = [[Coordinate alloc] initWithXCoordinate:10 YCoordinate:3 initiallyFacing:NONE];
-        [_game getValidMovesFrom:testOrigin];
+        [_game getValidMovesFrom:testOrigin withRadarPositions:false];
         // MiniMap sprite
         [self initMiniMap];
         [self addChild:visualBar];
@@ -111,7 +111,7 @@ SKSpriteNode *visualBar;
                     }
                     sprite.name = s.shipName;
                     sprite.position = CGPointMake(s.location.xCoord*widthDiv30 + sprite.frame.size.width/2, s.location.yCoord*heightDiv30 + sprite.frame.size.height/2);
-                    [overallImage addChild:sprite];
+                    [_screenNode addChild:sprite];
                 }
             }
         }
@@ -306,52 +306,6 @@ SKSpriteNode *bg2;
     [self initShipsMiniMap:image];
     [self addChild:image];
     
-}
-
-// Initializes Ships
-- (void) initShipSprites {
-    SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
-    int widthDiv30 = (self.frame.size.width-visualBar.frame.size.width) / GRID_SIZE;
-    int heightDiv30 = self.frame.size.height / GRID_SIZE;
-    ShipSegment *s;
-    for (int i = 0; i < GRID_SIZE; i++)
-    {
-        for (int j = 0; j < GRID_SIZE; j++)
-        {
-            
-            if ([_game.hostView.grid[i][j] isKindOfClass:[ShipSegment class]])
-            {
-                s = _game.hostView.grid[i][j];
-                if (s.isTail) {
-                    if (s.isTail && ([s.shipName isEqualToString:@"c1"] || [s.shipName isEqualToString:@"c2"]))
-                    {
-                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Cruiser"];
-                    }
-                    else if (s.isTail && ([s.shipName isEqualToString:@"d1"] || [s.shipName isEqualToString:@"d2"] || [s.shipName isEqualToString:@"d3"]))
-                    {
-                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Destroyer"];
-                    }
-                    else if (s.isTail && ([s.shipName isEqualToString:@"m1"] || [s.shipName isEqualToString:@"m2"]))
-                    {
-                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MineLayer"];
-                    }
-                    else if (s.isTail && [s.shipName isEqualToString:@"r1"])
-                    {
-                        NSLog(@"%d, %d\n", s.location.xCoord, s.location.yCoord);
-                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"RadarBoat"];
-                        
-                    }
-                    else if (s.isTail && ([s.shipName isEqualToString:@"t1"] || [s.shipName isEqualToString:@"t2"]))
-                    {
-                        sprite = [SKSpriteNode spriteNodeWithImageNamed:@"TorpedoBoat"];
-                    }
-                    sprite.name = s.shipName;
-                    sprite.position = CGPointMake(s.location.xCoord*widthDiv30 + sprite.frame.size.width/2, s.location.yCoord*heightDiv30 + sprite.frame.size.height/2);
-                    [_screenNode addChild:sprite];
-                }
-            }
-        }
-    }
 }
 
 // Initializes Terrain

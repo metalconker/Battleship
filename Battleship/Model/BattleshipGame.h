@@ -19,6 +19,7 @@
 -(instancetype) init;
 -(void)moveShipfrom: (Coordinate*) origin
                  to:(Coordinate*) destination;
--(NSMutableArray*) getValidMovesFrom:(Coordinate*)origin;
+-(NSMutableArray*) getValidMovesFrom:(Coordinate*)origin
+                  withRadarPositions:(BOOL) radarPositions;
 -(Coordinate*) getCoordOfShip: (NSString*) shipName;
 @end
