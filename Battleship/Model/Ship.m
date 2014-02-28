@@ -16,7 +16,6 @@
         _shipName = nameOfShip;
         _location = initialPosition;
         self.blocks = [[NSMutableArray alloc] init];
-        self.weapons = [[NSMutableArray alloc] init];
         self.viableActions = [[NSMutableArray alloc] init];
         [_viableActions addObject:@"Move"];
         [_viableActions addObject:@"Rotate"];

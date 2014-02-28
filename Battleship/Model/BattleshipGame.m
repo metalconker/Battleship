@@ -100,9 +100,6 @@
         Coordinate *c = move[0];
         [validSegmentLocations addObject:c];
     }
-    for (Coordinate *c in validSegmentLocations) {
-        NSLog(@"%d, %d", c.xCoord, c.yCoord);
-    }
     if (!radarPositions) {
         return validSegmentLocations;
     }
@@ -160,6 +157,22 @@
     }
 }
 
+-(NSMutableArray *)getValidActionsFrom:(Coordinate *)origin {
+    Ship* s;
+    if (_hostsTurn) {
+        s = [_hostFleet getShipWithCoord:origin];
+    }
+    else {
+        s = [_joinFleet getShipWithCoord:origin];
+    }
+    for (NSString* stringy in s.viableActions) {
+        NSLog(@"%@", stringy);
+    }
+    
+    return s.viableActions;
+}
+
+/*
 -(Coordinate*) getCoordOfShip: (NSString*) shipName {
     Fleet *currentFleet;
     if (_hostsTurn) {
@@ -175,4 +188,5 @@
     }
     return Nil;
 }
+ */
 @end

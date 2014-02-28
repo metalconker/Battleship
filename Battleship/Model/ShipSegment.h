@@ -18,11 +18,13 @@
 @property (strong, nonatomic) NSString* shipName;
 @property (strong, nonatomic) Coordinate* location;
 @property BOOL isHead;
+@property int shipSize;
 
 -(instancetype) initWithArmour:(ShipArmour) armour
                    andPosition:(int)cell
                     atLocation:(Coordinate*) initialLocation
-               belongingToShip:(NSString*) ship;
+               belongingToShip:(NSString*) ship
+                  withShipSize: (int) shipSize;
 
 @end
 
