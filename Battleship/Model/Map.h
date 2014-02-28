@@ -22,5 +22,5 @@
 -(instancetype) init;
 -(void) setCoords: (NSMutableArray*) coords
                to: (Terrain) t;
-
+-(Coordinate*) collisionLocationOfTorpedo: (Coordinate*) firedFrom;
 @end

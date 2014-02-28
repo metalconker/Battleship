@@ -88,4 +88,61 @@
     }
 }
 
+-(Coordinate*) collisionLocationOfTorpedo:(Coordinate *)firedFrom {
+    Coordinate *c = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+    switch(firedFrom.direction) {
+        case NORTH:
+            for(int i = 1; i <= 10; i++) {
+                c.xCoord = firedFrom.xCoord;
+                c.yCoord = firedFrom.yCoord + i;
+                if (![_grid[c.xCoord][c.yCoord] isKindOfClass:[NSNumber class]]) {
+                    return c;
+                }
+                else if ([_grid[c.xCoord][c.yCoord] intValue] != WATER) {
+                    return c;
+                }
+            }
+            break;
+        case SOUTH:
+            for(int i = 1; i <= 10; i++) {
+                c.xCoord = firedFrom.xCoord;
+                c.yCoord = firedFrom.yCoord - i;
+                if (![_grid[c.xCoord][c.yCoord] isKindOfClass:[NSNumber class]]) {
+                    return c;
+                }
+                else if ([_grid[c.xCoord][c.yCoord] intValue] != WATER) {
+                    return c;
+                }
+            }
+            break;
+        case WEST:
+            for(int i = 1; i <= 10; i++) {
+                c.xCoord = firedFrom.xCoord - i;
+                c.yCoord = firedFrom.yCoord;
+                if (![_grid[c.xCoord][c.yCoord] isKindOfClass:[NSNumber class]]) {
+                    return c;
+                }
+                else if ([_grid[c.xCoord][c.yCoord] intValue] != WATER) {
+                    return c;
+                }
+            }
+            break;
+        case EAST:
+            for(int i = 1; i <= 10; i++) {
+                c.xCoord = firedFrom.xCoord + i;
+                c.yCoord = firedFrom.yCoord;
+                if (![_grid[c.xCoord][c.yCoord] isKindOfClass:[NSNumber class]]) {
+                    return c;
+                }
+                else if ([_grid[c.xCoord][c.yCoord] intValue] != WATER) {
+                    return c;
+                }
+            }
+            break;
+        default:
+            break;
+    }
+    return Nil;
+}
+
 @end
