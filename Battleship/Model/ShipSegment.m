@@ -17,6 +17,7 @@
         _shipName = ship;
         _block = cell;
         _location = initialLocation;
+        _shipSize = shipSize;
     }
     return self;
 }
