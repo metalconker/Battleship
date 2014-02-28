@@ -110,17 +110,13 @@ SKSpriteNode *visualBar;
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"TorpedoBoat"];
                     }
                     sprite.name = s.shipName;
-                    sprite.position = CGPointMake(s.location.xCoord*widthDiv30 + sprite.frame.size.width/2, s.location.yCoord*heightDiv30 + sprite.frame.size.height/2);
+                    sprite.position = CGPointMake(s.location.xCoord*widthDiv30 + sprite.frame.size.width/2, s.location.yCoord*heightDiv30 - sprite.frame.size.height/2);
                     [_screenNode addChild:sprite];
                 }
             }
         }
     }
 }
-SKSpriteNode *bg1;
-SKSpriteNode *bg2;
-
-
 
 // Initializes the visual bar
 - (void)initVisualBar{
@@ -129,10 +125,7 @@ SKSpriteNode *bg2;
     visualBar.name = @"Visual Bar";
     visualBar.yScale = 5;
     visualBar.xScale = 0.5;
-    //visualBar.anchorPoint = CGPointZero;
-    visualBar.position = CGPointMake(self.frame.size.width - visualBar.frame.size.width/2, visualBar.frame.size.height/2);
-    
-    //visualBar.position = CGPointMake(0, 0);
+    visualBar.position = CGPointMake(visualBar.frame.size.width/2, visualBar.frame.size.height/2);
     
 }
 
