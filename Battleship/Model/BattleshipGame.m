@@ -64,19 +64,111 @@
     [self updateMap:_joinFleet];
 }
 
--(NSMutableArray*) getValidMovesfrom:(Coordinate*)origin {
+//still need to rule out blocked moves
+-(NSMutableArray*) getValidMovesFrom:(Coordinate*)origin {
     Ship* s;
     if (_hostsTurn) {
         s = [_hostFleet getShipWithCoord:origin];
-        NSLog(@"%@", s.shipName);
     }
     else {
         s = [_joinFleet getShipWithCoord:origin];
     }
     NSMutableArray *validMoves = [s getHeadLocationsOfMove];
-    for (Coordinate* loc in validMoves) {
-        if (_hostView.grid[loc.xCoord][loc.yCoord])
+    NSMutableArray *movesToBeRemoved = [[NSMutableArray alloc] init];
+    for (NSMutableArray* move in validMoves) {
+        for(Coordinate* segmentLocation in move) {
+            if ([_hostView.grid[segmentLocation.xCoord][segmentLocation.yCoord] isKindOfClass:[ShipSegment class]]) {
+                ShipSegment *seg =_hostView.grid[segmentLocation.xCoord][segmentLocation.yCoord];
+                if (![seg.shipName isEqualToString:s.shipName]) {
+                    [movesToBeRemoved addObject:move];
+                }
+            }
+            else if ([_hostView.grid[segmentLocation.xCoord][segmentLocation.yCoord] isKindOfClass:[NSNumber class]]) {
+                if ([_hostView.grid[segmentLocation.xCoord][segmentLocation.yCoord] intValue] != WATER) {
+                    [movesToBeRemoved addObject: move];
+                }
+                
+            }
+        }
+        
+    }
+    for (NSMutableArray* move in movesToBeRemoved) {
+        [validMoves removeObject:move];
     }
     
+    NSMutableArray *validSegmentLocations = [[NSMutableArray alloc] init];
+    for (NSMutableArray* move in validMoves) {
+        Coordinate *c = move[0];
+        [validSegmentLocations addObject:c];
+    }
+    NSMutableArray *segmentsWithinMoveRange = [[NSMutableArray alloc] init];
+    for (Coordinate* headLocation in validSegmentLocations) {
+        [segmentsWithinMoveRange addObject:headLocation];
+        if (headLocation.direction == NORTH) {
+            if (headLocation.xCoord+1 == s.location.xCoord || headLocation.xCoord-1 == s.location.xCoord) {
+                for (int i = 1; i < s.size; i++) {
+                    Coordinate* segLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+                    segLocation.xCoord = headLocation.xCoord;
+                    segLocation.yCoord = headLocation.yCoord - i;
+                    segLocation.direction = headLocation.direction;
+                    [segmentsWithinMoveRange addObject:segLocation];
+                }
+            }
+        }
+        else if (headLocation.direction == SOUTH) {
+            if (headLocation.xCoord+1 == s.location.xCoord || headLocation.xCoord-1 == s.location.xCoord) {
+                for (int i = 1; i < s.size; i++) {
+                    Coordinate* segLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+                    segLocation.xCoord = headLocation.xCoord;
+                    segLocation.yCoord = headLocation.yCoord + i;
+                    segLocation.direction = headLocation.direction;
+                    [segmentsWithinMoveRange addObject:segLocation];
+                }
+            }
+        }
+        else if (headLocation.direction == WEST) {
+            if (headLocation.yCoord+1 == s.location.yCoord || headLocation.yCoord-1 == s.location.yCoord) {
+                for (int i = 1; i < s.size; i++) {
+                    Coordinate* segLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+                    segLocation.xCoord = headLocation.xCoord + i;
+                    segLocation.yCoord = headLocation.yCoord;
+                    segLocation.direction = headLocation.direction;
+                    [segmentsWithinMoveRange addObject:segLocation];
+                }
+            }
+        }
+        else if (headLocation.direction == EAST) {
+            if (headLocation.xCoord+1 == s.location.yCoord || headLocation.xCoord-1 == s.location.yCoord) {
+                for (int i = 1; i < s.size; i++) {
+                    Coordinate* segLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+                    segLocation.xCoord = headLocation.xCoord;
+                    segLocation.yCoord = headLocation.yCoord;
+                    segLocation.direction = headLocation.direction;
+                    [segmentsWithinMoveRange addObject:segLocation];
+                }
+            }
+        }
+        
+    }
+    for (Coordinate *c in segmentsWithinMoveRange) {
+        NSLog(@"%d, %d", c.xCoord, c.yCoord);
+    }
+    return segmentsWithinMoveRange;
+}
+
+-(Coordinate*) getCoordOfShip: (NSString*) shipName {
+    Fleet *currentFleet;
+    if (_hostsTurn) {
+        currentFleet = _hostFleet;
+    }
+    else {
+        currentFleet = _joinFleet;
+    }
+    for (Ship *s in currentFleet.shipArray) {
+        if ([s.shipName isEqualToString:shipName]) {
+            return s.location;
+        }
+    }
+    return Nil;
 }
 @end

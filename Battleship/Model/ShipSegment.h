@@ -17,7 +17,8 @@
 @property int block;
 @property (strong, nonatomic) NSString* shipName;
 @property (strong, nonatomic) Coordinate* location;
-@property BOOL isTail;
+@property BOOL isHead;
+
 -(instancetype) initWithArmour:(ShipArmour) armour
                    andPosition:(int)cell
                     atLocation:(Coordinate*) initialLocation

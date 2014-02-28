@@ -8,14 +8,24 @@
 
 #import "MyScene.h"
 
+
+// Ship Array of this player
+NSMutableArray *thisPlayer;
+
+// Position of player 1 base;
+NSMutableArray *player1BasePositions;
+
+Fleet *testFleet;
+
+SKSpriteNode *visualBar;
+
+
 @interface MyScene()
 
 - (IBAction)handlePinch:(UIPinchGestureRecognizer *)recognizer;
 
 @property (nonatomic, strong) BattleshipGame *game;
 @property UIPinchGestureRecognizer *pinchRecognizer;
-@property SKSpriteNode *bg1;
-@property SKSpriteNode *bg2;
 
 @end
 
@@ -48,15 +58,10 @@ SKNode *overallImage;
         [self initTerrainSprites];
         // Ship sprites
         [self initShipSprites];
-        //MiniMap sprite
+        Coordinate* testOrigin = [[Coordinate alloc] initWithXCoordinate:10 YCoordinate:3 initiallyFacing:NONE];
+        [_game getValidMovesFrom:testOrigin];
+        // MiniMap sprite
         [self initMiniMap];
-        
-        Coordinate* testOrigin = [[Coordinate alloc] initWithXCoordinate:10 YCoordinate:1 initiallyFacing: NORTH];
-        Coordinate* testDestination = [[Coordinate alloc] initWithXCoordinate:15 YCoordinate:17 initiallyFacing: NORTH];
-        [_game moveShipfrom:testOrigin to:testDestination];
-        //[self initTerrainSprites];
-        [self initShipSprites];
-        
         [self addChild:visualBar];
     }
     
@@ -70,16 +75,12 @@ SKNode *overallImage;
     NSLog(@"this is getting called");
 }
 
-- (void) updateShipPosition {
-    
-}
-
 // Draws ship sprites to screen
 - (void) initShipSprites {
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
     int widthDiv30 = (self.frame.size.width-visualBar.frame.size.width) / GRID_SIZE;
     int heightDiv30 = self.frame.size.height / GRID_SIZE;
-
+    ShipSegment *s;
     for (int i = 0; i < GRID_SIZE; i++)
     {
         for (int j = 0; j < GRID_SIZE; j++)
@@ -87,27 +88,26 @@ SKNode *overallImage;
             
             if ([_game.hostView.grid[i][j] isKindOfClass:[ShipSegment class]])
             {
-                ShipSegment *s = _game.hostView.grid[i][j];
-                if (s.isTail) {
-                    if (s.isTail && ([s.shipName isEqualToString:@"c1"] || [s.shipName isEqualToString:@"c2"]))
+                s = _game.hostView.grid[i][j];
+                if (s.isHead) {
+                    if ([s.shipName isEqualToString:@"c1"] || [s.shipName isEqualToString:@"c2"])
                     {
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Cruiser"];
                     }
-                    else if (s.isTail && ([s.shipName isEqualToString:@"d1"] || [s.shipName isEqualToString:@"d2"] || [s.shipName isEqualToString:@"d3"]))
+                    else if ([s.shipName isEqualToString:@"d1"] || [s.shipName isEqualToString:@"d2"] || [s.shipName isEqualToString:@"d3"])
                     {
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Destroyer"];
                     }
-                    else if (s.isTail && ([s.shipName isEqualToString:@"m1"] || [s.shipName isEqualToString:@"m2"]))
+                    else if ([s.shipName isEqualToString:@"m1"] || [s.shipName isEqualToString:@"m2"])
                     {
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MineLayer"];
                     }
-                    else if (s.isTail && [s.shipName isEqualToString:@"r1"])
+                    else if ([s.shipName isEqualToString:@"r1"])
                     {
-                        NSLog(@"%d, %d\n", s.location.xCoord, s.location.yCoord);
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"RadarBoat"];
                         
                     }
-                    else if (s.isTail && ([s.shipName isEqualToString:@"t1"] || [s.shipName isEqualToString:@"t2"]))
+                    else if ([s.shipName isEqualToString:@"t1"] || [s.shipName isEqualToString:@"t2"])
                     {
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"TorpedoBoat"];
                     }
@@ -119,20 +119,24 @@ SKNode *overallImage;
         }
     }
 }
+SKSpriteNode *bg1;
+SKSpriteNode *bg2;
 
 // Draws terrain sprites to screen
 - (void) initTerrainSprites{
     
     // Not my code
-    _bg1 = [SKSpriteNode spriteNodeWithImageNamed:@"waterBackground"];
-    _bg1.anchorPoint = CGPointZero;
-    _bg1.position = CGPointMake(0, 0);
-    [self addChild:_bg1];
+    bg1 = [SKSpriteNode spriteNodeWithImageNamed:@"waterBackground"];
+    bg1.anchorPoint = CGPointZero;
+    //bg1.position = CGPointMake(self.frame.size.width/2, self.frame.size.height/2);
+    bg1.name = @"bg1";
+    [overallImage addChild:bg1];
     
-    _bg2 = [SKSpriteNode spriteNodeWithImageNamed:@"waterBackground"];
-    _bg2.anchorPoint = CGPointZero;
-    _bg2.position = CGPointMake(_bg1.size.width-1, 0);
-    [self addChild:_bg2];
+    bg2 = [SKSpriteNode spriteNodeWithImageNamed:@"waterBackground"];
+    bg2.anchorPoint = CGPointZero;
+    bg2.position = CGPointMake(bg1.frame.size.width-1, 0);
+    bg2.name = @"bg2";
+    [overallImage addChild:bg2];
     
     // Initilizes the different sprites
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
@@ -261,7 +265,7 @@ SKNode *overallImage;
             if ([_game.hostView.grid[i][j] isKindOfClass:[ShipSegment class]])
             {
                 s = _game.hostView.grid[i][j];
-                if (s.isTail) {
+                if (s.isHead) {
                     sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Green Dot"];
                     sprite.name = [NSString stringWithFormat:@"%@/Green Dot", s.shipName];
                     sprite.yScale = 0.3;
@@ -391,6 +395,9 @@ float mapScaleY;
     {
         [self setMiniMapLocation:location];
     }
+    
+    
+    
 }
 
 // Always set the minimap in a specific location - due to bugs with touching
@@ -431,15 +438,15 @@ bool down = false;
     /* Called before each frame is rendered */
     
     // Not my code
-    _bg1.position = CGPointMake(_bg1.position.x-0.5, _bg1.position.y);
-    _bg2.position = CGPointMake(_bg2.position.x-0.5, _bg2.position.y);
+    bg1.position = CGPointMake(bg1.position.x-0.5, bg1.position.y);
+    bg2.position = CGPointMake(bg2.position.x-0.5, bg2.position.y);
     
-    if (_bg1.position.x < -_bg1.size.width){
-        _bg1.position = CGPointMake(_bg2.position.x + _bg2.size.width, _bg1.position.y);
+    if (bg1.position.x < -bg1.frame.size.width){
+        bg1.position = CGPointMake(bg2.position.x + bg2.size.width, bg1.position.y);
     }
     
-    if (_bg2.position.x < -_bg2.size.width) {
-        _bg2.position = CGPointMake(_bg1.position.x + _bg1.size.width, _bg2.position.y);
+    if (bg2.position.x < -bg2.size.width) {
+        bg2.position = CGPointMake(bg1.position.x + bg1.frame.size.width, bg2.position.y);
     }
     
 }
@@ -462,21 +469,21 @@ float scale;
     
     //NSLog(@"Pinch");
     
-    if (_bg1.xScale < 2 && _bg1.yScale < 2 && recognizer.scale > 1)
+    if (overallImage.xScale < 2 && overallImage.yScale < 2 && recognizer.scale > 1)
     {
-        _bg1.xScale = _bg1.xScale + (0.01);
-        _bg1.yScale = _bg1.yScale + (0.01);
+        overallImage.xScale = overallImage.xScale + (0.01);
+        overallImage.yScale = overallImage.yScale + (0.01);
     }
     
-    if (_bg1.xScale > 1 && _bg1.yScale > 1 && recognizer.scale < 1)
+    if (overallImage.xScale > 1 && overallImage.yScale > 1 && recognizer.scale < 1)
     {
-        _bg1.xScale = _bg1.xScale - (0.01);
-        _bg1.yScale = _bg1.yScale - (0.01);
+        overallImage.xScale = overallImage.xScale - (0.01);
+        overallImage.yScale = overallImage.yScale - (0.01);
         
-        if (_bg1.xScale < 1 || _bg1.yScale < 1)
+        if (overallImage.xScale < 1 || overallImage.yScale < 1)
         {
-            _bg1.xScale = 1;
-            _bg1.yScale = 1;
+            overallImage.xScale = 1;
+            overallImage.yScale = 1;
         }
     }
     

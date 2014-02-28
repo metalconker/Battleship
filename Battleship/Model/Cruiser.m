@@ -36,11 +36,11 @@
                     break;
             }
             ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:HEAVY_ARMOUR andPosition:i atLocation:segCoord belongingToShip:nameOfShip];
-            if (i == self.size -1) {
-                nextSeg.isTail = YES;
+            if (i == 0) {
+                nextSeg.isHead = YES;
             }
             else {
-                nextSeg.isTail = NO;
+                nextSeg.isHead = NO;
             }
             self.blocks[i] = nextSeg;
         }

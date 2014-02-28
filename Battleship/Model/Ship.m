@@ -56,69 +56,79 @@
 }
 
 -(NSMutableArray *)getHeadLocationsOfMove {
-    NSMutableArray* possibleMoves = [[NSMutableArray alloc] init];
-    Coordinate* headLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+    NSMutableArray* viableMoves = [[NSMutableArray alloc] init];
+    NSMutableArray* headLocations = [[NSMutableArray alloc] init];
     ShipSegment* headSeg = self.blocks[0];
-    headLocation = headSeg.location;
     for (int i = -1; i <= 1; i++) {
         if (i != 0) {
+            Coordinate* headLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+            headLocation.xCoord = headSeg.location.xCoord;
+            headLocation.yCoord = headSeg.location.yCoord;
+            headLocation.direction = headSeg.location.direction;
             switch (headLocation.direction) {
-                case NORTH | SOUTH:
+                case NORTH:
                     headLocation.xCoord = headSeg.location.xCoord + i;
                     break;
-                case WEST | EAST:
+                case SOUTH:
+                    headLocation.xCoord = headSeg.location.xCoord + i;
+                    break;
+                case WEST:
+                    headLocation.yCoord = headSeg.location.yCoord + i;
+                    break;
+                case EAST:
                     headLocation.yCoord = headSeg.location.yCoord + i;
                     break;
                 default:
                     break;
             }
-            [possibleMoves addObject:headLocation];
+            [headLocations addObject:headLocation];
         }
-    }
-    headLocation = headSeg.location;
-    switch (headLocation.direction) {
-        case NORTH | SOUTH:
-            headLocation.xCoord = headSeg.location.xCoord;
-            break;
-        case WEST | EAST:
-            headLocation.yCoord = headSeg.location.yCoord;
-            break;
-        default:
-            break;
     }
     for (int i = -1; i <= self.speed; i++) {
         if (i != 0) {
+            Coordinate* headLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+            headLocation.xCoord = headSeg.location.xCoord;
+            headLocation.yCoord = headSeg.location.yCoord;
+            headLocation.direction = headSeg.location.direction;
             switch (headLocation.direction) {
                 case NORTH:
+                    headLocation.xCoord = headSeg.location.xCoord;
                     headLocation.yCoord = headSeg.location.yCoord + i;
                     break;
                 case SOUTH:
+                    headLocation.xCoord = headSeg.location.xCoord;
                     headLocation.yCoord = headSeg.location.yCoord - i;
                     break;
                 case WEST:
                     headLocation.xCoord = headSeg.location.xCoord - i;
+                    headLocation.yCoord = headSeg.location.yCoord;
                     break;
                 case EAST:
                     headLocation.xCoord = headSeg.location.xCoord + i;
+                    headLocation.yCoord = headSeg.location.yCoord;
                     break;
                 default:
                     break;
     
             }
-            [possibleMoves addObject:headLocation];
+            [headLocations addObject:headLocation];
         }
     }
-    for (Coordinate *headLocation in possibleMoves) {
-        Coordinate *tailLocation;
+    NSMutableArray *coordsToBeRemoved = [[NSMutableArray alloc] init];
+    for (Coordinate *headLocation in headLocations) {
+        Coordinate *tailLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+        tailLocation.xCoord = headLocation.xCoord;
+        tailLocation.yCoord = headLocation.yCoord;
+        tailLocation.direction = headLocation.direction;
         switch (headLocation.direction) {
             case NORTH:
-                tailLocation.xCoord = headLocation.xCoord - (self.size - 1);
+                tailLocation.yCoord = headLocation.yCoord - (self.size - 1);
                 break;
             case SOUTH:
-                tailLocation.xCoord = headLocation.xCoord + (self.size - 1);
+                tailLocation.yCoord = headLocation.yCoord + (self.size - 1);
                 break;
             case WEST:
-                tailLocation.yCoord = headLocation.xCoord + (self.size - 1);
+                tailLocation.xCoord = headLocation.xCoord + (self.size - 1);
                 break;
             case EAST:
                 tailLocation.xCoord = headLocation.xCoord - (self.size - 1);
@@ -126,10 +136,43 @@
             default:
                 break;
         }
-        if (![headLocation isWithinMap] || ![tailLocation isWithinMap]) {
-            [possibleMoves removeObject:headLocation];
+        if (![headLocation isWithinMap]) {
+            [coordsToBeRemoved addObject:headLocation];
+        }
+        if(![tailLocation isWithinMap]) {
+            [coordsToBeRemoved addObject:headLocation];
         }
     }
-    return possibleMoves;
+    for (Coordinate *c in coordsToBeRemoved) {
+        [headLocations removeObject:c];
+    }
+    for (Coordinate* headLocation in headLocations) {
+        NSMutableArray *shipLocations = [[NSMutableArray alloc] init];
+        for (int i = 0; i < self.size; i++) {
+            Coordinate *segmentLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+            segmentLocation.xCoord = headLocation.xCoord;
+            segmentLocation.yCoord = headLocation.yCoord;
+            segmentLocation.direction = headLocation.direction;
+            switch (segmentLocation.direction) {
+                case NORTH:
+                    segmentLocation.yCoord = headLocation.yCoord - i;
+                    break;
+                case SOUTH:
+                    segmentLocation.yCoord = headLocation.yCoord - i;
+                    break;
+                case WEST:
+                    segmentLocation.xCoord = headLocation.xCoord - i;
+                    break;
+                case EAST:
+                    segmentLocation.xCoord = headLocation.xCoord - i;
+                    break;
+                default:
+                    break;
+            }
+            [shipLocations addObject:segmentLocation];
+        }
+        [viableMoves addObject:shipLocations];
+    }
+    return viableMoves;
 }
 @end

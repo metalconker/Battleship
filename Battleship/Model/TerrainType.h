@@ -16,8 +16,7 @@ typedef enum TerrainType
     JOIN_BASE,
     CORAL,
     WATER,
-    SHIP_BODY,
-    SHIP_HEAD
+    MOVE_RANGE
 } Terrain;
 
 @end

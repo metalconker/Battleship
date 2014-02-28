@@ -80,5 +80,12 @@
     }
 }
 
+-(void) setCoords:(NSMutableArray *) coords
+               to:(Terrain) t {
+    for (Coordinate* c in coords) {
+        [_grid[c.xCoord] removeObjectAtIndex:c.yCoord];
+        [_grid[c.xCoord] insertObject:[NSNumber numberWithInt:t] atIndex:c.yCoord];
+    }
+}
 
 @end

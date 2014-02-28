@@ -20,4 +20,7 @@
 @property (strong, nonatomic) NSMutableArray* grid;
 
 -(instancetype) init;
+-(void) setCoords: (NSMutableArray*) coords
+               to: (Terrain) t;
+
 @end
