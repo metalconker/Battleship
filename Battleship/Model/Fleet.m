@@ -50,16 +50,16 @@
             mineLayer2 = [[Coordinate alloc] initWithXCoordinate:11 YCoordinate:27 initiallyFacing:SOUTH];
             radar1 = [[Coordinate alloc] initWithXCoordinate:10 YCoordinate:26 initiallyFacing:SOUTH];
         }
-        Cruiser *c1 = [[Cruiser alloc] initWithLocation: cruiser1 andName: @"c1"];
-        Cruiser *c2 = [[Cruiser alloc] initWithLocation: cruiser2 andName:@"c2"];
-        Destroyer *d1 = [[Destroyer alloc] initWithLocation: destroyer1 andName:@"d1"];
-        Destroyer *d2 = [[Destroyer alloc] initWithLocation: destroyer2 andName:@"d2"];
-        Destroyer *d3 = [[Destroyer alloc] initWithLocation: destroyer3 andName:@"d3"];
-        TorpedoBoat *t1 = [[TorpedoBoat alloc] initWithLocation: torpedo1 andName:@"t1"];
-        TorpedoBoat *t2 = [[TorpedoBoat alloc] initWithLocation: torpedo2 andName:@"t2"];
-        MineLayer *m1 = [[MineLayer alloc] initWithLocation: mineLayer1 andName:@"m1"];
-        MineLayer *m2 = [[MineLayer alloc] initWithLocation: mineLayer2 andName:@"m1"];
-        RadarBoat *r1 = [[RadarBoat alloc] initWithLocation: radar1 andName:@"r1"];
+        Cruiser *c1 = [[Cruiser alloc] initWithLocation: cruiser1 andName: @"Cruiser"];
+        Cruiser *c2 = [[Cruiser alloc] initWithLocation: cruiser2 andName:@"Cruiser"];
+        Destroyer *d1 = [[Destroyer alloc] initWithLocation: destroyer1 andName:@"Destroyer"];
+        Destroyer *d2 = [[Destroyer alloc] initWithLocation: destroyer2 andName:@"Destroyer"];
+        Destroyer *d3 = [[Destroyer alloc] initWithLocation: destroyer3 andName:@"Destroyer"];
+        TorpedoBoat *t1 = [[TorpedoBoat alloc] initWithLocation: torpedo1 andName:@"TorpedoBoat"];
+        TorpedoBoat *t2 = [[TorpedoBoat alloc] initWithLocation: torpedo2 andName:@"TorpedoBoat"];
+        MineLayer *m1 = [[MineLayer alloc] initWithLocation: mineLayer1 andName:@"MineLayer"];
+        MineLayer *m2 = [[MineLayer alloc] initWithLocation: mineLayer2 andName:@"MineLayer"];
+        RadarBoat *r1 = [[RadarBoat alloc] initWithLocation: radar1 andName:@"RadarBoat"];
         
        
         // TODO: garbage code
