@@ -18,9 +18,6 @@
         _block = cell;
         _location = initialLocation;
         _shipSize = shipSize;
-        self.viableActions = [[NSMutableArray alloc] init];
-        [_viableActions addObject:@"Move"];
-        [_viableActions addObject:@"Rotate"];
     }
     return self;
 }
