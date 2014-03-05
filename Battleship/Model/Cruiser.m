@@ -37,7 +37,6 @@
                     break;
             }
             ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:HEAVY_ARMOUR andPosition:i atLocation:segCoord belongingToShip:nameOfShip withShipSize:5];
-            [nextSeg.viableActions addObject:@"Fire with Heavy Cannon"];
             if (i == 0) {
                 nextSeg.isHead = YES;
             }

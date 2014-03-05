@@ -35,8 +35,6 @@
                     break;
             }
             ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:NORMAL_ARMOUR andPosition:i atLocation:segCoord belongingToShip:nameOfShip withShipSize:3];
-            [nextSeg.viableActions addObject:@"Fire with Cannon"];
-            [nextSeg.viableActions addObject:@"Turn on Extended Radar"];
             if (i == 0) {
                 nextSeg.isHead = YES;
             }
