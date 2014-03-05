@@ -158,7 +158,7 @@
 }
 
 
--(void) fireTorpedo:(Coordinate *)origin {
+-(Coordinate*) fireTorpedo:(Coordinate *)origin {
     Ship* s;
     if (_hostsTurn) {
         s = [_hostFleet getShipWithCoord:origin];
@@ -167,7 +167,18 @@
         s = [_joinFleet getShipWithCoord:origin];
     }
     Coordinate* impactCoord = [_hostView collisionLocationOfTorpedo:s.location];
-    
+    if ([_hostView.grid[impactCoord.xCoord][impactCoord.yCoord] isKindOfClass:[ShipSegment class]]) {
+        ShipSegment *shipSeg = _hostView.grid[impactCoord.xCoord][impactCoord.yCoord];
+        int shipBlock = shipSeg.block;
+        if (_hostsTurn) {
+            s = [_hostFleet getShipWithCoord:origin];
+        }
+        else {
+            s = [_joinFleet getShipWithCoord:origin];
+        }
+        [s damageShipWithTorpedoAt:shipBlock];
+    }
+    return impactCoord;
 }
 /*
 -(Coordinate*) getCoordOfShip: (NSString*) shipName {

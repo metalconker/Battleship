@@ -27,5 +27,6 @@
                belongingToShip:(NSString*) ship
                   withShipSize: (int) shipSize;
 
+-(BOOL) damageSegmentWithTorpedo;
 @end
 

@@ -248,7 +248,9 @@ SKLabelNode* shipName;
                 
             }
             
-            NSMutableArray* coordinates = [_game getValidMovesFrom:newMove withRadarPositions:true];
+            NSLog(@"%d, %d", newMove.xCoord, newMove.yCoord);
+            NSLog(@"Coordinates");
+            NSMutableArray* coordinates = [_game getValidMovesFrom:newMove withRadarPositions:false];
             for (Coordinate* c in coordinates) {
                 SKSpriteNode* moveRange = [SKSpriteNode spriteNodeWithImageNamed:@"Green Dot"];
                 moveRange.position = CGPointMake(widthDiv30*c.xCoord + widthDiv30/2, heightDiv30*c.yCoord + heightDiv30/2);

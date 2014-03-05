@@ -95,7 +95,10 @@
             for(int i = 1; i <= 10; i++) {
                 c.xCoord = firedFrom.xCoord;
                 c.yCoord = firedFrom.yCoord + i;
-                if (![_grid[c.xCoord][c.yCoord] isKindOfClass:[NSNumber class]]) {
+                if (i == 10) {
+                    return c;
+                }
+                else if (![_grid[c.xCoord][c.yCoord] isKindOfClass:[NSNumber class]]) {
                     return c;
                 }
                 else if ([_grid[c.xCoord][c.yCoord] intValue] != WATER) {
@@ -107,7 +110,10 @@
             for(int i = 1; i <= 10; i++) {
                 c.xCoord = firedFrom.xCoord;
                 c.yCoord = firedFrom.yCoord - i;
-                if (![_grid[c.xCoord][c.yCoord] isKindOfClass:[NSNumber class]]) {
+                if (i == 10) {
+                    return c;
+                }
+                else if (![_grid[c.xCoord][c.yCoord] isKindOfClass:[NSNumber class]]) {
                     return c;
                 }
                 else if ([_grid[c.xCoord][c.yCoord] intValue] != WATER) {
@@ -119,7 +125,10 @@
             for(int i = 1; i <= 10; i++) {
                 c.xCoord = firedFrom.xCoord - i;
                 c.yCoord = firedFrom.yCoord;
-                if (![_grid[c.xCoord][c.yCoord] isKindOfClass:[NSNumber class]]) {
+                if (i == 10) {
+                    return c;
+                }
+                else if (![_grid[c.xCoord][c.yCoord] isKindOfClass:[NSNumber class]]) {
                     return c;
                 }
                 else if ([_grid[c.xCoord][c.yCoord] intValue] != WATER) {
@@ -131,7 +140,10 @@
             for(int i = 1; i <= 10; i++) {
                 c.xCoord = firedFrom.xCoord + i;
                 c.yCoord = firedFrom.yCoord;
-                if (![_grid[c.xCoord][c.yCoord] isKindOfClass:[NSNumber class]]) {
+                if (i == 10) {
+                    return c;
+                }
+                else if (![_grid[c.xCoord][c.yCoord] isKindOfClass:[NSNumber class]]) {
                     return c;
                 }
                 else if ([_grid[c.xCoord][c.yCoord] intValue] != WATER) {

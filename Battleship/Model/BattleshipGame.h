@@ -21,6 +21,8 @@
                  to:(Coordinate*) destination;
 -(NSMutableArray*) getValidMovesFrom:(Coordinate*)origin
                   withRadarPositions:(BOOL) radarPositions;
--(void) fireTorpedo: (Coordinate*) origin;
+//-(Coordinate*) getCoordOfShip: (NSString*) shipName;
+-(NSMutableArray*) getValidActionsFrom:(Coordinate*)origin;
+-(Coordinate*) fireTorpedo: (Coordinate*) origin;
 
 @end

@@ -17,6 +17,7 @@
     self = [super initWithLocation:initialPosition andName:nameOfShip];
     if (self) {
         self.size = 3;
+        self.maxSpeed = 3;
         self.speed = 3;
         self.shipArmourType = NORMAL_ARMOUR;
         for (int i = 0; i < self.size; i++) {

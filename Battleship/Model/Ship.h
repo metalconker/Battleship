@@ -18,12 +18,15 @@
 
 @property (strong, nonatomic) NSMutableArray* blocks; //of ShipSegment
 @property int size;
+@property int maxSpeed;
 @property int speed;
 @property ShipArmour shipArmourType;
 @property Coordinate *location;
 @property Range *radarRange;
 @property Range *canonRange;
 @property NSString *shipName;
+@property NSMutableArray* viableActions; //of Strings
+@property BOOL isDestroyed;
 
 - (instancetype) initWithLocation: (Coordinate*) initialPosition
                           andName:(NSString*) nameOfShip;
@@ -31,6 +34,6 @@
 - (void)repair;
 - (void)rotate: (Rotation)destination;
 - (NSMutableArray*) getHeadLocationsOfMove;
-
+- (void)damageShipWithTorpedoAt:(int) blockNumber;
 @end
 
