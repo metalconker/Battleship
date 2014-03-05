@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import <SpriteKit/SpriteKit.h>
+#import "BattleshipGame.h"
+#import "Helpers.h"
 
 
 @interface SideBarDisplay : NSObject
@@ -16,8 +18,11 @@
 @property (strong, nonatomic) SKNode* visualBarNode;
 @property (strong, nonatomic) SKSpriteNode* displayedShip;
 @property (strong, nonatomic) SKLabelNode* shipName;
--(instancetype) initWithParentNode:(SKNode *)parent andVisualBarNode:(SKNode*) visualBar;
+@property (strong, nonatomic) BattleshipGame* game;
+@property (strong, nonatomic) Helpers* helper;
+@property (strong, nonatomic) NSMutableArray* functions;
+-(instancetype) initWithParentNode:(SKNode *)parent andVisualBarNode:(SKNode*) visualBar usingGame: (BattleshipGame*) game andHelperInstance: (Helpers*) helper;
 
--(void) displayShipDetails: (SKNode *) shipSprite;
+-(NSMutableArray*) displayShipDetails: (SKNode *) shipSprite;
                              
 @end
