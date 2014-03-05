@@ -12,6 +12,7 @@
 
 typedef enum shipArmourType
 {
+    DESTROYED,
     NORMAL_ARMOUR,
     HEAVY_ARMOUR
 } ShipArmour;

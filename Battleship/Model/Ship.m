@@ -17,6 +17,7 @@
         _location = initialPosition;
         self.blocks = [[NSMutableArray alloc] init];
         self.viableActions = [[NSMutableArray alloc] init];
+        self.isDestroyed = FALSE;
         [_viableActions addObject:@"Move"];
         [_viableActions addObject:@"Rotate"];
     }
@@ -176,5 +177,31 @@
         [viableMoves addObject:shipLocations];
     }
     return viableMoves;
+}
+
+-(void) damageShipWithTorpedoAt:(int)blockNumber {
+    [_blocks[blockNumber] damageSegmentWithTorpedo];
+    if (blockNumber > 0) {
+        if (![_blocks[blockNumber-1] damageSegmentWithTorpedo] && blockNumber < _size-1) {
+            [_blocks[blockNumber+1] damageSegmentWithTorpedo];
+        }
+    }
+    else {
+        [_blocks[blockNumber+1] damageSegmentWithTorpedo];
+    }
+    int counter = 0;
+    for (int i = 0; i < _size; i++) {
+        ShipSegment *s = _blocks[i];
+        if (s.segmentArmourType == DESTROYED) {
+            counter++;
+        }
+    }
+    if (counter == _size) {
+        _isDestroyed = TRUE;
+    }
+    else {
+        _speed = (_size-counter)/_maxSpeed;
+    }
+    
 }
 @end

@@ -242,6 +242,8 @@ SKLabelNode* shipName;
                 
             }
             
+            NSLog(@"%d, %d", newMove.xCoord, newMove.yCoord);
+            NSLog(@"Coordinates");
             NSMutableArray* coordinates = [_game getValidMovesFrom:newMove withRadarPositions:false];
             for (Coordinate* c in coordinates) {
                 NSLog(@"%d, %d", c.xCoord, c.yCoord);
