@@ -33,6 +33,7 @@ SKNode *visualBar;
 @property (nonatomic, strong) SKNode *ships;
 @property (nonatomic, strong) SKNode *shipDisplay;
 @property (nonatomic, strong) SKNode *nodeTouched;
+@property (nonatomic, strong) SideBarDisplay* display;
 @property bool miniMapTouched;
 @property bool shipClicked;
 
@@ -60,6 +61,8 @@ SKNode *visualBar;
         
         // Visual Bar sprite
         [self initVisualBar];
+        // Initilize the SideBarDisplay
+        _display = [[SideBarDisplay alloc] initWithParentNode:visualBar];
         
         // Contains all the map data
         [self addChild:_screenNode];
@@ -223,8 +226,7 @@ SKLabelNode* shipName;
         // If the initial touch was a cruiser
         if ([_nodeTouched.parent isEqual:_ships])
         {
-            SideBarDisplay* display = [[SideBarDisplay alloc] initWithParentNode:visualBar];
-            [display displayShipDetails:_nodeTouched];
+            [_display displayShipDetails:_nodeTouched];
             /*
             // If there has been a ship previously displayed
             if ([displayShip.name isEqualToString:@"displayed"])
