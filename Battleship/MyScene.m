@@ -17,7 +17,7 @@ NSMutableArray *player1BasePositions;
 
 Fleet *testFleet;
 
-SKSpriteNode *visualBar;
+SKNode *visualBar;
 
 
 @interface MyScene()
@@ -68,14 +68,12 @@ SKSpriteNode *visualBar;
         [self initTerrainSprites];
         // Ship sprites
         [self initShipSprites];
-        Coordinate* testOrigin = [[Coordinate alloc] initWithXCoordinate:10 YCoordinate:3 initiallyFacing:NONE];
-        [_game getValidActionsFrom:testOrigin];
         // MiniMap sprite
         [self initMiniMap];
         [self addChild:visualBar];
         
         // Creates the helper functions class
-        _helper = [[Helpers alloc] initWithScreenWidth:self.frame.size.width screenHeight:self.frame.size.height visualBarWidth:visualBar.size.width];
+        _helper = [[Helpers alloc] initWithScreenWidth:self.frame.size.width screenHeight:self.frame.size.height visualBarWidth:visualBar.frame.size.width];
     }
     
     return self;
@@ -85,8 +83,8 @@ SKSpriteNode *visualBar;
 // Draws ship sprites to screen
 - (void) initShipSprites {
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
-    int widthDiv30 = (self.frame.size.width-visualBar.frame.size.width) / GRID_SIZE;
-    int heightDiv30 = self.frame.size.height / GRID_SIZE;
+    double widthDiv30 = (self.frame.size.width-visualBar.frame.size.width) / GRID_SIZE;
+    double heightDiv30 = self.frame.size.height / GRID_SIZE;
     ShipSegment *s;
     for (int i = 0; i < GRID_SIZE; i++)
     {
@@ -97,38 +95,40 @@ SKSpriteNode *visualBar;
             {
                 s = _game.hostView.grid[i][j];
                 if (s.isHead) {
-                    if ([s.shipName isEqualToString:@"Cruiser"] || [s.shipName isEqualToString:@"Cruiser"])
+                    if ([s.shipName isEqualToString:@"c1"] || [s.shipName isEqualToString:@"c2"])
                     {
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Cruiser"];
                     }
-                    else if ([s.shipName isEqualToString:@"Destroyer"] || [s.shipName isEqualToString:@"Destroyer"] || [s.shipName isEqualToString:@"Destroyer"])
+                    else if ([s.shipName isEqualToString:@"d1"] || [s.shipName isEqualToString:@"d2"] || [s.shipName isEqualToString:@"d3"])
                     {
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Destroyer"];
                     }
-                    else if ([s.shipName isEqualToString:@"MineLayer"] || [s.shipName isEqualToString:@"MineLayer"])
+                    else if ([s.shipName isEqualToString:@"m1"] || [s.shipName isEqualToString:@"m2"])
                     {
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MineLayer"];
                     }
-                    else if ([s.shipName isEqualToString:@"RadarBoat"])
+                    else if ([s.shipName isEqualToString:@"r1"])
                     {
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"RadarBoat"];
                         
                     }
-                    else if ([s.shipName isEqualToString:@"TorpedoBoat"] || [s.shipName isEqualToString:@"TorpedoBoat"])
+                    else if ([s.shipName isEqualToString:@"t1"] || [s.shipName isEqualToString:@"t2"])
                     {
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"TorpedoBoat"];
                     }
                     sprite.name = s.shipName;
+                    sprite.yScale = (heightDiv30 * s.shipSize)/sprite.frame.size.height;
+                    sprite.xScale = widthDiv30/sprite.frame.size.width;
                     if (s.location.direction == SOUTH)
                     {
-                        sprite.position = CGPointMake(s.location.xCoord*widthDiv30 + sprite.frame.size.width/2, (s.location.yCoord*heightDiv30) - sprite.frame.size.height/2 + s.shipSize*heightDiv30);
+                        sprite.position = CGPointMake(s.location.xCoord*widthDiv30 + widthDiv30/2, (s.location.yCoord*heightDiv30) - sprite.frame.size.height/2 + s.shipSize*heightDiv30);
                         [_ships addChild:sprite];
                         sprite.zRotation = M_PI;
                     }
                     
                     else if (s.location.direction == NORTH)
                     {
-                        sprite.position = CGPointMake(s.location.xCoord*widthDiv30 + sprite.frame.size.width/2, (s.location.yCoord*heightDiv30) + sprite.frame.size.height/2 - s.shipSize*heightDiv30 + heightDiv30);
+                        sprite.position = CGPointMake(((double)s.location.xCoord)*widthDiv30 + + widthDiv30/2, (s.location.yCoord*heightDiv30) + sprite.frame.size.height/2 - s.shipSize*heightDiv30 + heightDiv30);
                         [_ships addChild:sprite];
                     }
                 }
@@ -200,14 +200,15 @@ SKLabelNode* shipName;
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
-    int widthDiv30 = (self.frame.size.width-visualBar.frame.size.width) / GRID_SIZE;
-    int heightDiv30 = self.frame.size.height / GRID_SIZE;
+    double widthDiv30 = (self.frame.size.width-visualBar.frame.size.width) / GRID_SIZE;
+    double heightDiv30 = self.frame.size.height / GRID_SIZE;
     
     for (UITouch *touch in touches) {
         
         CGPoint location = [touch locationInNode:self];
         
         Coordinate *newMove = [_helper fromTextureToCoordinate:location];
+        
         
         _nodeTouched = [self nodeAtPoint:location];
         
@@ -222,6 +223,9 @@ SKLabelNode* shipName;
         // If the initial touch was a cruiser
         if ([_nodeTouched.parent isEqual:_ships])
         {
+            SideBarDisplay* display = [[SideBarDisplay alloc] initWithParentNode:visualBar];
+            [display displayShipDetails:_nodeTouched];
+            /*
             // If there has been a ship previously displayed
             if ([displayShip.name isEqualToString:@"displayed"])
             {
@@ -246,9 +250,12 @@ SKLabelNode* shipName;
             NSLog(@"Coordinates");
             NSMutableArray* coordinates = [_game getValidMovesFrom:newMove withRadarPositions:false];
             for (Coordinate* c in coordinates) {
-                NSLog(@"%d, %d", c.xCoord, c.yCoord);
+                SKSpriteNode* moveRange = [SKSpriteNode spriteNodeWithImageNamed:@"Green Dot"];
+                moveRange.position = CGPointMake(widthDiv30*c.xCoord + widthDiv30/2, heightDiv30*c.yCoord + heightDiv30/2);
+                moveRange.xScale = widthDiv30/moveRange.frame.size.width;
+                moveRange.yScale = heightDiv30/moveRange.frame.size.height;
+                [self addChild:moveRange];
             }
-            
             displayShip = [SKSpriteNode spriteNodeWithImageNamed:_nodeTouched.name];
             displayShip.zRotation = M_PI / 2;
             displayShip.position = CGPointMake(self.frame.size.width - displayShip.size.width/2 - visualBar.frame.size.width/2, self.frame.size.height/2);
@@ -263,6 +270,7 @@ SKLabelNode* shipName;
             [self addChild:shipName];
             
             //_shipClicked = true;
+             */
         }
 //
 //        if (_shipClicked)
@@ -385,8 +393,8 @@ SKLabelNode* shipName;
     // Initilizes the different sprites
     SKSpriteNode *sprite = [[SKSpriteNode alloc] init];
     // Containers
-    int widthDiv30 = (self.frame.size.width-visualBar.frame.size.width) / GRID_SIZE;
-    int heightDiv30 = self.frame.size.height / GRID_SIZE;
+    double widthDiv30 = (self.frame.size.width-visualBar.frame.size.width) / GRID_SIZE;
+    double heightDiv30 = self.frame.size.height / GRID_SIZE;
     // Drawing the sprites to screen in position
     for (int i = 0; i < GRID_SIZE; i++)
     {
@@ -409,9 +417,10 @@ SKLabelNode* shipName;
                     case JOIN_BASE:
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MidBase"];
                         sprite.name = @"joinbase";
-                        sprite.zRotation = 3 * M_PI / 2;
+                        
                         sprite.xScale = 1.7;
                         sprite.yScale = 2.1;
+                        sprite.zRotation = 3 * M_PI / 2;
                         sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
                         [_screenNode addChild:sprite];
                         break;
