@@ -19,6 +19,7 @@
 @property (strong, nonatomic) Coordinate* location;
 @property BOOL isHead;
 @property int shipSize;
+@property NSMutableArray* viableActions; //of Strings
 
 -(instancetype) initWithArmour:(ShipArmour) armour
                    andPosition:(int)cell

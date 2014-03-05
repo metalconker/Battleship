@@ -32,6 +32,7 @@
                     break;
             }
             ShipSegment* nextSeg = [[ShipSegment alloc] initWithArmour:HEAVY_ARMOUR andPosition:i atLocation:segCoord belongingToShip:nameOfShip withShipSize:2];
+            [nextSeg.viableActions addObject:@"Fire with Cannon"];
             if (i == 0) {
                 nextSeg.isHead = YES;
             }
@@ -40,7 +41,6 @@
             }
             self.blocks[i] = nextSeg;
         }
-        [self.viableActions addObject:@"Fire with Cannon"];
         self.radarRange.rangeHeight = 6;
         self.radarRange.rangeWidth = 5;
         self.radarRange.startRange = -2;

@@ -24,7 +24,6 @@
 @property Range *radarRange;
 @property Range *canonRange;
 @property NSString *shipName;
-@property NSMutableArray* viableActions; //of Strings
 
 - (instancetype) initWithLocation: (Coordinate*) initialPosition
                           andName:(NSString*) nameOfShip;

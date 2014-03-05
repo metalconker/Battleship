@@ -157,16 +157,6 @@
     }
 }
 
--(NSMutableArray *)getValidActionsFrom:(Coordinate *)origin {
-    Ship* s;
-    if (_hostsTurn) {
-        s = [_hostFleet getShipWithCoord:origin];
-    }
-    else {
-        s = [_joinFleet getShipWithCoord:origin];
-    }    
-    return s.viableActions;
-}
 
 -(void) fireTorpedo:(Coordinate *)origin {
     Ship* s;
