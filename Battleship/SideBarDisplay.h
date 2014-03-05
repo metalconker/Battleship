@@ -13,9 +13,10 @@
 @interface SideBarDisplay : NSObject
 
 @property (strong, nonatomic) SKNode* parentNode;
+@property (strong, nonatomic) SKNode* visualBarNode;
 @property (strong, nonatomic) SKSpriteNode* displayedShip;
 @property (strong, nonatomic) SKLabelNode* shipName;
--(instancetype) initWithParentNode: (SKNode *) parent;
+-(instancetype) initWithParentNode:(SKNode *)parent andVisualBarNode:(SKNode*) visualBar;
 
 -(void) displayShipDetails: (SKNode *) shipSprite;
                              

@@ -10,10 +10,11 @@
 
 @implementation SideBarDisplay
 
--(instancetype) initWithParentNode:(SKNode *)parent {
+-(instancetype) initWithParentNode:(SKNode *)parent andVisualBarNode:(SKNode*) visualBar{
     self = [super init];
     if (self) {
         _parentNode = parent;
+        _visualBarNode = visualBar;
         _displayedShip = [[SKSpriteNode alloc] init];
         _shipName = [[SKLabelNode alloc] init];
     }
@@ -42,7 +43,7 @@
     NSLog(@"%@", shipSprite.name);
     ;    _displayedShip = [SKSpriteNode spriteNodeWithImageNamed:shipSprite.name];
     _displayedShip.zRotation = M_PI / 2;
-    _displayedShip.position = CGPointMake(_parentNode.frame.size.width - _displayedShip.size.width/2 - _parentNode.frame.size.width/2, _parentNode.frame.size.height/2);
+    _displayedShip.position = CGPointMake(_parentNode.frame.size.width - _displayedShip.size.width/2 - _visualBarNode.frame.size.width/2, _parentNode.frame.size.height/2);
     _displayedShip.name = @"displayed";
     [_parentNode addChild:_displayedShip];
     
@@ -50,7 +51,7 @@
     _shipName.name = @"displayedText";
     [_shipName setText:shipSprite.name];
     [_shipName setFontSize:18];
-    [_shipName setPosition:CGPointMake(_parentNode.frame.size.width - _displayedShip.size.width/2 - _parentNode.frame.size.width/2, _parentNode.frame.size.height/2 - _displayedShip.size.width * 1.5)];
+    [_shipName setPosition:CGPointMake(_parentNode.frame.size.width - _displayedShip.size.width/2 - _visualBarNode.frame.size.width/2, _parentNode.frame.size.height/2 - _displayedShip.size.width * 1.5)];
     [_parentNode addChild:_shipName];
 
 }

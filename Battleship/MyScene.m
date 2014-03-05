@@ -62,7 +62,7 @@ SKNode *visualBar;
         // Visual Bar sprite
         [self initVisualBar];
         // Initilize the SideBarDisplay
-        _display = [[SideBarDisplay alloc] initWithParentNode:visualBar];
+        _display = [[SideBarDisplay alloc] initWithParentNode:self andVisualBarNode:visualBar];
         
         // Contains all the map data
         [self addChild:_screenNode];
