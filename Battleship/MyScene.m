@@ -34,6 +34,10 @@ SKNode *visualBar;
 @property (nonatomic, strong) SKNode *shipDisplay;
 @property (nonatomic, strong) SKNode *nodeTouched;
 @property (nonatomic, strong) SideBarDisplay* display;
+@property (nonatomic, strong) NSMutableArray *shipFunctions;
+
+@property (nonatomic, strong) NSMutableArray *movementLocations;
+@property (nonatomic, strong) SKNode *movementLocationsSprites;
 @property bool miniMapTouched;
 @property bool shipClicked;
 
@@ -55,14 +59,15 @@ SKNode *visualBar;
         // The ships
         _ships = [[SKNode alloc] init];
         
+        // Move Locations
+        _movementLocationsSprites = [[SKNode alloc] init];
+        
         // Ship display
-        _shipDisplay = [[SKNode alloc] init];
-        [self addChild:_shipDisplay];
+        ///_shipDisplay = [[SKNode alloc] init];
+        //[self addChild:_shipDisplay];
         
         // Visual Bar sprite
         [self initVisualBar];
-        // Initilize the SideBarDisplay
-        _display = [[SideBarDisplay alloc] initWithParentNode:visualBar];
         
         // Contains all the map data
         [self addChild:_screenNode];
@@ -75,8 +80,14 @@ SKNode *visualBar;
         [self initMiniMap];
         [self addChild:visualBar];
         
+        // Locations
+        [self addChild:_movementLocationsSprites];
+        
         // Creates the helper functions class
         _helper = [[Helpers alloc] initWithScreenWidth:self.frame.size.width screenHeight:self.frame.size.height visualBarWidth:visualBar.frame.size.width];
+        
+        // Initilize the SideBarDisplay
+        _display = [[SideBarDisplay alloc] initWithParentNode:self andVisualBarNode:visualBar usingGame:_game andHelperInstance:_helper];
     }
     
     return self;
@@ -93,11 +104,11 @@ SKNode *visualBar;
     {
         for (int j = 0; j < GRID_SIZE; j++)
         {
-            
             if ([_game.hostView.grid[i][j] isKindOfClass:[ShipSegment class]])
             {
                 s = _game.hostView.grid[i][j];
                 if (s.isHead) {
+                    
                     if ([s.shipName isEqualToString:@"c1"] || [s.shipName isEqualToString:@"c2"])
                     {
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Cruiser"];
@@ -108,6 +119,7 @@ SKNode *visualBar;
                     }
                     else if ([s.shipName isEqualToString:@"m1"] || [s.shipName isEqualToString:@"m2"])
                     {
+                        
                         sprite = [SKSpriteNode spriteNodeWithImageNamed:@"MineLayer"];
                     }
                     else if ([s.shipName isEqualToString:@"r1"])
@@ -131,7 +143,7 @@ SKNode *visualBar;
                     
                     else if (s.location.direction == NORTH)
                     {
-                        sprite.position = CGPointMake(((double)s.location.xCoord)*widthDiv30 + + widthDiv30/2, (s.location.yCoord*heightDiv30) + sprite.frame.size.height/2 - s.shipSize*heightDiv30 + heightDiv30);
+                        sprite.position = CGPointMake(((double)s.location.xCoord)*widthDiv30 + widthDiv30/2, (s.location.yCoord*heightDiv30) + sprite.frame.size.height/2 - s.shipSize*heightDiv30 + heightDiv30);
                         [_ships addChild:sprite];
                     }
                 }
@@ -143,13 +155,11 @@ SKNode *visualBar;
 
 // Initializes the visual bar
 - (void)initVisualBar{
-    
     visualBar = [SKSpriteNode spriteNodeWithImageNamed:@"Mini Map"];
     visualBar.name = @"Visual Bar";
     visualBar.yScale = 5;
     visualBar.xScale = 0.5;
     visualBar.position = CGPointMake(self.frame.size.width - visualBar.frame.size.width/2, visualBar.frame.size.height/2);
-    
 }
 
 -(void)initShipsMiniMap:(SKNode*) miniMap
@@ -197,9 +207,6 @@ SKNode *visualBar;
     }
 }
 
-SKSpriteNode *displayShip;
-SKLabelNode* shipName;
-
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
@@ -223,60 +230,44 @@ SKLabelNode* shipName;
         
         //SpriteNode *displayShip = [self ];
         
-        // If the initial touch was a cruiser
-        if ([_nodeTouched.parent isEqual:_ships])
+        // If the touch is a ship
+        if ([_nodeTouched.parent isEqual:_ships] && ![_shipFunctions containsObject:_nodeTouched])
         {
-            [_display displayShipDetails:_nodeTouched];
-            /*
-            // If there has been a ship previously displayed
-            if ([displayShip.name isEqualToString:@"displayed"])
-            {
-                //[self removeChild:]
-                [self enumerateChildNodesWithName:@"displayed" usingBlock:^(SKNode *node, BOOL *stop) {
-                    [node removeFromParent];
-                }];
-                
-            }
+            _shipFunctions = [_display displayShipDetails:_nodeTouched];
+            _shipDisplay = _nodeTouched;
             
-            // If there has been a ship previously displayed
-            if ([shipName.name isEqualToString:@"displayedText"])
-            {
-                //[self removeChild:]
-                [self enumerateChildNodesWithName:@"displayedText" usingBlock:^(SKNode *node, BOOL *stop) {
-                    [node removeFromParent];
-                }];
-                
-            }
-            
-            NSMutableArray* coordinates = [_game getValidMovesFrom:newMove withRadarPositions:true];
-            for (Coordinate* c in coordinates) {
-                SKSpriteNode* moveRange = [SKSpriteNode spriteNodeWithImageNamed:@"Green Dot"];
-                moveRange.position = CGPointMake(widthDiv30*c.xCoord + widthDiv30/2, heightDiv30*c.yCoord + heightDiv30/2);
-                moveRange.xScale = widthDiv30/moveRange.frame.size.width;
-                moveRange.yScale = heightDiv30/moveRange.frame.size.height;
-                [self addChild:moveRange];
-            }
-            displayShip = [SKSpriteNode spriteNodeWithImageNamed:_nodeTouched.name];
-            displayShip.zRotation = M_PI / 2;
-            displayShip.position = CGPointMake(self.frame.size.width - displayShip.size.width/2 - visualBar.frame.size.width/2, self.frame.size.height/2);
-            displayShip.name = @"displayed";
-            [self addChild:displayShip];
-            
-            shipName = [SKLabelNode labelNodeWithFontNamed:@"displayedText"];
-            shipName.name = @"displayedText";
-            [shipName setText:_nodeTouched.name];
-            [shipName setFontSize:18];
-            [shipName setPosition:CGPointMake(self.frame.size.width - displayShip.size.width/2 - visualBar.frame.size.width/2, self.frame.size.height/2 - displayShip.size.width * 1.5)];
-            [self addChild:shipName];
-            
-            //_shipClicked = true;
-             */
         }
-//
-//        if (_shipClicked)
-//        {
-//            _nodeTouched.position = CGPointMake(newMove.xCoord*widthDiv30 + _nodeTouched.frame.size.width/2, newMove.yCoord*heightDiv30 + _nodeTouched.frame.size.height/2);
-//        }
+        
+        // Displaying the sidebar
+        if ([_shipFunctions containsObject:_nodeTouched])
+        {
+            if ([_nodeTouched.name isEqual:@"Move"])
+            {
+                
+                Coordinate* c = [_helper fromTextureToCoordinate:_shipDisplay.position];
+                NSMutableArray* d = [_game getValidMovesFrom:c withRadarPositions:false];
+                [_movementLocationsSprites removeAllChildren];
+                for (Coordinate* e in d)
+                {
+
+                    SKSpriteNode* f = [[SKSpriteNode alloc] initWithImageNamed:@"Move Range"];
+                    f.yScale = 0.9;
+                    f.position = CGPointMake(e.xCoord * widthDiv30 + widthDiv30/2, e.yCoord * heightDiv30 + heightDiv30/2);
+                    [_movementLocationsSprites addChild:f];
+                }
+                
+                //sfor (Coordinate* c in [)
+            }
+            
+        }
+        
+        if ([[_movementLocationsSprites children] containsObject:_nodeTouched])
+        {
+            Coordinate* c = [_helper fromTextureToCoordinate:_nodeTouched.position];
+            _shipDisplay.position = CGPointMake((double)c.xCoord * widthDiv30 + widthDiv30/2 , (double)c.yCoord * heightDiv30 + heightDiv30/2);
+        }
+        
+        
         
     }
 }

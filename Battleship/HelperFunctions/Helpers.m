@@ -24,7 +24,7 @@
 // Returns a coordinate of the click to coordinate value
 - (Coordinate*) fromTextureToCoordinate:(CGPoint) point {
     return [[Coordinate alloc] initWithXCoordinate:(int)(point.x / _screenWidth30)
-                                       YCoordinate:(int)(point.y / _screenWidth30)
+                                       YCoordinate:(int)(point.y / _screenHeight30)
                                    initiallyFacing: NONE];
 }
 

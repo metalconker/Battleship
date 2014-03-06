@@ -18,7 +18,7 @@
         self.maxSpeed = 8;
         self.speed = 8;
         self.shipArmourType = NORMAL_ARMOUR;
-        [self.viableActions addObject:@"Fire with Torpedo"];
+        [self.viableActions addObject:@"FireTorpedo"];
         for (int i = 0; i < self.size; i++) {
             Coordinate* segCoord = [[Coordinate alloc] init];
             segCoord.direction = initialPosition.direction;
