@@ -26,6 +26,8 @@
 @property Range *canonRange;
 @property NSString *shipName;
 @property NSMutableArray* viableActions; //of Strings
+
+@property NSMutableArray* visibleCoordinates;
 @property BOOL isDestroyed;
 
 - (instancetype) initWithLocation: (Coordinate*) initialPosition
