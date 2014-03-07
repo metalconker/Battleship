@@ -17,7 +17,7 @@
 @interface GCHelper : NSObject <GKMatchmakerViewControllerDelegate, GKMatchDelegate> {
     BOOL gameCenterAvailable;
     BOOL userAuthenticated;
-    UIViewController *presentViewController;
+    UIViewController *presentingViewController;
     GKMatch *match;
     BOOL matchStarted;
     id <GCHelperDelegate> delegate;
