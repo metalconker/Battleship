@@ -14,6 +14,7 @@
 
 @property float screenWidth30;
 @property float screenHeight30;
+@property float visualBarWidth;
 
 -(instancetype) initWithScreenWidth:(float)sWidth
                        screenHeight:(float)sHeight

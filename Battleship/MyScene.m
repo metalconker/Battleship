@@ -26,7 +26,26 @@ SKNode *visualBar;
 
 @property (nonatomic, strong) BattleshipGame *game;
 @property UIPinchGestureRecognizer *pinchRecognizer;
+
+// Overall Sprite Node that contains all the subcontainers
 @property (nonatomic, strong) SKNode *screenNode;
+
+// Undernodes
+// Background container
+@property (nonatomic, strong) SKNode *backgroundNode;
+// VisualBar container
+@property (nonatomic, strong) SKNode *visualBarNode;
+// Foreground container
+@property (nonatomic, strong) SKNode *foregroundNode;
+// Active Ships container
+@property (nonatomic, strong) SKNode *activeShipsNode;
+// Destroyed Ships container
+@property (nonatomic, strong) SKNode *destroyedShipsNode;
+// Minimap container
+@property (nonatomic, strong) SKNode *miniMapNode;
+
+
+
 @property (nonatomic, strong) Helpers *helper;
 @property (nonatomic, strong) SKSpriteNode *bg1;
 @property (nonatomic, strong) SKSpriteNode *bg2;
@@ -45,6 +64,16 @@ SKNode *visualBar;
 
 @implementation MyScene
 
+// Node Names
+const NSString* screenNodeName = @"Overall";
+const NSString* backgroundNodeName = @"Background";
+const NSString* visualBarNodeName = @"Visual Bar";
+const NSString* foregroundNodeName = @"Foreground";
+const NSString* activeShipsNodeName = @"Active Ships";
+const NSString* destroyedShipsNodeName = @"Destroyed Ships";
+const NSString* miniMapNodeName = @"Mini Map";
+
+
 -(id)initWithSize:(CGSize)size {
     if (self = [super initWithSize:size]) {
         
@@ -55,6 +84,7 @@ SKNode *visualBar;
         
         // The overall image node
         _screenNode = [[SKNode alloc] init];
+        _screenNode.name = @"Overall Node";
         
         // The ships
         _ships = [[SKNode alloc] init];
@@ -433,8 +463,10 @@ SKNode *visualBar;
 }
 
 -(void)update:(CFTimeInterval)currentTime {
-    // Scrolls the backgrounds
-    [_helper scrollBackground1:_bg1 background2:_bg2];
+    // Scrolls the backgrounds according to current time
+    [_helper
+     scrollBackground1:(SKSpriteNode*)[_screenNode childNodeWithName:@"background1"]
+     background2:(SKSpriteNode*)[_screenNode childNodeWithName:@"background2"]];
 }
 
 // Handles the pinch

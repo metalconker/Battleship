@@ -17,6 +17,7 @@
     if (self) {
         _screenWidth30 = (sWidth - vBWidth) / GRID_SIZE;
         _screenHeight30 = sHeight / GRID_SIZE;
+        _visualBarWidth = vBWidth;
     }
     return self;
 }
