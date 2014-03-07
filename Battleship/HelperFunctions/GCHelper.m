@@ -11,6 +11,9 @@
 @implementation GCHelper
 
 @synthesize gameCenterAvailable;
+@synthesize presentingViewController;
+@synthesize match;
+@synthesize delegate;
 
 #pragma mark Initialization
 

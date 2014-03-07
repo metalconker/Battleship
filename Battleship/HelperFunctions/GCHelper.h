@@ -22,6 +22,7 @@
     BOOL matchStarted;
     id <GCHelperDelegate> delegate;
 }
+
 @property (retain) UIViewController *presentingViewController;
 @property (retain) GKMatch *match;
 @property (assign) id<GCHelperDelegate> delegate;
