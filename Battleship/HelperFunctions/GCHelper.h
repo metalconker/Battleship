@@ -20,7 +20,7 @@
     UIViewController *presentingViewController;
     GKMatch *match;
     BOOL matchStarted;
-    id <GCHelperDelegate> delegate;
+    __unsafe_unretained id  <GCHelperDelegate> delegate;
 }
 
 @property (retain) UIViewController *presentingViewController;
