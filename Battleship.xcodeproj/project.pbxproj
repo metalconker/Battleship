@@ -42,7 +42,7 @@
 		87AD0BEC18BC6B29001BCD2F /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BD818BC6B28001BCD2F /* Ship.m */; };
 		87AD0BED18BC6B29001BCD2F /* ShipSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BDC18BC6B28001BCD2F /* ShipSegment.m */; };
 		87AD0BEE18BC6B29001BCD2F /* TorpedoBoat.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BDF18BC6B28001BCD2F /* TorpedoBoat.m */; };
-		9415F99118CA6D2A0067F500 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 9415F99018CA6D2A0067F500 /* Player.m */; };
+		9415F99418CA6E340067F500 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 9415F99318CA6E340067F500 /* Player.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,8 +119,8 @@
 		87AD0BDE18BC6B28001BCD2F /* TorpedoBoat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TorpedoBoat.h; path = Model/TorpedoBoat.h; sourceTree = "<group>"; };
 		87AD0BDF18BC6B28001BCD2F /* TorpedoBoat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TorpedoBoat.m; path = Model/TorpedoBoat.m; sourceTree = "<group>"; };
 		87AD0BE218BC6B28001BCD2F /* WeaponType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeaponType.h; path = Model/WeaponType.h; sourceTree = "<group>"; };
-		9415F98F18CA6D2A0067F500 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = ../../Desktop/Player.h; sourceTree = "<group>"; };
-		9415F99018CA6D2A0067F500 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Player.m; path = ../../Desktop/Player.m; sourceTree = "<group>"; };
+		9415F99218CA6E340067F500 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = Model/Player.h; sourceTree = "<group>"; };
+		9415F99318CA6E340067F500 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Player.m; path = Model/Player.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,8 +264,8 @@
 		871F9B7818A2FFDD006F2682 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				9415F98F18CA6D2A0067F500 /* Player.h */,
-				9415F99018CA6D2A0067F500 /* Player.m */,
+				9415F99218CA6E340067F500 /* Player.h */,
+				9415F99318CA6E340067F500 /* Player.m */,
 				87AD0BC318BC6B28001BCD2F /* BattleshipGame.h */,
 				87AD0BC418BC6B28001BCD2F /* BattleshipGame.m */,
 				87AD0BC518BC6B28001BCD2F /* Coordinate.h */,
@@ -418,7 +418,7 @@
 				5117152F189A390200BE75A9 /* AppDelegate.m in Sources */,
 				5117152B189A390200BE75A9 /* main.m in Sources */,
 				87AD0BE918BC6B29001BCD2F /* MineLayer.m in Sources */,
-				9415F99118CA6D2A0067F500 /* Player.m in Sources */,
+				9415F99418CA6E340067F500 /* Player.m in Sources */,
 				87AD0BE618BC6B29001BCD2F /* Destroyer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
