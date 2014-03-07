@@ -29,6 +29,7 @@
 		51C23997189C9A9700B5D430 /* Pew_Pew-DKnight556-1379997159.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 51C23996189C9A9700B5D430 /* Pew_Pew-DKnight556-1379997159.mp3 */; };
 		51D3C09418C556A900BDCA98 /* SideBarDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D3C09318C556A900BDCA98 /* SideBarDisplay.m */; };
 		873BD0F418C8106500AC62CA /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873BD0F318C8106500AC62CA /* GameKit.framework */; };
+		87964BB718CA6EAC00D38181 /* GCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 87964BB618CA6EAC00D38181 /* GCHelper.m */; };
 		87AAA64C18C1386300EF6FED /* StartScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AAA64B18C1386300EF6FED /* StartScreen.m */; };
 		87AD0BE318BC6B29001BCD2F /* BattleshipGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BC418BC6B28001BCD2F /* BattleshipGame.m */; };
 		87AD0BE418BC6B29001BCD2F /* Coordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BC618BC6B28001BCD2F /* Coordinate.m */; };
@@ -42,6 +43,7 @@
 		87AD0BEC18BC6B29001BCD2F /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BD818BC6B28001BCD2F /* Ship.m */; };
 		87AD0BED18BC6B29001BCD2F /* ShipSegment.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BDC18BC6B28001BCD2F /* ShipSegment.m */; };
 		87AD0BEE18BC6B29001BCD2F /* TorpedoBoat.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BDF18BC6B28001BCD2F /* TorpedoBoat.m */; };
+		9415F99418CA6E340067F500 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = 9415F99318CA6E340067F500 /* Player.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +88,8 @@
 		51D3C09218C556A900BDCA98 /* SideBarDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideBarDisplay.h; sourceTree = "<group>"; };
 		51D3C09318C556A900BDCA98 /* SideBarDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideBarDisplay.m; sourceTree = "<group>"; };
 		873BD0F318C8106500AC62CA /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		87964BB518CA6EAC00D38181 /* GCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCHelper.h; path = HelperFunctions/GCHelper.h; sourceTree = "<group>"; };
+		87964BB618CA6EAC00D38181 /* GCHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCHelper.m; path = HelperFunctions/GCHelper.m; sourceTree = "<group>"; };
 		87AAA64A18C1386300EF6FED /* StartScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartScreen.h; sourceTree = "<group>"; };
 		87AAA64B18C1386300EF6FED /* StartScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartScreen.m; sourceTree = "<group>"; };
 		87AD0BC318BC6B28001BCD2F /* BattleshipGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BattleshipGame.h; path = Model/BattleshipGame.h; sourceTree = "<group>"; };
@@ -118,6 +122,8 @@
 		87AD0BDE18BC6B28001BCD2F /* TorpedoBoat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TorpedoBoat.h; path = Model/TorpedoBoat.h; sourceTree = "<group>"; };
 		87AD0BDF18BC6B28001BCD2F /* TorpedoBoat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TorpedoBoat.m; path = Model/TorpedoBoat.m; sourceTree = "<group>"; };
 		87AD0BE218BC6B28001BCD2F /* WeaponType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WeaponType.h; path = Model/WeaponType.h; sourceTree = "<group>"; };
+		9415F99218CA6E340067F500 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = Model/Player.h; sourceTree = "<group>"; };
+		9415F99318CA6E340067F500 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Player.m; path = Model/Player.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +242,8 @@
 				5155192118C087540019BEE6 /* Helpers.m */,
 				51D3C09218C556A900BDCA98 /* SideBarDisplay.h */,
 				51D3C09318C556A900BDCA98 /* SideBarDisplay.m */,
+				87964BB518CA6EAC00D38181 /* GCHelper.h */,
+				87964BB618CA6EAC00D38181 /* GCHelper.m */,
 			);
 			name = HelperFunctions;
 			sourceTree = "<group>";
@@ -261,6 +269,8 @@
 		871F9B7818A2FFDD006F2682 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9415F99218CA6E340067F500 /* Player.h */,
+				9415F99318CA6E340067F500 /* Player.m */,
 				87AD0BC318BC6B28001BCD2F /* BattleshipGame.h */,
 				87AD0BC418BC6B28001BCD2F /* BattleshipGame.m */,
 				87AD0BC518BC6B28001BCD2F /* Coordinate.h */,
@@ -413,7 +423,9 @@
 				5117152F189A390200BE75A9 /* AppDelegate.m in Sources */,
 				5117152B189A390200BE75A9 /* main.m in Sources */,
 				87AD0BE918BC6B29001BCD2F /* MineLayer.m in Sources */,
+				9415F99418CA6E340067F500 /* Player.m in Sources */,
 				87AD0BE618BC6B29001BCD2F /* Destroyer.m in Sources */,
+				87964BB718CA6EAC00D38181 /* GCHelper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
