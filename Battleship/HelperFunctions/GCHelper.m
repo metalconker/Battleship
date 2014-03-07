@@ -20,5 +20,13 @@ static GCHelper *sharedHelper = nil;
     return sharedHelper;
 }
 
+- (BOOL) isGameCenterAvailable{
+    Class gcClass = (NSClassFromString(@"GKLocalPlayer"));
+    NSString *reqSysVer = @"4.1";
+    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+    BOOL osVersionSupported = ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending);
+    return (gcClass && osVersionSupported);
+}
+
 
 @end
