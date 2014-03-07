@@ -24,5 +24,5 @@
 //-(Coordinate*) getCoordOfShip: (NSString*) shipName;
 -(NSMutableArray*) getValidActionsFrom:(Coordinate*)origin;
 -(Coordinate*) fireTorpedo: (Coordinate*) origin;
-
+-(NSMutableArray*) getShipDamages: (Coordinate*) origin;
 @end

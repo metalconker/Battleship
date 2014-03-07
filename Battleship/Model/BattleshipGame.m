@@ -207,4 +207,20 @@
     return Nil;
 }
  */
+
+-(NSMutableArray*) getShipDamages:(Coordinate *)origin {
+    Ship* s;
+    if (_hostsTurn) {
+        s = [_hostFleet getShipWithCoord:origin];
+    }
+    else {
+        s = [_joinFleet getShipWithCoord:origin];
+    }
+    NSMutableArray* damages = [[NSMutableArray alloc] init];
+    for (int i = 0; i < s.size; i++) {
+        ShipSegment *shipSeg = s.blocks[i];
+        [damages addObject:[NSNumber numberWithInt:shipSeg.segmentArmourType]];
+    }
+    return damages;
+}
 @end
