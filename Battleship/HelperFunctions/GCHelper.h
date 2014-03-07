@@ -5,7 +5,6 @@
 //  Created by Robert Schneidman on 3/7/2014.
 //  Copyright (c) 2014 Rayyan Khoury. All rights reserved.
 //
-
 #import <Foundation/Foundation.h>
 #import <GameKit/GameKit.h>
 
@@ -36,6 +35,9 @@
 
 @property (assign, readonly) BOOL gameCenterAvailable;
 
+-(void)findMatchWithMinPlayers:(int)minPlayers maxPlayers:(int)maxPlayers
+                viewController:(UIViewController *) viewController
+                      delegate:(id<GCHelperDelegate>)theDelegate;
 + (GCHelper *)sharedInstance;
 - (void)authenticateLocalUser;
 
