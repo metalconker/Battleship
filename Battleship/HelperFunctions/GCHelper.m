@@ -11,6 +11,9 @@
 @implementation GCHelper
 
 @synthesize gameCenterAvailable;
+@synthesize presentingViewController;
+@synthesize match;
+@synthesize delegate;
 
 #pragma mark Initialization
 
@@ -66,6 +69,26 @@ static GCHelper *sharedHelper = nil;
     else {
         NSLog(@"Already authenticated");
     }
+}
+
+-(void)findMatchWithMinPlayers:(int)minPlayers maxPlayers:(int)maxPlayers viewController:(UIViewController *)viewController delegate:(id<GCHelperDelegate>)theDelegate{
+    
+    if(!gameCenterAvailable) return;
+    
+    matchStarted = NO;
+    self.match = nil;
+    self.presentingViewController = viewController;
+    delegate = theDelegate;
+    [presentingViewController dismissModalViewControllerAnimated:NO];
+    
+    GKMatchRequest *request = [[GKMatchRequest alloc] init];
+    request.minPlayers = minPlayers;
+    request.maxPlayers = maxPlayers;
+    
+    GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc]initWithMatchRequest:request];
+
+    mmvc.matchmakerDelegate = self;
+    [presentingViewController presentModalViewController:mmvc animated:YES];
 }
 
 @end
