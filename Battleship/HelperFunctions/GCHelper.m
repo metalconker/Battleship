@@ -20,17 +20,26 @@ static GCHelper *sharedHelper = nil;
     return sharedHelper;
 }
 
+- (BOOL) isGameCenterAvailable{
+    Class gcClass = (NSClassFromString(@"GKLocalPlayer"));
+    NSString *reqSysVer = @"4.1";
+    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+    BOOL osVersionSupported = ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending);
+    return (gcClass && osVersionSupported);
+}
+
 -(id)init {
     if ((self = [super init])) {
         gameCenterAvailable = [self isGameCenerAvailable];
         if (gameCenterAvailable) {
             NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-            [nc addObserver:self selector:@selector(authenticationChanged) name:GKPlyaerAuthenticationDidChangeNotificationName object:nil];
+            [nc addObserver:self selector:@selector(authenticationChanged) name:GKPlayerAuthenticationDidChangeNotificationName object:nil];
             
         }
     }
     return self;
 }
+
 
 -(void)authenticationChanged {
     if ([GKLocalPlayer localPlayer].isAuthenticated && !userAuthenticated) {
