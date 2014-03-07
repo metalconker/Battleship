@@ -64,14 +64,32 @@ static GCHelper *sharedHelper = nil;
     NSLog(@"Authenticating local user...");
     if ([GKLocalPlayer localPlayer].authenticated == NO) {
         [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:nil];
-        NSLog(@"Already authenticated");
     }
     else {
         NSLog(@"Already authenticated");
     }
 }
 
-#pragma mark GKMatchmakerViewControllerDelegate
+-(void)findMatchWithMinPlayers:(int)minPlayers maxPlayers:(int)maxPlayers viewController:(UIViewController *)viewController delegate:(id<GCHelperDelegate>)theDelegate{
+    
+    if(!gameCenterAvailable) return;
+    
+    matchStarted = NO;
+    self.match = nil;
+    self.presentingViewController = viewController;
+    delegate = theDelegate;
+    [presentingViewController dismissModalViewControllerAnimated:NO];
+    
+    GKMatchRequest *request = [[GKMatchRequest alloc] init];
+    request.minPlayers = minPlayers;
+    request.maxPlayers = maxPlayers;
+    
+    GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc]initWithMatchRequest:request];
+
+    mmvc.matchmakerDelegate = self;
+    [presentingViewController presentModalViewController:mmvc animated:YES];
+    
+}
 
 -(void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController {
     [presentingViewController dismissModalViewControllerAnimated:YES];
