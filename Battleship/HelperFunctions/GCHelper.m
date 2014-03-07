@@ -10,4 +10,15 @@
 
 @implementation GCHelper
 
+@synthesize gameCenterAvailable;
+
+static GCHelper *sharedHelper = nil;
++ (GCHelper *) sharedInstance {
+    if(!sharedHelper){
+        sharedHelper = [[GCHelper alloc] init];
+    }
+    return sharedHelper;
+}
+
+
 @end
