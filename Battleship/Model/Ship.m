@@ -151,28 +151,69 @@
     }
     for (Coordinate* headLocation in headLocations) {
         NSMutableArray *shipLocations = [[NSMutableArray alloc] init];
-        for (int i = 0; i < self.size; i++) {
-            Coordinate *segmentLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
-            segmentLocation.xCoord = headLocation.xCoord;
-            segmentLocation.yCoord = headLocation.yCoord;
-            segmentLocation.direction = headLocation.direction;
-            switch (segmentLocation.direction) {
-                case NORTH:
-                    segmentLocation.yCoord = headLocation.yCoord - i;
-                    break;
-                case SOUTH:
-                    segmentLocation.yCoord = headLocation.yCoord - i;
-                    break;
-                case WEST:
-                    segmentLocation.xCoord = headLocation.xCoord - i;
-                    break;
-                case EAST:
-                    segmentLocation.xCoord = headLocation.xCoord - i;
-                    break;
-                default:
-                    break;
-            }
-            [shipLocations addObject:segmentLocation];
+        Coordinate *segmentLocation = [[Coordinate alloc] initWithXCoordinate:0 YCoordinate:0 initiallyFacing:NONE];
+        segmentLocation.xCoord = headLocation.xCoord;
+        segmentLocation.yCoord = headLocation.yCoord;
+        segmentLocation.direction = headLocation.direction;
+        switch (headLocation.direction) {
+            case NORTH:
+                if (headLocation.yCoord > headSeg.location.yCoord) {
+                    for (int i = headLocation.yCoord; i > headSeg.location.yCoord; i--) {
+                        Coordinate *segmentLocation = [[Coordinate alloc] initWithXCoordinate:headLocation.xCoord YCoordinate:i initiallyFacing:headLocation.direction];
+                        [shipLocations addObject:segmentLocation];
+                    }
+                }
+                else {
+                    for (int i = 0; i < self.size; i++) {
+                        Coordinate *segmentLocation = [[Coordinate alloc] initWithXCoordinate:headLocation.xCoord YCoordinate:headLocation.yCoord - i initiallyFacing:headLocation.direction];
+                        [shipLocations addObject:segmentLocation];
+                    }
+                }
+                break;
+            case SOUTH:
+                if (headLocation.yCoord < headSeg.location.yCoord) {
+                    for (int i = headLocation.yCoord; i < headSeg.location.yCoord; i++) {
+                        Coordinate *segmentLocation = [[Coordinate alloc] initWithXCoordinate:headLocation.xCoord YCoordinate:i initiallyFacing:headLocation.direction];
+                        [shipLocations addObject:segmentLocation];
+                    }
+                }
+                else {
+                    for (int i = 0; i < self.size; i++) {
+                        Coordinate *segmentLocation = [[Coordinate alloc] initWithXCoordinate:headLocation.xCoord YCoordinate:headLocation.yCoord + i initiallyFacing:headLocation.direction];
+                        [shipLocations addObject:segmentLocation];
+                    }
+                }
+                break;
+            case WEST:
+                if (headLocation.xCoord < headSeg.location.xCoord) {
+                    for (int i = headLocation.xCoord; i < headSeg.location.xCoord; i++) {
+                        Coordinate *segmentLocation = [[Coordinate alloc] initWithXCoordinate:i YCoordinate:headLocation.yCoord initiallyFacing:headLocation.direction];
+                        [shipLocations addObject:segmentLocation];
+                    }
+                }
+                else {
+                    for (int i = 0; i < self.size; i++) {
+                        Coordinate *segmentLocation = [[Coordinate alloc] initWithXCoordinate:headLocation.xCoord + i YCoordinate:headLocation.yCoord initiallyFacing:headLocation.direction];
+                        [shipLocations addObject:segmentLocation];
+                    }
+                }
+                break;
+            case EAST:
+                if (headLocation.xCoord > headSeg.location.xCoord) {
+                    for (int i = headLocation.xCoord; i > headSeg.location.xCoord; i--) {
+                        Coordinate *segmentLocation = [[Coordinate alloc] initWithXCoordinate:i YCoordinate:headLocation.yCoord initiallyFacing:headLocation.direction];
+                        [shipLocations addObject:segmentLocation];
+                    }
+                }
+                else {
+                    for (int i = 0; i < self.size; i++) {
+                        Coordinate *segmentLocation = [[Coordinate alloc] initWithXCoordinate:headLocation.xCoord - i YCoordinate:headLocation.yCoord initiallyFacing:headLocation.direction];
+                        [shipLocations addObject:segmentLocation];
+                    }
+                }
+                break;
+            default:
+                break;
         }
         [viableMoves addObject:shipLocations];
     }

@@ -23,4 +23,6 @@
 
 - (void) scrollBackground1:(SKSpriteNode*) bg1 background2:(SKSpriteNode*)bg2;
 
+- (CGPoint) positionShipSprite: (SKNode*) sprite atCoordinate: (Coordinate*) c;
+
 @end

@@ -75,7 +75,7 @@ SKNode *visualBar;
         // Terrain sprites
         [self initTerrainSprites];
         // Ship sprites
-        [self initShipSprites];
+        
         // MiniMap sprite
         [self initMiniMap];
         [self addChild:visualBar];
@@ -85,7 +85,7 @@ SKNode *visualBar;
         
         // Creates the helper functions class
         _helper = [[Helpers alloc] initWithScreenWidth:self.frame.size.width screenHeight:self.frame.size.height visualBarWidth:visualBar.frame.size.width];
-        
+        [self initShipSprites];
         // Initilize the SideBarDisplay
         _display = [[SideBarDisplay alloc] initWithParentNode:self andVisualBarNode:visualBar usingGame:_game andHelperInstance:_helper];
     }
@@ -134,18 +134,11 @@ SKNode *visualBar;
                     sprite.name = s.shipName;
                     sprite.yScale = (heightDiv30 * s.shipSize)/sprite.frame.size.height;
                     sprite.xScale = widthDiv30/sprite.frame.size.width;
-                    if (s.location.direction == SOUTH)
-                    {
-                        sprite.position = CGPointMake(s.location.xCoord*widthDiv30 + widthDiv30/2, (s.location.yCoord*heightDiv30) - sprite.frame.size.height/2 + s.shipSize*heightDiv30);
-                        [_ships addChild:sprite];
+                    if (s.location.direction == SOUTH) {
                         sprite.zRotation = M_PI;
                     }
-                    
-                    else if (s.location.direction == NORTH)
-                    {
-                        sprite.position = CGPointMake(((double)s.location.xCoord)*widthDiv30 + widthDiv30/2, (s.location.yCoord*heightDiv30) + sprite.frame.size.height/2 - s.shipSize*heightDiv30 + heightDiv30);
-                        [_ships addChild:sprite];
-                    }
+                    sprite.position = [_helper positionShipSprite:sprite atCoordinate:s.location];
+                    [_ships addChild:sprite];
                 }
             }
         }
@@ -251,7 +244,8 @@ SKNode *visualBar;
                 {
 
                     SKSpriteNode* f = [[SKSpriteNode alloc] initWithImageNamed:@"Move Range"];
-                    f.yScale = 0.9;
+                    f.xScale = widthDiv30/f.frame.size.width;
+                    f.yScale = heightDiv30/f.frame.size.height;
                     f.position = CGPointMake(e.xCoord * widthDiv30 + widthDiv30/2, e.yCoord * heightDiv30 + heightDiv30/2);
                     [_movementLocationsSprites addChild:f];
                 }
@@ -264,7 +258,9 @@ SKNode *visualBar;
         if ([[_movementLocationsSprites children] containsObject:_nodeTouched])
         {
             Coordinate* c = [_helper fromTextureToCoordinate:_nodeTouched.position];
-            _shipDisplay.position = CGPointMake((double)c.xCoord * widthDiv30 + widthDiv30/2 , (double)c.yCoord * heightDiv30 + heightDiv30/2);
+            _shipDisplay.position = CGPointMake((double)c.xCoord * widthDiv30 + widthDiv30/2 , (double)c.yCoord * heightDiv30 - _shipDisplay.frame.size.height/2 + heightDiv30);
+            //sprite.position = CGPointMake((double) (s.location.xCoord)*widthDiv30 + widthDiv30/2, (s.location.yCoord*heightDiv30) - sprite.frame.size.height/2 + heightDiv30);
+            
         }
         
         
@@ -401,7 +397,7 @@ SKNode *visualBar;
                         sprite.zRotation =  M_PI / 2;
                         sprite.xScale = 1.7;
                         sprite.yScale = 2.1;
-                        sprite.position = CGPointMake(i*widthDiv30 + sprite.frame.size.width/2, j*heightDiv30 + sprite.frame.size.height/2);
+                        sprite.position = CGPointMake(i*widthDiv30 + widthDiv30/2, j*heightDiv30 + sprite.frame.size.height/2);
                         [_screenNode addChild:sprite];
                         break;
                         
