@@ -12,6 +12,8 @@
 
 @synthesize gameCenterAvailable;
 
+#pragma mark Initialization
+
 static GCHelper *sharedHelper = nil;
 + (GCHelper *) sharedInstance {
     if(!sharedHelper){
@@ -30,7 +32,7 @@ static GCHelper *sharedHelper = nil;
 
 -(id)init {
     if ((self = [super init])) {
-        gameCenterAvailable = [self isGameCenerAvailable];
+        gameCenterAvailable = [self isGameCenterAvailable];
         if (gameCenterAvailable) {
             NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
             [nc addObserver:self selector:@selector(authenticationChanged) name:GKPlayerAuthenticationDidChangeNotificationName object:nil];
@@ -49,6 +51,19 @@ static GCHelper *sharedHelper = nil;
     else if (![GKLocalPlayer localPlayer].isAuthenticated && userAuthenticated) {
         NSLog(@"Authentication changed: player not authenticated");
         userAuthenticated = FALSE;
+    }
+}
+
+#pragma mark User Functions
+
+-(void)authenticateLocalUser {
+    if(!gameCenterAvailable) return;
+    NSLog(@"Authenticating local user...");
+    if ([GKLocalPlayer localPlayer].authenticated == NO) {
+        [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:nil];
+    }
+    else {
+        NSLog(@"Already authenticated");
     }
 }
 @end
