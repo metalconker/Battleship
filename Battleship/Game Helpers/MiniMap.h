@@ -22,6 +22,7 @@
 @property (strong, nonatomic) Sizes *sizes;
 @property (strong, nonatomic) Names *names;
 @property (strong, nonatomic) BattleshipGame *game;
+@property Boolean initiallyTouched;
 
 
 // Mini Map positions
@@ -32,6 +33,6 @@
                             andNames:(Names*) names
                              andGame:(BattleshipGame*) game;
 
-- (Boolean) setMiniMapLocation:(CGPoint)location;
+- (void) setMiniMapLocation:(CGPoint)location;
 
 @end

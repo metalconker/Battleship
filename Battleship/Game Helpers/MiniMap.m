@@ -34,8 +34,8 @@
     
     // Point locations
     CGPoint point1 = CGPointMake(_sizes.fullScreenWidth - _sizes.miniMapHeight - _sizes.visualBarWidth,
-                                 _sizes.fullScreenHeight - _miniMapLength);
-    CGPoint point2 = CGPointMake(_miniMapLength,
+                                 _sizes.fullScreenHeight - _sizes.miniMapHeight);
+    CGPoint point2 = CGPointMake(_sizes.miniMapHeight,
                                  _sizes.fullScreenHeight - _sizes.miniMapHeight);
     CGPoint point3 = CGPointMake(_sizes.fullScreenWidth - _sizes.miniMapHeight - _sizes.visualBarWidth,
                                  _sizes.miniMapHeight);
@@ -94,7 +94,7 @@
 }
 
 // Always set the minimap in a specific location - due to bugs with touching
-- (Boolean) setMiniMapLocation:(CGPoint)location {
+- (void) setMiniMapLocation:(CGPoint)location {
     
     SKNode* minimap = [_miniMapNode childNodeWithName:_names.miniMapSpriteName];
     
@@ -120,8 +120,7 @@
         
     }
     
-    [minimap setPosition:[[_miniMapPositions objectAtIndex:pos] CGPointValue]];
-    return false;
+    minimap.position = [[_miniMapPositions objectAtIndex:pos] CGPointValue];
 }
 
 @end

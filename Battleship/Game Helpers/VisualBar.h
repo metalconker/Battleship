@@ -25,6 +25,10 @@
 
 @property (strong, nonatomic) SKNode *shipFunctions;
 @property (strong, nonatomic) SKNode *shipClicked;
+@property (strong, nonatomic) SKNode *shipClickedName;
+@property (strong, nonatomic) SKNode *shipActuallyClicked;
+
+@property (strong, nonatomic) SKNode *movementLocationsSprites;
 
 - (instancetype) initVisualBarWithNode:(SKNode*) visualBarNode
                                andSizes:(Sizes*) sizes
@@ -34,5 +38,7 @@
                              andHelper:(Helpers*) helper;
 
 -(NSMutableArray*) displayShipDetails: (SKNode*) shipSprite;
+- (void) detectFunction: (SKNode*) functionSprite;
+- (void) updateShipLocation:(SKNode*) newShipLocation;
 
 @end

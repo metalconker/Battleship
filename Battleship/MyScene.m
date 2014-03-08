@@ -26,11 +26,6 @@
         
         [self addChild:_mainGameController.containers.overallNode];
         
-        // Move Locations
-        _movementLocationsSprites = [[SKNode alloc] init];
-        
-        // Locations
-        [self addChild:_movementLocationsSprites];
     }
     
     return self;
@@ -48,53 +43,31 @@
         _nodeTouched = [self nodeAtPoint:location];
         
         // If the initial touch was on the mini map
-        if ([_nodeTouched.name isEqualToString:@"Mini Map"])
+        if ([_nodeTouched.name isEqualToString:_mainGameController.names.miniMapSpriteName])
         {
-            _miniMapTouched = true;
+            _mainGameController.miniMap.initiallyTouched = true;
         }
         
         //SpriteNode *displayShip = [self ];
         
         // If the touch is a ship
-        if ([_nodeTouched.parent isEqual:_mainGameController.ships.shipsNode] && ![_shipFunctions containsObject:_nodeTouched])
+        if ([_nodeTouched.parent isEqual:_mainGameController.ships.shipsNode])
         {
-            _shipFunctions = [_mainGameController.visualBar displayShipDetails:_nodeTouched];
-            _shipDisplay = _nodeTouched;
-            
+            [_mainGameController.visualBar displayShipDetails:_nodeTouched];
         }
         
-        // Displaying the sidebar
-        if ([_shipFunctions containsObject:_nodeTouched])
+        // If the touch is a move button
+        if ([_nodeTouched.parent isEqual:_mainGameController.visualBar.shipFunctions])
         {
-            if ([_nodeTouched.name isEqual:@"Move"])
-            {
-                
-                Coordinate* c = [_mainGameController.helper fromTextureToCoordinate:_shipDisplay.position];
-                NSMutableArray* d = [_game getValidMovesFrom:c withRadarPositions:false];
-                [_movementLocationsSprites removeAllChildren];
-                for (Coordinate* e in d)
-                {
-                    
-                    SKSpriteNode* f = [[SKSpriteNode alloc] initWithImageNamed:@"Move Range"];
-                    f.xScale = _mainGameController.sizes.tileWidth/f.frame.size.width;
-                    f.yScale = _mainGameController.sizes.tileHeight/f.frame.size.height;
-                    f.position = CGPointMake(e.xCoord * _mainGameController.sizes.tileWidth + _mainGameController.sizes.tileWidth/2,
-                                             e.yCoord * _mainGameController.sizes.tileHeight + _mainGameController.sizes.tileHeight/2);
-                    [_movementLocationsSprites addChild:f];
-                }
-            }
-            
+            [_mainGameController.visualBar detectFunction:_nodeTouched];
         }
         
-        if ([[_movementLocationsSprites children] containsObject:_nodeTouched])
+        // If the touch is a move location
+        if ([_nodeTouched.parent isEqual:_mainGameController.visualBar.movementLocationsSprites])
         {
-            Coordinate* c = [_mainGameController.helper fromTextureToCoordinate:_nodeTouched.position];
-            _shipDisplay.position = CGPointMake((double)c.xCoord * _mainGameController.sizes.tileWidth + _mainGameController.sizes.tileWidth/2,
-                                                (double)c.yCoord * _mainGameController.sizes.tileHeight - _shipDisplay.frame.size.height/2 + _mainGameController.sizes.tileHeight);
+            NSLog(@"hello");
+            [_mainGameController.visualBar updateShipLocation:_nodeTouched];
         }
-        
-        
-        
     }
 }
 
@@ -110,9 +83,10 @@
     CGPoint position = [node position];
     
     // Mini Map Movement
-    if ([node.name isEqualToString:_mainGameController.names.miniMapNodeName])
+    if (_mainGameController.miniMap.initiallyTouched)
     {
-        [node setPosition:CGPointMake(position.x + translation.x, position.y + translation.y)];
+        CGPoint position = [[_mainGameController.miniMap.miniMapNode childNodeWithName:_mainGameController.names.miniMapSpriteName ] position];
+        [[_mainGameController.miniMap.miniMapNode childNodeWithName:_mainGameController.names.miniMapSpriteName] setPosition:CGPointMake(position.x + translation.x, position.y + translation.y)];
     }
 }
 
@@ -122,10 +96,12 @@
     CGPoint location = [touch locationInNode:self];
     
     // If the mini map was initially touched
-    if (_miniMapTouched)
+    if(_mainGameController.miniMap.initiallyTouched)
     {
-        _miniMapTouched = [_mainGameController.miniMap setMiniMapLocation:location];
+        [_mainGameController.miniMap setMiniMapLocation:location];
+        _mainGameController.miniMap.initiallyTouched = false;
     }
+
 }
 
 -(void)update:(CFTimeInterval)currentTime {

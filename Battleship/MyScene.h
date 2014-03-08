@@ -28,14 +28,9 @@
 
 @property UIPinchGestureRecognizer *pinchRecognizer;
 
-@property (nonatomic, strong) SKNode *shipDisplay;
 @property (nonatomic, strong) SKNode *nodeTouched;
-@property (nonatomic, strong) NSMutableArray *shipFunctions;
 
-@property (nonatomic, strong) NSMutableArray *movementLocations;
-@property (nonatomic, strong) SKNode *movementLocationsSprites;
-@property bool miniMapTouched;
-@property bool shipClicked;
+@property BOOL miniMapTouched;
 
 - (id) initWithSize:(CGSize)size;
 - (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
