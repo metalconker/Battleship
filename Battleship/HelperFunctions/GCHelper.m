@@ -11,6 +11,9 @@
 @implementation GCHelper
 
 @synthesize gameCenterAvailable;
+@synthesize presentingViewController;
+@synthesize match;
+@synthesize delegate;
 
 #pragma mark Initialization
 
@@ -61,9 +64,60 @@ static GCHelper *sharedHelper = nil;
     NSLog(@"Authenticating local user...");
     if ([GKLocalPlayer localPlayer].authenticated == NO) {
         [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:nil];
+        NSLog(@"Already authenticated");
     }
     else {
         NSLog(@"Already authenticated");
     }
+}
+
+#pragma mark GKMatchmakerViewControllerDelegate
+
+-(void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController {
+    [presentingViewController dismissModalViewControllerAnimated:YES];
+}
+
+-(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
+    [presentingViewController dismissModalViewControllerAnimated:YES];
+    NSLog(@"Error finding match: %@", error.localizedDescription);
+}
+
+-(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)theMatch {
+    [presentingViewController dismissModalViewControllerAnimated:YES];
+    self.match = theMatch;
+    match.delegate = self;
+    if (!matchStarted && match.expectedPlayerCount == 0) {
+        NSLog(@"Ready to start match");
+    }
+}
+
+#pragma mark GKMatchDelegate
+
+-(void)match:(GKMatch *)theMatch didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
+    if (match != theMatch) return;
+    [delegate match:theMatch didReceiveData:data fromPlayer:playerID];
+}
+
+-(void)match: (GKMatch *) theMatch player:(NSString *)playerID didChangeState:(GKPlayerConnectionState)state {
+    switch (state) {
+        case GKPlayerStateConnected:
+            NSLog(@"Player connected");
+            if (!matchStarted && theMatch.expectedPlayerCount == 0) {
+                NSLog(@"Ready to start match!");
+            }
+            break;
+        case GKPlayerStateDisconnected:
+            NSLog(@"Player disconnected!");
+            matchStarted = NO;
+            [delegate matchEnded];
+            break;
+    }
+}
+
+-(void)match:(GKMatch *)theMatch didFailWithError:(NSError *)error {
+    if (match != theMatch) return;
+    NSLog(@"MAtch failed with error: %@", error.localizedDescription);
+    matchStarted = NO;
+    [delegate matchEnded];
 }
 @end
