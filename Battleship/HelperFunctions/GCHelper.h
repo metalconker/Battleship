@@ -22,7 +22,7 @@
     BOOL matchStarted;
     __unsafe_unretained id <GCHelperDelegate> delegate;
 }
-
+@property (strong, nonatomic) UIViewController* rootViewController;
 @property (retain) UIViewController *presentingViewController;
 @property (retain) GKMatch *match;
 @property (assign) id<GCHelperDelegate> delegate;
@@ -31,7 +31,7 @@
 -(void)findMatchWithMinPlayers:(int)minPlayers maxPlayers:(int)maxPlayers
                 viewController:(UIViewController *) viewController
                       delegate:(id<GCHelperDelegate>)theDelegate;
-+ (GCHelper *)sharedInstance;
++ (GCHelper *)sharedInstance:(UIViewController*) rootView;
 - (void)authenticateLocalUser;
 
 @end

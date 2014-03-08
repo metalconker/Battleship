@@ -11,10 +11,13 @@
 
 @implementation AppDelegate
 
+@synthesize viewController;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [[GCHelper sharedInstance] authenticateLocalUser];
+    viewController = (ViewController*) self.window.rootViewController;
+    [[GCHelper sharedInstance: self.window.rootViewController] authenticateLocalUser];
     return YES;
 }
 							

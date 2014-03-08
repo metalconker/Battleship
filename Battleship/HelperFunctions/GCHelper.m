@@ -18,9 +18,9 @@
 #pragma mark Initialization
 
 static GCHelper *sharedHelper = nil;
-+ (GCHelper *) sharedInstance {
++ (GCHelper *)sharedInstance:(UIViewController*) rootView {
     if(!sharedHelper){
-        sharedHelper = [[GCHelper alloc] init];
+        sharedHelper = [[GCHelper alloc] initWith:rootView];
     }
     return sharedHelper;
 }
@@ -33,8 +33,9 @@ static GCHelper *sharedHelper = nil;
     return (gcClass && osVersionSupported);
 }
 
--(id)init {
+-(id)initWith: (UIViewController*) rootView {
     if ((self = [super init])) {
+        _rootViewController = rootView;
         gameCenterAvailable = [self isGameCenterAvailable];
         if (gameCenterAvailable) {
             NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
@@ -59,15 +60,27 @@ static GCHelper *sharedHelper = nil;
 
 #pragma mark User Functions
 
--(void)authenticateLocalUser {
-    if(!gameCenterAvailable) return;
-    NSLog(@"Authenticating local user...");
-    if ([GKLocalPlayer localPlayer].authenticated == NO) {
-        [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:nil];
-    }
-    else {
-        NSLog(@"Already authenticated");
-    }
+- (void) authenticateLocalUser
+{
+    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+    localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error){
+        if (viewController != nil)
+        {
+            [_rootViewController presentViewController:viewController animated:YES completion:nil];
+            
+            //showAuthenticationDialogWhenReasonable: is an example method name. Create your own method that displays an authentication view when appropriate for your app.
+            //[self showAuthenticationDialogWhenReasonable: viewController];
+        }
+        else if (localPlayer.isAuthenticated)
+        {
+            //authenticatedPlayer: is an example method name. Create your own method that is called after the loacal player is authenticated.
+            //[self authenticatedPlayer: localPlayer];
+        }
+        else
+        {
+            //[self disableGameCenter];
+        }
+    };
 }
 
 -(void)findMatchWithMinPlayers:(int)minPlayers maxPlayers:(int)maxPlayers viewController:(UIViewController *)viewController delegate:(id<GCHelperDelegate>)theDelegate{
@@ -78,7 +91,7 @@ static GCHelper *sharedHelper = nil;
     self.match = nil;
     self.presentingViewController = viewController;
     delegate = theDelegate;
-    [presentingViewController dismissModalViewControllerAnimated:NO];
+    [presentingViewController dismissViewControllerAnimated:NO completion:nil];
     
     GKMatchRequest *request = [[GKMatchRequest alloc] init];
     request.minPlayers = minPlayers;
@@ -87,21 +100,21 @@ static GCHelper *sharedHelper = nil;
     GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc]initWithMatchRequest:request];
 
     mmvc.matchmakerDelegate = self;
-    [presentingViewController presentModalViewController:mmvc animated:YES];
+    [presentingViewController presentViewController:mmvc animated:YES completion:nil];
     
 }
 
 -(void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController {
-    [presentingViewController dismissModalViewControllerAnimated:YES];
+    [presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
-    [presentingViewController dismissModalViewControllerAnimated:YES];
+    [presentingViewController dismissViewControllerAnimated:YES completion:nil];
     NSLog(@"Error finding match: %@", error.localizedDescription);
 }
 
 -(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)theMatch {
-    [presentingViewController dismissModalViewControllerAnimated:YES];
+    [presentingViewController dismissViewControllerAnimated:YES completion:nil];
     self.match = theMatch;
     match.delegate = self;
     if (!matchStarted && match.expectedPlayerCount == 0) {

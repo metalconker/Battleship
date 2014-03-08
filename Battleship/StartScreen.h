@@ -7,7 +7,7 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-
-@interface StartScreen : SKScene
+#import "GCHelper.h"
+@interface StartScreen : SKScene <GCHelperDelegate>
 
 @end
