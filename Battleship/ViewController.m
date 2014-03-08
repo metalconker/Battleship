@@ -8,12 +8,6 @@
 
 #import "ViewController.h"
 
-@import AVFoundation;
-
-@interface ViewController ()
-@property (nonatomic) AVAudioPlayer * backgroundMusicPlayer;
-@end
-
 // hello
 
 @implementation ViewController

@@ -8,22 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "Coordinate.h"
-#import "Map.h"
+#import "Sizes.h"
 
 @interface Helpers : NSObject
 
-@property float screenWidth30;
-@property float screenHeight30;
-@property float visualBarWidth;
+@property (strong, nonatomic) Sizes *sizes;
 
--(instancetype) initWithScreenWidth:(float)sWidth
-                       screenHeight:(float)sHeight
-                     visualBarWidth:(float)vBWidth;
-
--(Coordinate*) fromTextureToCoordinate:(CGPoint) point;
-
-- (void) scrollBackground1:(SKSpriteNode*) bg1 background2:(SKSpriteNode*)bg2;
-
-- (CGPoint) positionShipSprite: (SKNode*) sprite atCoordinate: (Coordinate*) c;
+-(instancetype) initWithSizes:(Sizes*) sizes;
+- (Coordinate*) fromTextureToCoordinate:(CGPoint) point;
 
 @end
