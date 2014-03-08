@@ -13,6 +13,4 @@
 
 @interface ViewController : UIViewController
 
--(void) showGameCenter;
-
 @end
