@@ -15,10 +15,27 @@
 #import "RadarBoat.h"
 #import "MineLayer.h"
 #import "Helpers.h"
-#import "SideBarDisplay.h"
+#import "Names.h"
+#import "MiniMap.h"
+#import "Containers.h"
+#import "Background.h"
+#import "MainGameController.h"
 
 @interface MyScene : SKScene
 
-@property (strong, nonatomic) NSMutableArray* miniMapPositions;
+@property (nonatomic, strong) BattleshipGame *game;
+@property (nonatomic, strong) MainGameController *mainGameController;
+
+@property UIPinchGestureRecognizer *pinchRecognizer;
+
+@property (nonatomic, strong) SKNode *nodeTouched;
+
+@property BOOL miniMapTouched;
+
+- (id) initWithSize:(CGSize)size;
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
+- (IBAction) handlePinch:(UIPinchGestureRecognizer *)recognizer;
 
 @end
