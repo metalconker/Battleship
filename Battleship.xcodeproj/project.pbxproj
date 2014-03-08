@@ -29,6 +29,7 @@
 		51C23997189C9A9700B5D430 /* Pew_Pew-DKnight556-1379997159.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 51C23996189C9A9700B5D430 /* Pew_Pew-DKnight556-1379997159.mp3 */; };
 		51D3C09418C556A900BDCA98 /* SideBarDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = 51D3C09318C556A900BDCA98 /* SideBarDisplay.m */; };
 		873BD0F418C8106500AC62CA /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873BD0F318C8106500AC62CA /* GameKit.framework */; };
+		8749A09C18CADDEF006B1B89 /* ShipActionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8749A09B18CADDEF006B1B89 /* ShipActionHelper.m */; };
 		87964BB718CA6EAC00D38181 /* GCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 87964BB618CA6EAC00D38181 /* GCHelper.m */; };
 		87AAA64C18C1386300EF6FED /* StartScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AAA64B18C1386300EF6FED /* StartScreen.m */; };
 		87AD0BE318BC6B29001BCD2F /* BattleshipGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BC418BC6B28001BCD2F /* BattleshipGame.m */; };
@@ -88,6 +89,8 @@
 		51D3C09218C556A900BDCA98 /* SideBarDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideBarDisplay.h; sourceTree = "<group>"; };
 		51D3C09318C556A900BDCA98 /* SideBarDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideBarDisplay.m; sourceTree = "<group>"; };
 		873BD0F318C8106500AC62CA /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		8749A09A18CADDEF006B1B89 /* ShipActionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipActionHelper.h; sourceTree = "<group>"; };
+		8749A09B18CADDEF006B1B89 /* ShipActionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipActionHelper.m; sourceTree = "<group>"; };
 		87964BB518CA6EAC00D38181 /* GCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCHelper.h; path = HelperFunctions/GCHelper.h; sourceTree = "<group>"; };
 		87964BB618CA6EAC00D38181 /* GCHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCHelper.m; path = HelperFunctions/GCHelper.m; sourceTree = "<group>"; };
 		87AAA64A18C1386300EF6FED /* StartScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartScreen.h; sourceTree = "<group>"; };
@@ -244,6 +247,8 @@
 				51D3C09318C556A900BDCA98 /* SideBarDisplay.m */,
 				87964BB518CA6EAC00D38181 /* GCHelper.h */,
 				87964BB618CA6EAC00D38181 /* GCHelper.m */,
+				8749A09A18CADDEF006B1B89 /* ShipActionHelper.h */,
+				8749A09B18CADDEF006B1B89 /* ShipActionHelper.m */,
 			);
 			name = HelperFunctions;
 			sourceTree = "<group>";
@@ -417,6 +422,7 @@
 				51D3C09418C556A900BDCA98 /* SideBarDisplay.m in Sources */,
 				87AD0BED18BC6B29001BCD2F /* ShipSegment.m in Sources */,
 				87AD0BEC18BC6B29001BCD2F /* Ship.m in Sources */,
+				8749A09C18CADDEF006B1B89 /* ShipActionHelper.m in Sources */,
 				87AD0BE318BC6B29001BCD2F /* BattleshipGame.m in Sources */,
 				87AD0BEB18BC6B29001BCD2F /* Range.m in Sources */,
 				87AD0BEA18BC6B29001BCD2F /* RadarBoat.m in Sources */,

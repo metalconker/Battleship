@@ -21,5 +21,5 @@
 
 - (instancetype)initWithPlayerID:(int)playerID;
 - (Ship*)getShipWithCoord:(Coordinate*) location;
-
+- (NSMutableArray*)getRotationRangeOf:(Ship*) s;
 @end

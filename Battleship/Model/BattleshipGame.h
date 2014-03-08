@@ -25,4 +25,6 @@
 -(NSMutableArray*) getValidActionsFrom:(Coordinate*)origin;
 -(Coordinate*) fireTorpedo: (Coordinate*) origin;
 -(NSMutableArray*) getShipDamages: (Coordinate*) origin;
+-(NSMutableArray*) getValidRotationsFrom:(Coordinate*)origin;
+    
 @end

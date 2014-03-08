@@ -80,7 +80,7 @@ static GCHelper *sharedHelper = nil;
         {
             //[self disableGameCenter];
         }
-    };
+    } ;
 }
 
 -(void)findMatchWithMinPlayers:(int)minPlayers maxPlayers:(int)maxPlayers viewController:(UIViewController *)viewController delegate:(id<GCHelperDelegate>)theDelegate{

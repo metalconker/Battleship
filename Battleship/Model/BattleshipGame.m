@@ -223,4 +223,15 @@
     }
     return damages;
 }
+
+/*-(NSMutableArray *)getValidRotationsFrom:(Coordinate *)origin {
+    Ship* s;
+    if (_hostsTurn) {
+        s = [_hostFleet getShipWithCoord:origin];
+    }
+    else {
+        s = [_joinFleet getShipWithCoord:origin];
+    }
+    
+}*/
 @end
