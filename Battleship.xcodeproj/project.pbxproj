@@ -14,7 +14,6 @@
 		51171529189A390200BE75A9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 51171527189A390200BE75A9 /* InfoPlist.strings */; };
 		5117152B189A390200BE75A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5117152A189A390200BE75A9 /* main.m */; };
 		5117152F189A390200BE75A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5117152E189A390200BE75A9 /* AppDelegate.m */; };
-		51171532189A390200BE75A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51171530189A390200BE75A9 /* Main.storyboard */; };
 		51171535189A390200BE75A9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 51171534189A390200BE75A9 /* ViewController.m */; };
 		51171538189A390200BE75A9 /* MyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 51171537189A390200BE75A9 /* MyScene.m */; };
 		5117153C189A390200BE75A9 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5117153B189A390200BE75A9 /* Images.xcassets */; };
@@ -23,19 +22,20 @@
 		51171545189A390200BE75A9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51171520189A390200BE75A9 /* UIKit.framework */; };
 		5117154D189A390200BE75A9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5117154B189A390200BE75A9 /* InfoPlist.strings */; };
 		5117154F189A390200BE75A9 /* BattleshipTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5117154E189A390200BE75A9 /* BattleshipTests.m */; };
-		512AE1D918CAA8A7005D02DB /* Names.m in Sources */ = {isa = PBXBuildFile; fileRef = 512AE1D818CAA8A7005D02DB /* Names.m */; };
-		512AE1DC18CAB12C005D02DB /* Containers.m in Sources */ = {isa = PBXBuildFile; fileRef = 512AE1DB18CAB12C005D02DB /* Containers.m */; };
-		512AE1DF18CAB606005D02DB /* MiniMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 512AE1DE18CAB606005D02DB /* MiniMap.m */; };
-		512AE1E218CAB846005D02DB /* Sizes.m in Sources */ = {isa = PBXBuildFile; fileRef = 512AE1E118CAB846005D02DB /* Sizes.m */; };
-		512AE1E518CACB36005D02DB /* Ships.m in Sources */ = {isa = PBXBuildFile; fileRef = 512AE1E418CACB36005D02DB /* Ships.m */; };
-		512AE1E818CACEC2005D02DB /* Background.m in Sources */ = {isa = PBXBuildFile; fileRef = 512AE1E718CACEC2005D02DB /* Background.m */; };
-		512AE1EB18CAD2C2005D02DB /* DestroyedShips.m in Sources */ = {isa = PBXBuildFile; fileRef = 512AE1EA18CAD2C2005D02DB /* DestroyedShips.m */; };
-		512AE1EE18CAD2D1005D02DB /* Foreground.m in Sources */ = {isa = PBXBuildFile; fileRef = 512AE1ED18CAD2D1005D02DB /* Foreground.m */; };
-		512AE1F118CAD463005D02DB /* MainGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 512AE1F018CAD463005D02DB /* MainGameController.m */; };
-		512AE1F418CAD85E005D02DB /* VisualBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 512AE1F318CAD85E005D02DB /* VisualBar.m */; };
-		5155192218C087540019BEE6 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 5155192118C087540019BEE6 /* Helpers.m */; };
 		873BD0F418C8106500AC62CA /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 873BD0F318C8106500AC62CA /* GameKit.framework */; };
 		8749A09C18CADDEF006B1B89 /* ShipActionHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8749A09B18CADDEF006B1B89 /* ShipActionHelper.m */; };
+		8753F38918CB8579009C38B4 /* Background.m in Sources */ = {isa = PBXBuildFile; fileRef = 8753F37418CB8579009C38B4 /* Background.m */; };
+		8753F38A18CB8579009C38B4 /* Containers.m in Sources */ = {isa = PBXBuildFile; fileRef = 8753F37618CB8579009C38B4 /* Containers.m */; };
+		8753F38B18CB8579009C38B4 /* DestroyedShips.m in Sources */ = {isa = PBXBuildFile; fileRef = 8753F37818CB8579009C38B4 /* DestroyedShips.m */; };
+		8753F38C18CB8579009C38B4 /* Foreground.m in Sources */ = {isa = PBXBuildFile; fileRef = 8753F37A18CB8579009C38B4 /* Foreground.m */; };
+		8753F38D18CB8579009C38B4 /* Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 8753F37C18CB8579009C38B4 /* Helpers.m */; };
+		8753F38E18CB8579009C38B4 /* MainGameController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8753F37E18CB8579009C38B4 /* MainGameController.m */; };
+		8753F38F18CB8579009C38B4 /* MiniMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 8753F38018CB8579009C38B4 /* MiniMap.m */; };
+		8753F39018CB8579009C38B4 /* Names.m in Sources */ = {isa = PBXBuildFile; fileRef = 8753F38218CB8579009C38B4 /* Names.m */; };
+		8753F39118CB8579009C38B4 /* Ships.m in Sources */ = {isa = PBXBuildFile; fileRef = 8753F38418CB8579009C38B4 /* Ships.m */; };
+		8753F39218CB8579009C38B4 /* Sizes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8753F38618CB8579009C38B4 /* Sizes.m */; };
+		8753F39318CB8579009C38B4 /* VisualBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8753F38818CB8579009C38B4 /* VisualBar.m */; };
+		8753F39418CB8A35009C38B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51171530189A390200BE75A9 /* Main.storyboard */; };
 		87964BB718CA6EAC00D38181 /* GCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 87964BB618CA6EAC00D38181 /* GCHelper.m */; };
 		87AAA64C18C1386300EF6FED /* StartScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AAA64B18C1386300EF6FED /* StartScreen.m */; };
 		87AD0BE318BC6B29001BCD2F /* BattleshipGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BC418BC6B28001BCD2F /* BattleshipGame.m */; };
@@ -86,31 +86,31 @@
 		5117154A189A390200BE75A9 /* BattleshipTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BattleshipTests-Info.plist"; sourceTree = "<group>"; };
 		5117154C189A390200BE75A9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5117154E189A390200BE75A9 /* BattleshipTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BattleshipTests.m; sourceTree = "<group>"; };
-		512AE1D718CAA8A7005D02DB /* Names.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Names.h; sourceTree = "<group>"; };
-		512AE1D818CAA8A7005D02DB /* Names.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Names.m; sourceTree = "<group>"; };
-		512AE1DA18CAB12C005D02DB /* Containers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Containers.h; sourceTree = "<group>"; };
-		512AE1DB18CAB12C005D02DB /* Containers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Containers.m; sourceTree = "<group>"; };
-		512AE1DD18CAB606005D02DB /* MiniMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiniMap.h; sourceTree = "<group>"; };
-		512AE1DE18CAB606005D02DB /* MiniMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiniMap.m; sourceTree = "<group>"; };
-		512AE1E018CAB846005D02DB /* Sizes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sizes.h; sourceTree = "<group>"; };
-		512AE1E118CAB846005D02DB /* Sizes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Sizes.m; path = "Battleship/Game Helpers/Sizes.m"; sourceTree = SOURCE_ROOT; };
-		512AE1E318CACB36005D02DB /* Ships.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ships.h; sourceTree = "<group>"; };
-		512AE1E418CACB36005D02DB /* Ships.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ships.m; sourceTree = "<group>"; };
-		512AE1E618CACEC2005D02DB /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Background.h; sourceTree = "<group>"; };
-		512AE1E718CACEC2005D02DB /* Background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Background.m; sourceTree = "<group>"; };
-		512AE1E918CAD2C2005D02DB /* DestroyedShips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DestroyedShips.h; sourceTree = "<group>"; };
-		512AE1EA18CAD2C2005D02DB /* DestroyedShips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DestroyedShips.m; sourceTree = "<group>"; };
-		512AE1EC18CAD2D1005D02DB /* Foreground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Foreground.h; sourceTree = "<group>"; };
-		512AE1ED18CAD2D1005D02DB /* Foreground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Foreground.m; sourceTree = "<group>"; };
-		512AE1EF18CAD463005D02DB /* MainGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainGameController.h; sourceTree = "<group>"; };
-		512AE1F018CAD463005D02DB /* MainGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainGameController.m; sourceTree = "<group>"; };
-		512AE1F218CAD85E005D02DB /* VisualBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualBar.h; sourceTree = "<group>"; };
-		512AE1F318CAD85E005D02DB /* VisualBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisualBar.m; sourceTree = "<group>"; };
-		5155192018C087540019BEE6 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
-		5155192118C087540019BEE6 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
 		873BD0F318C8106500AC62CA /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		8749A09A18CADDEF006B1B89 /* ShipActionHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShipActionHelper.h; sourceTree = "<group>"; };
 		8749A09B18CADDEF006B1B89 /* ShipActionHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShipActionHelper.m; sourceTree = "<group>"; };
+		8753F37318CB8579009C38B4 /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Background.h; sourceTree = "<group>"; };
+		8753F37418CB8579009C38B4 /* Background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Background.m; sourceTree = "<group>"; };
+		8753F37518CB8579009C38B4 /* Containers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Containers.h; sourceTree = "<group>"; };
+		8753F37618CB8579009C38B4 /* Containers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Containers.m; sourceTree = "<group>"; };
+		8753F37718CB8579009C38B4 /* DestroyedShips.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DestroyedShips.h; sourceTree = "<group>"; };
+		8753F37818CB8579009C38B4 /* DestroyedShips.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DestroyedShips.m; sourceTree = "<group>"; };
+		8753F37918CB8579009C38B4 /* Foreground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Foreground.h; sourceTree = "<group>"; };
+		8753F37A18CB8579009C38B4 /* Foreground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Foreground.m; sourceTree = "<group>"; };
+		8753F37B18CB8579009C38B4 /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
+		8753F37C18CB8579009C38B4 /* Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helpers.m; sourceTree = "<group>"; };
+		8753F37D18CB8579009C38B4 /* MainGameController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainGameController.h; sourceTree = "<group>"; };
+		8753F37E18CB8579009C38B4 /* MainGameController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainGameController.m; sourceTree = "<group>"; };
+		8753F37F18CB8579009C38B4 /* MiniMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiniMap.h; sourceTree = "<group>"; };
+		8753F38018CB8579009C38B4 /* MiniMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiniMap.m; sourceTree = "<group>"; };
+		8753F38118CB8579009C38B4 /* Names.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Names.h; sourceTree = "<group>"; };
+		8753F38218CB8579009C38B4 /* Names.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Names.m; sourceTree = "<group>"; };
+		8753F38318CB8579009C38B4 /* Ships.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ships.h; sourceTree = "<group>"; };
+		8753F38418CB8579009C38B4 /* Ships.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ships.m; sourceTree = "<group>"; };
+		8753F38518CB8579009C38B4 /* Sizes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sizes.h; sourceTree = "<group>"; };
+		8753F38618CB8579009C38B4 /* Sizes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sizes.m; sourceTree = "<group>"; };
+		8753F38718CB8579009C38B4 /* VisualBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualBar.h; sourceTree = "<group>"; };
+		8753F38818CB8579009C38B4 /* VisualBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisualBar.m; sourceTree = "<group>"; };
 		87964BB518CA6EAC00D38181 /* GCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCHelper.h; path = HelperFunctions/GCHelper.h; sourceTree = "<group>"; };
 		87964BB618CA6EAC00D38181 /* GCHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCHelper.m; path = HelperFunctions/GCHelper.m; sourceTree = "<group>"; };
 		87AAA64A18C1386300EF6FED /* StartScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartScreen.h; sourceTree = "<group>"; };
@@ -210,7 +210,8 @@
 		51171524189A390200BE75A9 /* Battleship */ = {
 			isa = PBXGroup;
 			children = (
-				512AE1D618CA8358005D02DB /* Game Helpers */,
+				8753F37218CB8579009C38B4 /* Game Helpers */,
+				512AE1D618CA8358005D02DB /* HelperFunctions */,
 				5155191F18C087040019BEE6 /* HelperFunctions */,
 				871F9B7818A2FFDD006F2682 /* Model */,
 				5117152D189A390200BE75A9 /* AppDelegate.h */,
@@ -257,13 +258,9 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		512AE1D618CA8358005D02DB /* Game Helpers */ = {
+		512AE1D618CA8358005D02DB /* HelperFunctions */ = {
 			isa = PBXGroup;
 			children = (
-				5155192018C087540019BEE6 /* Helpers.h */,
-				5155192118C087540019BEE6 /* Helpers.m */,
-				51D3C09218C556A900BDCA98 /* SideBarDisplay.h */,
-				51D3C09318C556A900BDCA98 /* SideBarDisplay.m */,
 				87964BB518CA6EAC00D38181 /* GCHelper.h */,
 				87964BB618CA6EAC00D38181 /* GCHelper.m */,
 				8749A09A18CADDEF006B1B89 /* ShipActionHelper.h */,
@@ -271,16 +268,6 @@
 			);
 			name = HelperFunctions;
 			sourceTree = "<group>";
-		};
-		5155192318C08BE10019BEE6 /* Initialization */ = {
-			isa = PBXGroup;
-			children = (
-				5155192418C08C010019BEE6 /* Inits.h */,
-				5155192518C08C010019BEE6 /* Inits.m */,
-			);
-			name = "Game Helpers";
-			path = "Battleship/Game Helpers";
-			sourceTree = SOURCE_ROOT;
 		};
 		5155191F18C087040019BEE6 /* HelperFunctions */ = {
 			isa = PBXGroup;
@@ -328,6 +315,35 @@
 				87AD0BE218BC6B28001BCD2F /* WeaponType.h */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		8753F37218CB8579009C38B4 /* Game Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8753F37318CB8579009C38B4 /* Background.h */,
+				8753F37418CB8579009C38B4 /* Background.m */,
+				8753F37518CB8579009C38B4 /* Containers.h */,
+				8753F37618CB8579009C38B4 /* Containers.m */,
+				8753F37718CB8579009C38B4 /* DestroyedShips.h */,
+				8753F37818CB8579009C38B4 /* DestroyedShips.m */,
+				8753F37918CB8579009C38B4 /* Foreground.h */,
+				8753F37A18CB8579009C38B4 /* Foreground.m */,
+				8753F37B18CB8579009C38B4 /* Helpers.h */,
+				8753F37C18CB8579009C38B4 /* Helpers.m */,
+				8753F37D18CB8579009C38B4 /* MainGameController.h */,
+				8753F37E18CB8579009C38B4 /* MainGameController.m */,
+				8753F37F18CB8579009C38B4 /* MiniMap.h */,
+				8753F38018CB8579009C38B4 /* MiniMap.m */,
+				8753F38118CB8579009C38B4 /* Names.h */,
+				8753F38218CB8579009C38B4 /* Names.m */,
+				8753F38318CB8579009C38B4 /* Ships.h */,
+				8753F38418CB8579009C38B4 /* Ships.m */,
+				8753F38518CB8579009C38B4 /* Sizes.h */,
+				8753F38618CB8579009C38B4 /* Sizes.m */,
+				8753F38718CB8579009C38B4 /* VisualBar.h */,
+				8753F38818CB8579009C38B4 /* VisualBar.m */,
+			);
+			path = "Game Helpers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -409,9 +425,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8753F39418CB8A35009C38B4 /* Main.storyboard in Resources */,
 				51171529189A390200BE75A9 /* InfoPlist.strings in Resources */,
 				5117153C189A390200BE75A9 /* Images.xcassets in Resources */,
-				51171532189A390200BE75A9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,33 +448,33 @@
 			files = (
 				87AD0BE718BC6B29001BCD2F /* Fleet.m in Sources */,
 				51171538189A390200BE75A9 /* MyScene.m in Sources */,
-				5155192218C087540019BEE6 /* Helpers.m in Sources */,
-				512AE1E818CACEC2005D02DB /* Background.m in Sources */,
-				512AE1E218CAB846005D02DB /* Sizes.m in Sources */,
 				87AD0BE518BC6B29001BCD2F /* Cruiser.m in Sources */,
-				512AE1D918CAA8A7005D02DB /* Names.m in Sources */,
-				512AE1EB18CAD2C2005D02DB /* DestroyedShips.m in Sources */,
+				8753F38918CB8579009C38B4 /* Background.m in Sources */,
+				8753F39218CB8579009C38B4 /* Sizes.m in Sources */,
 				87AD0BE418BC6B29001BCD2F /* Coordinate.m in Sources */,
 				51171535189A390200BE75A9 /* ViewController.m in Sources */,
+				8753F38F18CB8579009C38B4 /* MiniMap.m in Sources */,
 				87AD0BED18BC6B29001BCD2F /* ShipSegment.m in Sources */,
+				8753F38E18CB8579009C38B4 /* MainGameController.m in Sources */,
 				87AD0BEC18BC6B29001BCD2F /* Ship.m in Sources */,
+				8753F39018CB8579009C38B4 /* Names.m in Sources */,
 				8749A09C18CADDEF006B1B89 /* ShipActionHelper.m in Sources */,
 				87AD0BE318BC6B29001BCD2F /* BattleshipGame.m in Sources */,
-				512AE1F418CAD85E005D02DB /* VisualBar.m in Sources */,
+				8753F38D18CB8579009C38B4 /* Helpers.m in Sources */,
 				87AD0BEB18BC6B29001BCD2F /* Range.m in Sources */,
-				512AE1DC18CAB12C005D02DB /* Containers.m in Sources */,
 				87AD0BEA18BC6B29001BCD2F /* RadarBoat.m in Sources */,
+				8753F38A18CB8579009C38B4 /* Containers.m in Sources */,
 				87AD0BE818BC6B29001BCD2F /* Map.m in Sources */,
 				87AAA64C18C1386300EF6FED /* StartScreen.m in Sources */,
-				512AE1E518CACB36005D02DB /* Ships.m in Sources */,
+				8753F38C18CB8579009C38B4 /* Foreground.m in Sources */,
 				87AD0BEE18BC6B29001BCD2F /* TorpedoBoat.m in Sources */,
-				512AE1EE18CAD2D1005D02DB /* Foreground.m in Sources */,
+				8753F39318CB8579009C38B4 /* VisualBar.m in Sources */,
 				5117152F189A390200BE75A9 /* AppDelegate.m in Sources */,
-				512AE1DF18CAB606005D02DB /* MiniMap.m in Sources */,
+				8753F38B18CB8579009C38B4 /* DestroyedShips.m in Sources */,
+				8753F39118CB8579009C38B4 /* Ships.m in Sources */,
 				5117152B189A390200BE75A9 /* main.m in Sources */,
 				87AD0BE918BC6B29001BCD2F /* MineLayer.m in Sources */,
 				9415F99418CA6E340067F500 /* Player.m in Sources */,
-				512AE1F118CAD463005D02DB /* MainGameController.m in Sources */,
 				87AD0BE618BC6B29001BCD2F /* Destroyer.m in Sources */,
 				87964BB718CA6EAC00D38181 /* GCHelper.m in Sources */,
 			);
