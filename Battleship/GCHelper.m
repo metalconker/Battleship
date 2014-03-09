@@ -110,13 +110,13 @@ static GCHelper *sharedHelper = nil;
     request.minPlayers = 2;
     request.maxPlayers = 2;
     
-    GKTurnBasedMatchmakerViewController *mmvc = [[GKTurnBasedMatchmakerViewController alloc] initWithMatchRequest:request];
-    mmvc.turnBasedMatchmakerDelegate = self;
+    GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
+    mmvc.matchmakerDelegate = self;
     [_rootViewController presentViewController:mmvc animated:YES completion:nil];
 }
 
--(void)turnBasedMatchmakerViewControllerWasCancelled:(GKTurnBasedMatchmakerViewController *)viewController {
-    [presentingViewController dismissViewControllerAnimated:YES completion:nil];
+-(void)matchmakerViewControllerWasCancelled:(GKTurnBasedMatchmakerViewController *)viewController {
+    [_rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)turnBasedMatchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
