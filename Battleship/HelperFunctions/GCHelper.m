@@ -104,6 +104,17 @@ static GCHelper *sharedHelper = nil;
     
 }
 
+- (IBAction)joinBattleshipMatch: (id) sender
+{
+    GKMatchRequest *request = [[GKMatchRequest alloc] init];
+    request.minPlayers = 2;
+    request.maxPlayers = 2;
+    
+    GKTurnBasedMatchmakerViewController *mmvc = [[GKTurnBasedMatchmakerViewController alloc] initWithMatchRequest:request];
+    mmvc.turnBasedMatchmakerDelegate = self;
+    [_rootViewController presentViewController:mmvc animated:YES completion:nil];
+}
+
 -(void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController {
     [presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }

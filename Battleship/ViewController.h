@@ -11,10 +11,10 @@
 #import <AVFoundation/AVFoundation.h>
 #import "MyScene.h"
 #import "StartScreen.h"
+#import "MatchScreen.h"
 
 @interface ViewController : UIViewController
 
 @property (nonatomic) AVAudioPlayer * backgroundMusicPlayer;
-
-
+- (IBAction)joinBattleshipMatch: (id) sender;
 @end

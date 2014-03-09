@@ -36,6 +36,7 @@
 		8753F39218CB8579009C38B4 /* Sizes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8753F38618CB8579009C38B4 /* Sizes.m */; };
 		8753F39318CB8579009C38B4 /* VisualBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 8753F38818CB8579009C38B4 /* VisualBar.m */; };
 		8753F39418CB8A35009C38B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51171530189A390200BE75A9 /* Main.storyboard */; };
+		8784B73618CBDFB9003F3C11 /* MatchScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 8784B73518CBDFB9003F3C11 /* MatchScreen.m */; };
 		87964BB718CA6EAC00D38181 /* GCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 87964BB618CA6EAC00D38181 /* GCHelper.m */; };
 		87AAA64C18C1386300EF6FED /* StartScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AAA64B18C1386300EF6FED /* StartScreen.m */; };
 		87AD0BE318BC6B29001BCD2F /* BattleshipGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 87AD0BC418BC6B28001BCD2F /* BattleshipGame.m */; };
@@ -111,6 +112,8 @@
 		8753F38618CB8579009C38B4 /* Sizes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sizes.m; sourceTree = "<group>"; };
 		8753F38718CB8579009C38B4 /* VisualBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VisualBar.h; sourceTree = "<group>"; };
 		8753F38818CB8579009C38B4 /* VisualBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VisualBar.m; sourceTree = "<group>"; };
+		8784B73418CBDFB9003F3C11 /* MatchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchScreen.h; sourceTree = "<group>"; };
+		8784B73518CBDFB9003F3C11 /* MatchScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchScreen.m; sourceTree = "<group>"; };
 		87964BB518CA6EAC00D38181 /* GCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCHelper.h; path = HelperFunctions/GCHelper.h; sourceTree = "<group>"; };
 		87964BB618CA6EAC00D38181 /* GCHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCHelper.m; path = HelperFunctions/GCHelper.m; sourceTree = "<group>"; };
 		87AAA64A18C1386300EF6FED /* StartScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartScreen.h; sourceTree = "<group>"; };
@@ -216,6 +219,8 @@
 				871F9B7818A2FFDD006F2682 /* Model */,
 				5117152D189A390200BE75A9 /* AppDelegate.h */,
 				5117152E189A390200BE75A9 /* AppDelegate.m */,
+				8784B73418CBDFB9003F3C11 /* MatchScreen.h */,
+				8784B73518CBDFB9003F3C11 /* MatchScreen.m */,
 				51171530189A390200BE75A9 /* Main.storyboard */,
 				51171533189A390200BE75A9 /* ViewController.h */,
 				51171534189A390200BE75A9 /* ViewController.m */,
@@ -467,6 +472,7 @@
 				87AD0BE818BC6B29001BCD2F /* Map.m in Sources */,
 				87AAA64C18C1386300EF6FED /* StartScreen.m in Sources */,
 				8753F38C18CB8579009C38B4 /* Foreground.m in Sources */,
+				8784B73618CBDFB9003F3C11 /* MatchScreen.m in Sources */,
 				87AD0BEE18BC6B29001BCD2F /* TorpedoBoat.m in Sources */,
 				8753F39318CB8579009C38B4 /* VisualBar.m in Sources */,
 				5117152F189A390200BE75A9 /* AppDelegate.m in Sources */,

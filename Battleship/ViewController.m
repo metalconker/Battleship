@@ -32,7 +32,6 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    
     // Plays music
 //    NSError *error;
 //    NSURL * backgroundMusicURL = [[NSBundle mainBundle] URLForResource:@"Jigglypuff sings Game of Thrones a capella" withExtension:@"mp3"];
@@ -48,8 +47,11 @@
         skView.showsNodeCount = YES;
         
         // Create and configure the scene.
-        SKScene * scene = [StartScreen sceneWithSize:skView.bounds.size];
+        SKScene* scene = [StartScreen sceneWithSize:skView.bounds.size];
         scene.scaleMode = SKSceneScaleModeAspectFill;
+
+      
+  
         
         // Present the scene.
         [skView presentScene:scene];
@@ -75,6 +77,9 @@
     [super didReceiveMemoryWarning];
     // Release any cached data, images, etc that aren't in use.
 }
+
+
+
 
 
 @end

@@ -33,5 +33,6 @@
                       delegate:(id<GCHelperDelegate>)theDelegate;
 + (GCHelper *)sharedInstance:(UIViewController*) rootView;
 - (void)authenticateLocalUser;
+- (IBAction)joinBattleshipMatch: (id) sender;
 
 @end
