@@ -115,24 +115,24 @@ static GCHelper *sharedHelper = nil;
     [_rootViewController presentViewController:mmvc animated:YES completion:nil];
 }
 
--(void)matchmakerViewControllerWasCancelled:(GKTurnBasedMatchmakerViewController *)viewController {
+-(void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController {
     [_rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)turnBasedMatchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
+-(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
     [_rootViewController dismissViewControllerAnimated:YES completion:nil];
     NSLog(@"Error finding match: %@", error.localizedDescription);
 }
 
--(void)turnBasedMatchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKTurnBasedMatch *)theMatch {
+-(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)theMatch {
     [_rootViewController dismissViewControllerAnimated:YES completion:nil];
-    for(NSString* s in theMatch.participants){
+    //self.match = theMatch;
+    match.delegate = self;
+    
+    for (NSString* s in theMatch.playerIDs) {
         NSLog(@"%@", s);
     }
-    //match.delegate = self;
-    //if (!matchStarted && match.expectedPlayerCount == 0) {
-
-    //}
+    
 }
 
 #pragma mark GKMatchDelegate
