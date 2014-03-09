@@ -115,11 +115,11 @@ static GCHelper *sharedHelper = nil;
     [_rootViewController presentViewController:mmvc animated:YES completion:nil];
 }
 
--(void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController {
+-(void)turnBasedMatchmakerViewControllerWasCancelled:(GKTurnBasedMatchmakerViewController *)viewController {
     [presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
+-(void)turnBasedMatchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
     [presentingViewController dismissViewControllerAnimated:YES completion:nil];
     NSLog(@"Error finding match: %@", error.localizedDescription);
 }
