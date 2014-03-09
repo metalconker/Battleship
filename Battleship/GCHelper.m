@@ -120,17 +120,19 @@ static GCHelper *sharedHelper = nil;
 }
 
 -(void)turnBasedMatchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
-    [presentingViewController dismissViewControllerAnimated:YES completion:nil];
+    [_rootViewController dismissViewControllerAnimated:YES completion:nil];
     NSLog(@"Error finding match: %@", error.localizedDescription);
 }
 
--(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)theMatch {
-    [presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    self.match = theMatch;
-    match.delegate = self;
-    if (!matchStarted && match.expectedPlayerCount == 0) {
-        NSLog(@"Ready to start match");
+-(void)turnBasedMatchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKTurnBasedMatch *)theMatch {
+    [_rootViewController dismissViewControllerAnimated:YES completion:nil];
+    for(NSString* s in theMatch.participants){
+        NSLog(@"%@", s);
     }
+    //match.delegate = self;
+    //if (!matchStarted && match.expectedPlayerCount == 0) {
+
+    //}
 }
 
 #pragma mark GKMatchDelegate
