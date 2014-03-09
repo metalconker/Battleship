@@ -110,26 +110,27 @@ static GCHelper *sharedHelper = nil;
     request.minPlayers = 2;
     request.maxPlayers = 2;
     
-    GKTurnBasedMatchmakerViewController *mmvc = [[GKTurnBasedMatchmakerViewController alloc] initWithMatchRequest:request];
-    mmvc.turnBasedMatchmakerDelegate = self;
+    GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
+    mmvc.matchmakerDelegate = self;
     [_rootViewController presentViewController:mmvc animated:YES completion:nil];
 }
 
--(void)turnBasedMatchmakerViewControllerWasCancelled:(GKTurnBasedMatchmakerViewController *)viewController {
-    [presentingViewController dismissViewControllerAnimated:YES completion:nil];
+-(void)matchmakerViewControllerWasCancelled:(GKTurnBasedMatchmakerViewController *)viewController {
+    [_rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)turnBasedMatchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
-    [presentingViewController dismissViewControllerAnimated:YES completion:nil];
+-(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
+    [_rootViewController dismissViewControllerAnimated:YES completion:nil];
     NSLog(@"Error finding match: %@", error.localizedDescription);
 }
 
 -(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)theMatch {
-    [presentingViewController dismissViewControllerAnimated:YES completion:nil];
-    self.match = theMatch;
+    [_rootViewController dismissViewControllerAnimated:YES completion:nil];
+    //self.match = theMatch;
     match.delegate = self;
-    if (!matchStarted && match.expectedPlayerCount == 0) {
-        NSLog(@"Ready to start match");
+    
+    for (NSString* s in theMatch.playerIDs) {
+        NSLog(@"%@", s);
     }
 }
 
