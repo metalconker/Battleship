@@ -51,9 +51,10 @@
 }
 
 -(void) match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
-    NSLog(@"%s", "test");
-    _gameMap = [data bytes];
+    NSLog(@"test");
+    //_gameMap = [data bytes];
 }
+
 //must remove fleet and then add fleet back
 /*
 -(void)updateMap:(Fleet*) updatedFleet{
