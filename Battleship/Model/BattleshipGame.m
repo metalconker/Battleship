@@ -24,6 +24,7 @@
     if (self) {
         _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID];
         _gameCenter = [GCHelper sharedInstance:nil];
+        _gameCenter.match.delegate = self;
         NSString* loc = _localPlayer.playerID;
         if ([loc compare:_gameCenter.match.playerIDs[0]] < 0) {
             _myTurn = true;
