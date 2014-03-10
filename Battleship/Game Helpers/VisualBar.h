@@ -12,6 +12,7 @@
 #import "Names.h"
 #import "Helpers.h"
 #import "BattleshipGame.h"
+#import "Foreground.h"
 
 @interface VisualBar : NSObject
 
@@ -20,24 +21,22 @@
 @property (strong, nonatomic) Sizes *sizes;
 @property (strong, nonatomic) Names *names;
 @property (strong, nonatomic) BattleshipGame *game;
-@property (strong, nonatomic) SKNode *activeShipsNode;
+@property (strong, nonatomic) Foreground *foreground;
 @property (strong, nonatomic) Helpers *helper;
 
 @property (strong, nonatomic) SKNode *shipFunctions;
 @property (strong, nonatomic) SKNode *shipClicked;
 @property (strong, nonatomic) SKNode *shipClickedName;
-@property (strong, nonatomic) SKNode *shipActuallyClicked;
-
-@property (strong, nonatomic) SKNode *movementLocationsSprites;
+@property (strong, nonatomic) SKSpriteNode *shipActuallyClicked;
 
 - (instancetype) initVisualBarWithNode:(SKNode*) visualBarNode
-                               andSizes:(Sizes*) sizes
-                               andNames:(Names*) names
+                              andSizes:(Sizes*) sizes
+                              andNames:(Names*) names
                                andGame:(BattleshipGame*) game
-                    andActiveShipsNode:(SKNode*) activeShipsNode
+                         andForeground:(Foreground*) foreground
                              andHelper:(Helpers*) helper;
 
--(NSMutableArray*) displayShipDetails: (SKNode*) shipSprite;
+- (void) displayShipDetails: (SKNode*) shipSprite;
 - (void) detectFunction: (SKNode*) functionSprite;
 - (void) updateShipLocation:(SKNode*) newShipLocation;
 

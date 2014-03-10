@@ -14,7 +14,7 @@
 
 @property (strong, nonatomic) Sizes *sizes;
 
--(instancetype) initWithSizes:(Sizes*) sizes;
+- (instancetype) initWithSizes:(Sizes*) sizes;
 - (Coordinate*) fromTextureToCoordinate:(CGPoint) point;
 
 @end

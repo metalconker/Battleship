@@ -50,6 +50,14 @@
     
 }
 
+- (void) updateMiniMapPositionWithTranslation:(CGPoint) translation{
+    
+    CGPoint position = [[_miniMapNode childNodeWithName:_names.miniMapSpriteName ] position];
+    [[_miniMapNode childNodeWithName:_names.miniMapSpriteName]
+     setPosition:CGPointMake(position.x + translation.x, position.y + translation.y)];
+    
+}
+
 // Initializes mini map
 - (void)initMiniMap{
     // Mini Map
