@@ -112,6 +112,7 @@ static GCHelper *sharedHelper = nil;
     
     GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
     mmvc.matchmakerDelegate = self;
+    NSLog(@"AAAAA");
     [_rootViewController presentViewController:mmvc animated:YES completion:nil];
 }
 
@@ -125,6 +126,7 @@ static GCHelper *sharedHelper = nil;
 }
 
 -(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)theMatch {
+    NSLog(@"asdfasdfa");
     [_rootViewController dismissViewControllerAnimated:YES completion:nil];
     //self.match = theMatch;
     match.delegate = self;
