@@ -116,12 +116,12 @@ static GCHelper *sharedHelper = nil;
     [_rootViewController presentViewController:mmvc animated:YES completion:nil];
 }
 
--(void)matchmakerViewControllerWasCancelled:(GKTurnBasedMatchmakerViewController *)viewController {
+-(void)matchmakerViewControllerWasCancelled:(GKMatchmakerViewController *)viewController {
     [_rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
-    [_rootViewController dismissViewControllerAnimated:YES completion:nil];
+    //[_rootViewController dismissViewControllerAnimated:YES completion:nil];
     NSLog(@"Error finding match: %@", error.localizedDescription);
 }
 
@@ -134,6 +134,7 @@ static GCHelper *sharedHelper = nil;
     for (NSString* s in theMatch.playerIDs) {
         NSLog(@"%@", s);
     }
+    
 }
 
 #pragma mark GKMatchDelegate
