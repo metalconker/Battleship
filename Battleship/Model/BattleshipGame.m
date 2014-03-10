@@ -10,9 +10,11 @@
 @interface BattleshipGame()
 @property BOOL myTurn;
 @property(strong, nonatomic) Player* localPlayer;
-
+@property(strong, nonatomic) GCHelper* gameCenter;
 -(void)updateMap:(Fleet*) updatedFleet;
 -(void)removeShipFromMap: (Ship*) s;
+-(void)sendMap;
+-(void)match:(GKMatch*)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID;
 @end
 
 @implementation BattleshipGame
@@ -21,19 +23,35 @@
     self = [super init];
     if (self) {
         _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID];
+        _gameCenter = [GCHelper sharedInstance:nil];
         NSString* loc = _localPlayer.playerID;
-        if ([loc compare:[GCHelper sharedInstance:nil].match.playerIDs[0]] < 0) {
+        if ([loc compare:_gameCenter.match.playerIDs[0]] < 0) {
             _myTurn = true;
         }
         else {
             _myTurn = false;
         }
-        NSLog(@"%d", _myTurn);
-        self.hostView = [[Map alloc] init];
+        if (_myTurn) {
+            self.gameMap = [[Map alloc] init];
+            [self sendMap];
+        }
         //[self updateMap: _hostFleet];
         //[self updateMap: _joinFleet];
     }
     return self;
+}
+
+-(void)sendMap {
+    NSError* error;
+    NSData *packet = [NSData dataWithBytes:&_gameMap length:sizeof(_gameMap)];
+    [_gameCenter.match sendDataToAllPlayers: packet withDataMode:GKMatchSendDataUnreliable error:&error];
+    if (error != nil) {
+        NSLog(@"error");
+    }
+}
+
+-(void) match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
+    _gameCenter = [data bytes];
 }
 //must remove fleet and then add fleet back
 /*

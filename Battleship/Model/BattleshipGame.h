@@ -15,7 +15,7 @@
 
 @interface BattleshipGame : NSObject
 
-@property (strong, nonatomic) Map* hostView;
+@property (strong, nonatomic) Map* gameMap;
 
 
 -(instancetype) init;
