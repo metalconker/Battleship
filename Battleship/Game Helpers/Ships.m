@@ -127,6 +127,7 @@
         [_movingShip removeObjectAtIndex:0];
         [_movingShipNewLocation removeObjectAtIndex:0];
         [_movingShipOldLocation removeObjectAtIndex:0];
+        [_game moveShipfrom:oldCoord to:newCoord];
     }
 }
 
