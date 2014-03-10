@@ -24,7 +24,6 @@
 @property (strong, nonatomic) BattleshipGame *game;
 @property Boolean initiallyTouched;
 
-
 // Mini Map positions
 @property (strong, nonatomic) NSMutableArray* miniMapPositions;
 
@@ -32,7 +31,7 @@
                             andSizes:(Sizes*) sizes
                             andNames:(Names*) names
                              andGame:(BattleshipGame*) game;
-
 - (void) setMiniMapLocation:(CGPoint)location;
+- (void) updateMiniMapPositionWithTranslation:(CGPoint)translation;
 
 @end

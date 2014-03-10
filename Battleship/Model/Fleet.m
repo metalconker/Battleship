@@ -81,14 +81,5 @@
     return Nil;
 }
 
--(NSMutableArray*) getRotationRangeOf: (Ship*) s{
-    NSMutableArray *validRotations = [[NSMutableArray alloc] init];
-    if ([s isKindOfClass:[Cruiser class]] || [s isKindOfClass:[Destroyer class]] || [s isKindOfClass:[MineLayer class]]) {
-    
-    }
-    else if ([s isKindOfClass:[TorpedoBoat class]] || [s isKindOfClass:[RadarBoat class]]) {
-        
-    }
-    return validRotations;
-}
 @end
+

@@ -11,9 +11,9 @@
 @implementation Background
 
 - (instancetype) initBackgroundWithNode:(SKNode*) backgroundNode
-                          andSizes:(Sizes*) sizes
-                          andNames:(Names*) names
-                           andGame:(BattleshipGame*) game{
+                               andSizes:(Sizes*) sizes
+                               andNames:(Names*) names
+                                andGame:(BattleshipGame*) game{
     self = [super init];
     if (self) {
         _game = game;
@@ -112,7 +112,7 @@
     
     if (background1.position.x < -background1.frame.size.width){
         background1.position = CGPointMake(background2.position.x + background2.frame.size.width,
-                                   background1.position.y);
+                                           background1.position.y);
     }
     
     if (background2.position.x < -background2.frame.size.width) {
@@ -120,5 +120,6 @@
                                            background2.position.y);
     }
 }
+
 
 @end
