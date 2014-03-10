@@ -124,6 +124,27 @@
     
     if (intervals == 0)
     {
+        // Check the direction of the coordinate
+        if (newCoord.yCoord > oldCoord.yCoord)
+        {
+            [oldCoord setDirection:NORTH];
+        }
+        
+        else if (newCoord.yCoord < oldCoord.yCoord)
+        {
+            [oldCoord setDirection:SOUTH];
+        }
+        
+        else if (newCoord.xCoord > oldCoord.xCoord)
+        {
+            [oldCoord setDirection:EAST];
+        }
+        
+        else if (newCoord.xCoord < oldCoord.xCoord)
+        {
+            [oldCoord setDirection:WEST];
+        }
+        
         [_movingShip removeObjectAtIndex:0];
         [_movingShipNewLocation removeObjectAtIndex:0];
         [_movingShipOldLocation removeObjectAtIndex:0];

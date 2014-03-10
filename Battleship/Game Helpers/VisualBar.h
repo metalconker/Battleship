@@ -38,6 +38,6 @@
 
 - (void) displayShipDetails: (SKNode*) shipSprite;
 - (void) detectFunction: (SKNode*) functionSprite;
-- (void) updateShipLocation:(SKNode*) newShipLocation;
+//- (void) updateShipLocation:(SKNode*) newShipLocation;
 
 @end
