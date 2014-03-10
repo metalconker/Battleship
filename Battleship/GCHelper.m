@@ -120,7 +120,7 @@ static GCHelper *sharedHelper = nil;
 }
 
 -(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFailWithError:(NSError *)error {
-    [_rootViewController dismissViewControllerAnimated:YES completion:nil];
+    //[_rootViewController dismissViewControllerAnimated:YES completion:nil];
     NSLog(@"Error finding match: %@", error.localizedDescription);
 }
 
