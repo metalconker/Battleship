@@ -12,8 +12,8 @@
 #import "Ship.h"
 #import "Player.h"
 #import "GCHelper.h"
-
-@interface BattleshipGame : NSObject
+#import "AppDelegate.h"
+@interface BattleshipGame : NSObject <GKMatchDelegate>
 
 @property (strong, nonatomic) Map* gameMap;
 

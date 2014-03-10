@@ -63,7 +63,7 @@ static GCHelper *sharedHelper = nil;
     request.maxPlayers = 2;
     
     GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
-    mmvc.matchmakerDelegate = self;
+
 
     [_rootViewController presentViewController:mmvc animated:YES completion:nil];
 }

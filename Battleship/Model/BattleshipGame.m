@@ -24,6 +24,7 @@
     if (self) {
         _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID];
         _gameCenter = [GCHelper sharedInstance:nil];
+        _gameCenter.match.delegate = self;
         NSString* loc = _localPlayer.playerID;
         if ([loc compare:_gameCenter.match.playerIDs[0]] < 0) {
             _myTurn = true;
@@ -43,8 +44,11 @@
 
 -(void)sendMap {
     NSError* error;
-    NSData *packet = [NSData dataWithBytes:&_gameMap length:sizeof(_gameMap)];
-    [_gameCenter.match sendDataToAllPlayers: packet withDataMode:GKMatchSendDataUnreliable error:&error];
+    NSLog(@"send");
+    int i = 0;
+    NSData *packet = [NSData dataWithBytes:&i length:sizeof(_gameMap)];
+    BOOL success = [_gameCenter.match sendDataToAllPlayers: packet withDataMode:GKMatchSendDataUnreliable error:&error];
+    NSLog(@"%d", success);
     if (error != nil) {
         NSLog(@"error");
     }
