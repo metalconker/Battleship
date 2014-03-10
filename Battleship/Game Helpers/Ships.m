@@ -124,7 +124,6 @@
     
     if (intervals == 0)
     {
-        
         // Check the direction of the coordinate
         if (newCoord.yCoord > oldCoord.yCoord)
         {
@@ -145,7 +144,6 @@
         {
             [oldCoord setDirection:WEST];
         }
-        
         
         [_movingShip removeObjectAtIndex:0];
         [_movingShipNewLocation removeObjectAtIndex:0];
