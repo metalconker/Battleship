@@ -10,6 +10,7 @@
 #import "Map.h"
 #import "Fleet.h"
 #import "Ship.h"
+#import "Player.h"
 
 @interface BattleshipGame : NSObject
 

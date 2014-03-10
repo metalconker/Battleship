@@ -126,11 +126,12 @@ static GCHelper *sharedHelper = nil;
 
 -(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)theMatch {
     [_rootViewController dismissViewControllerAnimated:YES completion:nil];
-    //self.match = theMatch;
+    self.match = theMatch;
     match.delegate = self;
-    
+    if(theMatch.expectedPlayerCount == 0){
     for (NSString* s in theMatch.playerIDs) {
         NSLog(@"%@", s);
+    }
     }
     
 }

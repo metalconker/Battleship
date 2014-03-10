@@ -16,7 +16,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     viewController = (ViewController*) self.window.rootViewController;
-    //[[GCHelper sharedInstance: self.window.rootViewController] authenticateLocalUser];
+    [[GCHelper sharedInstance: self.window.rootViewController] authenticateLocalUser];
     return YES;
 }
 							

@@ -9,8 +9,8 @@
 #import "BattleshipGame.h"
 @interface BattleshipGame()
 @property BOOL hostsTurn;
-@property(strong, nonatomic) Fleet* hostFleet;
-@property(strong, nonatomic) Fleet* joinFleet;
+@property(strong, nonatomic) Player* hostPlayer;
+@property(strong, nonatomic) Player* joinPlayer;
 
 -(void)updateMap:(Fleet*) updatedFleet;
 -(void)removeShipFromMap: (Ship*) s;
@@ -26,8 +26,7 @@
         _hostsTurn = true;
         self.hostView = [[Map alloc] init];
         [self updateMap: _hostFleet];
-        [self updateMap: _joinFleet];
-    }
+     }
     return self;
 }
 //must remove fleet and then add fleet back
