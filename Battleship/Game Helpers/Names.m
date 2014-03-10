@@ -25,6 +25,7 @@
     
     // Container Names
     _overallNodeName = @"OverallContainer";
+    _gesturesNodeName = @"GesturesContainer";
     _backgroundNodeName = @"BackgroundContainer";
     _visualBarNodeName = @"VisualBarContainer";
     _foregroundNodeName = @"ForegroundContainer";
@@ -53,9 +54,9 @@
     
     // Background Images
     _baseImageName = @"Base";
-    _coralImageName = @"Coral";
+    _coralImageName = @"Corals";
     _moveRangeImageName = @"MoveRange";
-    _waterBackgroundImageName = @"WaterBackground";
+    _waterBackgroundImageName = @"WaterBackgrounds";
     
     // Mini Map Images
     _miniMapGreenBaseImageName = @"MiniMapGreenBase";

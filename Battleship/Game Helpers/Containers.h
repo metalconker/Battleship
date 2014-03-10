@@ -17,6 +17,7 @@
 
 // The sprite containers
 @property (strong, nonatomic) SKNode *overallNode;
+@property (strong, nonatomic) SKNode *gesturesNode;
 @property (strong, nonatomic) SKNode *backgroundNode;
 @property (strong, nonatomic) SKNode *visualBarNode;
 @property (strong, nonatomic) SKNode *foregroundNode;

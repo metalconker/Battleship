@@ -24,6 +24,7 @@
 - (void) initContainers{
     
     _overallNode = [[SKNode alloc] init];
+    _gesturesNode = [[SKNode alloc] init];
     _backgroundNode = [[SKNode alloc] init];
     _visualBarNode = [[SKNode alloc] init];
     _foregroundNode = [[SKNode alloc] init];
@@ -32,6 +33,7 @@
     _miniMapNode = [[SKNode alloc] init];
     
     _overallNode.name = _names.overallNodeName;
+    _gesturesNode.name = _names.gesturesNodeName;
     _backgroundNode.name = _names.backgroundNodeName;
     _visualBarNode.name = _names.visualBarNodeName;
     _foregroundNode.name = _names.foregroundNodeName;
@@ -39,13 +41,15 @@
     _destroyedShipsNode.name = _names.destroyedShipsNodeName;
     _miniMapNode.name = _names.miniMapNodeName;
     
-    [_overallNode addChild:_backgroundNode];
+    [_gesturesNode addChild:_backgroundNode];
+    [_gesturesNode addChild:_activeShipsNode];
+    [_gesturesNode addChild:_foregroundNode];
+    [_overallNode addChild:_gesturesNode];
     [_overallNode addChild:_visualBarNode];
-    [_overallNode addChild:_foregroundNode];
-    [_overallNode addChild:_activeShipsNode];
     [_overallNode addChild:_destroyedShipsNode];
     [_overallNode addChild:_miniMapNode];
     
 }
+
 
 @end

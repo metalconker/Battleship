@@ -12,6 +12,7 @@
 
 // Node Names
 @property (strong, nonatomic) NSString* overallNodeName;
+@property (strong, nonatomic) NSString* gesturesNodeName;
 @property (strong, nonatomic) NSString* backgroundNodeName;
 @property (strong, nonatomic) NSString* visualBarNodeName;
 @property (strong, nonatomic) NSString* foregroundNodeName;

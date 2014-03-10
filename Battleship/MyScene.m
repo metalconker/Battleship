@@ -21,8 +21,7 @@
         _game = [[BattleshipGame alloc] init];
         
         // Creates the main game controller
-        _mainGameController = [[MainGameController alloc] initMainGameControllerWithGame:_game
-                                                                                andFrame:self.frame.size];
+        _mainGameController = [[MainGameController alloc] initMainGameControllerWithGame:_game andFrame:self.frame.size];
         
         [self addChild:_mainGameController.containers.overallNode];
         
@@ -36,37 +35,37 @@
     for (UITouch *touch in touches) {
         
         CGPoint location = [touch locationInNode:self];
-        
-        //Coordinate *newMove = [_helper fromTextureToCoordinate:location];
-        
-        
         _nodeTouched = [self nodeAtPoint:location];
         
-        // If the initial touch was on the mini map
+        // Mini map touched
         if ([_nodeTouched.name isEqualToString:_mainGameController.names.miniMapSpriteName])
         {
             _mainGameController.miniMap.initiallyTouched = true;
         }
         
-        //SpriteNode *displayShip = [self ];
+        // Background touched
+        if ([_nodeTouched.parent isEqual:_mainGameController.gestures.gesturesNode]
+            || [_nodeTouched.parent.parent isEqual:_mainGameController.gestures.gesturesNode])
+        {
+            _mainGameController.gestures.initiallyTouched = true;
+        }
         
-        // If the touch is a ship
+        // Ship touched
         if ([_nodeTouched.parent isEqual:_mainGameController.ships.shipsNode])
         {
             [_mainGameController.visualBar displayShipDetails:_nodeTouched];
         }
         
-        // If the touch is a move button
+        // Move button touched
         if ([_nodeTouched.parent isEqual:_mainGameController.visualBar.shipFunctions])
         {
             [_mainGameController.visualBar detectFunction:_nodeTouched];
         }
         
-        // If the touch is a move location
-        if ([_nodeTouched.parent isEqual:_mainGameController.visualBar.movementLocationsSprites])
+        // Move location touched
+        if ([_nodeTouched.parent isEqual:_mainGameController.foreground.movementLocationsSprites])
         {
-            NSLog(@"hello");
-            [_mainGameController.visualBar updateShipLocation:_nodeTouched];
+            [_mainGameController.ships updateShipLocation:_nodeTouched];
         }
     }
 }
@@ -75,18 +74,18 @@
     UITouch *touch = [touches anyObject];
     CGPoint positionInScene = [touch locationInNode:self];
     CGPoint previousPosition = [touch previousLocationInNode:self];
-    CGPoint location = [touch locationInNode:self];
-    
     CGPoint translation = CGPointMake(positionInScene.x - previousPosition.x, positionInScene.y - previousPosition.y);
     
-    SKNode *node = [self nodeAtPoint:location];
-    CGPoint position = [node position];
-    
-    // Mini Map Movement
+    // Move mini map
     if (_mainGameController.miniMap.initiallyTouched)
     {
-        CGPoint position = [[_mainGameController.miniMap.miniMapNode childNodeWithName:_mainGameController.names.miniMapSpriteName ] position];
-        [[_mainGameController.miniMap.miniMapNode childNodeWithName:_mainGameController.names.miniMapSpriteName] setPosition:CGPointMake(position.x + translation.x, position.y + translation.y)];
+        [_mainGameController.miniMap updateMiniMapPositionWithTranslation:translation];
+    }
+    
+    // Move map around
+    if (_mainGameController.gestures.initiallyTouched && !_mainGameController.miniMap.initiallyTouched)
+    {
+        [_mainGameController.gestures updateGesturesPositionWithTranslation:translation];
     }
 }
 
@@ -95,42 +94,43 @@
     UITouch *touch = [touches anyObject];
     CGPoint location = [touch locationInNode:self];
     
-    // If the mini map was initially touched
+    // Relocate mini map
     if(_mainGameController.miniMap.initiallyTouched)
     {
         [_mainGameController.miniMap setMiniMapLocation:location];
         _mainGameController.miniMap.initiallyTouched = false;
     }
-
+    
+    // Update background
+    if(_mainGameController.gestures.initiallyTouched)
+    {
+        _mainGameController.gestures.initiallyTouched = false;
+    }
+    
 }
 
+NSInteger intervals = 100;
 -(void)update:(CFTimeInterval)currentTime {
     // Scrolls the backgrounds according to current time
     [_mainGameController.background scrollBackgrounds];
+    
+    // Ships to move
+    if ([_mainGameController.ships.movingShip count] > 0)
+    {
+        intervals--;
+        [_mainGameController.ships animateShips:intervals];
+        
+        if (intervals == 0)
+        {
+            intervals = 100;
+        }
+    }
 }
 
 // Handles the pinch
 -(void) handlePinch:(UIPinchGestureRecognizer *) recognizer {
-    // Makes the screen node larger
-    SKNode* overallNode = _mainGameController.containers.overallNode;
-    if (overallNode.xScale < 2 && overallNode.yScale < 2 && recognizer.scale > 1)
-    {
-        overallNode.xScale = overallNode.xScale + (0.01);
-        overallNode.yScale = overallNode.yScale + (0.01);
-    }
     
-    // Makes the screen node smaller
-    if (overallNode.xScale > 1 && overallNode.yScale > 1 && recognizer.scale < 1)
-    {
-        overallNode.xScale = overallNode.xScale - (0.01);
-        overallNode.yScale = overallNode.yScale - (0.01);
-        
-        if (overallNode.xScale < 1 || overallNode.yScale < 1)
-        {
-            overallNode.xScale = 1;
-            overallNode.yScale = 1;
-        }
-    }
+    [_mainGameController.gestures handlePinchWithRecognizerScale:recognizer.scale];
 }
 
 // Adds the pinch recognizer to the scene

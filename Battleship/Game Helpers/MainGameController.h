@@ -18,6 +18,7 @@
 #import "VisualBar.h"
 #import "Helpers.h"
 #import "BattleshipGame.h"
+#import "Gestures.h"
 @interface MainGameController : NSObject
 
 @property (strong, nonatomic) BattleshipGame *game;
@@ -31,6 +32,7 @@
 @property (strong, nonatomic) Foreground *foreground;
 @property (strong, nonatomic) VisualBar *visualBar;
 @property (strong, nonatomic) Helpers *helper;
+@property (strong, nonatomic) Gestures *gestures;
 
 - (instancetype) initMainGameControllerWithGame:(BattleshipGame*)game
                                        andFrame:(CGSize)frame;
