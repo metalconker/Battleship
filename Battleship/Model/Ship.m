@@ -35,6 +35,7 @@
 }
 
 -(void)positionShip:(Coordinate *)destination {
+    NSLog(@"%d", destination.direction);
     _location.xCoord = destination.xCoord;
     _location.yCoord = destination.yCoord;
     _location.direction = destination.direction;

@@ -20,6 +20,7 @@
     self = [super init];
     if (self) {
         self.grid = [[NSMutableArray alloc] init];
+        //if ([[GCHelper sharedInstance:nil] localPlayer].playerID == )
         for(int i = 0; i<GRID_SIZE; i++){
             NSMutableArray *array = [[NSMutableArray alloc] init];
             [self.grid insertObject:array atIndex:i ];

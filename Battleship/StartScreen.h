@@ -10,6 +10,6 @@
 #import "GCHelper.h"
 #import "ViewController.h"
 
-@interface StartScreen : SKScene <GCHelperDelegate>
+@interface StartScreen : SKScene
 @property (strong, nonatomic) UIViewController* parentView;
 @end
