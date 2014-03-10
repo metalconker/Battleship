@@ -19,6 +19,11 @@
         backgroundSprite.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame));
         backgroundSprite.xScale = 0.6;
         backgroundSprite.yScale = 0.6;
+        SKSpriteNode *startButton = [SKSpriteNode spriteNodeWithImageNamed:@"Start Button"];
+        startButton.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)/2.8);
+        [startButton setZPosition:1];
+        [backgroundSprite setZPosition:0];
+        [self addChild:startButton];
         [self addChild:backgroundSprite];
         [[GCHelper sharedInstance:nil] joinBattleshipMatch:[GKLocalPlayer localPlayer]];
     }
@@ -26,5 +31,9 @@
     return self;
 }
 
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    SKScene * scene = [MyScene sceneWithSize:self.scene.view.bounds.size];
+    [self.scene.view presentScene:scene];
+}
          
 @end

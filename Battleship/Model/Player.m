@@ -10,10 +10,10 @@
 
 @implementation Player
 
-- (instancetype) init {
+- (instancetype) initWith: (NSString*) playerID {
     self = [super init];
     if (self) {
-        
+        _playerID = playerID;
         self.radarGrid = [[NSMutableArray alloc] init];
         for(int i = 0; i<GRID_SIZE; i++){
             self.radarGrid[i] = [[NSMutableArray alloc] init];
@@ -25,8 +25,5 @@
     self.playerFleet = [[Fleet alloc] initWithPlayerID:_playerID];
     return self;
 }
-
-
-
 
 @end

@@ -24,11 +24,8 @@
         startButton.position = CGPointMake(CGRectGetMidX(self.frame), CGRectGetMidY(self.frame)/2.8);
         [startButton setZPosition:1];
         [backgroundSprite setZPosition:0];
-        SKView* mapView;
         [self addChild:startButton];
-        [self addChild:backgroundSprite ];
-        AppDelegate* delegate = (AppDelegate *) [UIApplication sharedApplication].delegate;
-        //[[GCHelper sharedInstance] findMatchWithMinPlayers:2 maxPlayers:2 viewController:delegate.viewController delegate:self];
+        [self addChild:backgroundSprite];
     }
     
     return self;

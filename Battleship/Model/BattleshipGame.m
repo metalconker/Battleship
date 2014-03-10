@@ -8,12 +8,13 @@
 
 #import "BattleshipGame.h"
 @interface BattleshipGame()
-@property BOOL hostsTurn;
-@property(strong, nonatomic) Fleet* hostFleet;
-@property(strong, nonatomic) Fleet* joinFleet;
-
+@property BOOL myTurn;
+@property(strong, nonatomic) Player* localPlayer;
+@property(strong, nonatomic) GCHelper* gameCenter;
 -(void)updateMap:(Fleet*) updatedFleet;
 -(void)removeShipFromMap: (Ship*) s;
+-(void)sendMap;
+-(void)match:(GKMatch*)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID;
 @end
 
 @implementation BattleshipGame
@@ -21,17 +22,41 @@
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _hostFleet = [[Fleet alloc] initWithPlayerID:1];
-        _joinFleet = [[Fleet alloc] initWithPlayerID:2];
-        _hostsTurn = true;
-        self.hostView = [[Map alloc] init];
-        [self updateMap: _hostFleet];
-        [self updateMap: _joinFleet];
+        _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID];
+        _gameCenter = [GCHelper sharedInstance:nil];
+        NSString* loc = _localPlayer.playerID;
+        if ([loc compare:_gameCenter.match.playerIDs[0]] < 0) {
+            _myTurn = true;
+        }
+        else {
+            _myTurn = false;
+        }
+        if (_myTurn) {
+            self.gameMap = [[Map alloc] init];
+            [self sendMap];
+        }
+        //[self updateMap: _hostFleet];
+        //[self updateMap: _joinFleet];
     }
     return self;
 }
-//must remove fleet and then add fleet back
 
+-(void)sendMap {
+    NSError* error;
+    NSData *packet = [NSData dataWithBytes:&_gameMap length:sizeof(_gameMap)];
+    [_gameCenter.match sendDataToAllPlayers: packet withDataMode:GKMatchSendDataUnreliable error:&error];
+    if (error != nil) {
+        NSLog(@"error");
+    }
+}
+
+-(void) match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
+    if (match != _gameCenter.match) return;
+    [self match:_gameCenter.match didReceiveData:data fromPlayer:playerID];
+    _gameMap = [data bytes];
+}
+//must remove fleet and then add fleet back
+/*
 -(void)updateMap:(Fleet*) updatedFleet{
     for(Ship* ship in updatedFleet.shipArray) {
         for(ShipSegment* seg in ship.blocks) {
@@ -190,7 +215,6 @@
     }
     return impactCoord;
 }
-/*
 -(Coordinate*) getCoordOfShip: (NSString*) shipName {
     Fleet *currentFleet;
     if (_hostsTurn) {
@@ -206,7 +230,7 @@
     }
     return Nil;
 }
- */
+
 
 -(NSMutableArray*) getShipDamages:(Coordinate *)origin {
     Ship* s;

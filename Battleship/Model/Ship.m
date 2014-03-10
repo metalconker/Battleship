@@ -35,6 +35,7 @@
 }
 
 -(void)positionShip:(Coordinate *)destination {
+    NSLog(@"%d", destination.direction);
     _location.xCoord = destination.xCoord;
     _location.yCoord = destination.yCoord;
     _location.direction = destination.direction;
@@ -43,6 +44,7 @@
         switch (destination.direction) {
             case NORTH:
                 seg.location.yCoord = destination.yCoord - i;
+                NSLog(@"%d,%d", seg.location.xCoord, seg.location.yCoord);
                 break;
             case SOUTH:
                 seg.location.yCoord = destination.yCoord + i;

@@ -53,8 +53,8 @@
     {
         for (int j = 0; j < GRID_SIZE; j++)
         {
-            if ([_game.hostView.grid[i][j] isKindOfClass:[NSNumber class]]) {
-                Terrain terType = [_game.hostView.grid[i][j] intValue];
+            if ([_game.gameMap.grid[i][j] isKindOfClass:[NSNumber class]]) {
+                Terrain terType = [_game.gameMap.grid[i][j] intValue];
                 switch (terType)
                 {
                     case HOST_BASE:
