@@ -76,9 +76,9 @@
         for (int j = 0; j < GRID_SIZE; j++)
         {
             
-            if ([_game.hostView.grid[i][j] isKindOfClass:[ShipSegment class]])
+            if ([_game.gameMap.grid[i][j] isKindOfClass:[ShipSegment class]])
             {
-                s = _game.hostView.grid[i][j];
+                s = _game.gameMap.grid[i][j];
                 if (s.isHead) {
                     sprite = [SKSpriteNode spriteNodeWithImageNamed:_names.miniMapGreenDotImageName];
                     sprite.name = [NSString stringWithFormat:@"%@/Green Dot", s.shipName];
