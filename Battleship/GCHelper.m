@@ -10,10 +10,9 @@
 
 @implementation GCHelper
 
-@synthesize gameCenterAvailable;
-@synthesize presentingViewController;
+
 @synthesize match;
-@synthesize delegate;
+
 
 #pragma mark Initialization
 
@@ -25,53 +24,27 @@ static GCHelper *sharedHelper = nil;
     return sharedHelper;
 }
 
-- (BOOL) isGameCenterAvailable{
-    Class gcClass = (NSClassFromString(@"GKLocalPlayer"));
-    NSString *reqSysVer = @"4.1";
-    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
-    BOOL osVersionSupported = ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending);
-    return (gcClass && osVersionSupported);
-}
-
 -(id)initWith: (UIViewController*) rootView {
     if ((self = [super init])) {
         _rootViewController = rootView;
-        gameCenterAvailable = [self isGameCenterAvailable];
-        if (gameCenterAvailable) {
-            NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-            [nc addObserver:self selector:@selector(authenticationChanged) name:GKPlayerAuthenticationDidChangeNotificationName object:nil];
-            
-        }
     }
     return self;
 }
 
 
--(void)authenticationChanged {
-    if ([GKLocalPlayer localPlayer].isAuthenticated && !userAuthenticated) {
-        NSLog(@"Authetication changed: player authenticated");
-        userAuthenticated = TRUE;
-    }
-    else if (![GKLocalPlayer localPlayer].isAuthenticated && userAuthenticated) {
-        NSLog(@"Authentication changed: player not authenticated");
-        userAuthenticated = FALSE;
-    }
-}
-
 #pragma mark User Functions
 
 - (void) authenticateLocalUser
 {
-    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
-    localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error){
+    _localPlayer = [GKLocalPlayer localPlayer];
+    _localPlayer.authenticateHandler = ^(UIViewController *viewController, NSError *error){
         if (viewController != nil)
         {
             [_rootViewController presentViewController:viewController animated:YES completion:nil];
-            
             //showAuthenticationDialogWhenReasonable: is an example method name. Create your own method that displays an authentication view when appropriate for your app.
             //[self showAuthenticationDialogWhenReasonable: viewController];
         }
-        else if (localPlayer.isAuthenticated)
+        else if (_localPlayer.isAuthenticated)
         {
             //authenticatedPlayer: is an example method name. Create your own method that is called after the loacal player is authenticated.
             //[self authenticatedPlayer: localPlayer];
@@ -83,27 +56,6 @@ static GCHelper *sharedHelper = nil;
     } ;
 }
 
--(void)findMatchWithMinPlayers:(int)minPlayers maxPlayers:(int)maxPlayers viewController:(UIViewController *)viewController delegate:(id<GCHelperDelegate>)theDelegate{
-    
-    if(!gameCenterAvailable) return;
-    
-    matchStarted = NO;
-    self.match = nil;
-    self.presentingViewController = viewController;
-    delegate = theDelegate;
-    [presentingViewController dismissViewControllerAnimated:NO completion:nil];
-    
-    GKMatchRequest *request = [[GKMatchRequest alloc] init];
-    request.minPlayers = minPlayers;
-    request.maxPlayers = maxPlayers;
-    
-    GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc]initWithMatchRequest:request];
-
-    mmvc.matchmakerDelegate = self;
-    [presentingViewController presentViewController:mmvc animated:YES completion:nil];
-    
-}
-
 - (IBAction)joinBattleshipMatch: (id) sender
 {
     GKMatchRequest *request = [[GKMatchRequest alloc] init];
@@ -112,7 +64,7 @@ static GCHelper *sharedHelper = nil;
     
     GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
     mmvc.matchmakerDelegate = self;
-    NSLog(@"AAAAA");
+
     [_rootViewController presentViewController:mmvc animated:YES completion:nil];
 }
 
@@ -126,44 +78,13 @@ static GCHelper *sharedHelper = nil;
 }
 
 -(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)theMatch {
-    NSLog(@"asdfasdfa");
     [_rootViewController dismissViewControllerAnimated:YES completion:nil];
-    //self.match = theMatch;
-    match.delegate = self;
-    
-    for (NSString* s in theMatch.playerIDs) {
-        NSLog(@"%@", s);
-    }
-    
-}
-
-#pragma mark GKMatchDelegate
-
--(void)match:(GKMatch *)theMatch didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
-    if (match != theMatch) return;
-    [delegate match:theMatch didReceiveData:data fromPlayer:playerID];
-}
-
--(void)match: (GKMatch *) theMatch player:(NSString *)playerID didChangeState:(GKPlayerConnectionState)state {
-    switch (state) {
-        case GKPlayerStateConnected:
-            NSLog(@"Player connected");
-            if (!matchStarted && theMatch.expectedPlayerCount == 0) {
-                NSLog(@"Ready to start match!");
-            }
-            break;
-        case GKPlayerStateDisconnected:
-            NSLog(@"Player disconnected!");
-            matchStarted = NO;
-            [delegate matchEnded];
-            break;
+    self.match = theMatch;
+    if (theMatch.expectedPlayerCount == 0) {
+        for (NSString* s in theMatch.playerIDs) {
+            NSLog(@"%@", s);
+        }
     }
 }
 
--(void)match:(GKMatch *)theMatch didFailWithError:(NSError *)error {
-    if (match != theMatch) return;
-    NSLog(@"MAtch failed with error: %@", error.localizedDescription);
-    matchStarted = NO;
-    [delegate matchEnded];
-}
 @end

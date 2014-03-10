@@ -8,9 +8,8 @@
 
 #import "BattleshipGame.h"
 @interface BattleshipGame()
-@property BOOL hostsTurn;
-@property(strong, nonatomic) Fleet* hostFleet;
-@property(strong, nonatomic) Fleet* joinFleet;
+@property BOOL myTurn;
+@property(strong, nonatomic) Player* localPlayer;
 
 -(void)updateMap:(Fleet*) updatedFleet;
 -(void)removeShipFromMap: (Ship*) s;
@@ -21,17 +20,23 @@
 -(instancetype) init {
     self = [super init];
     if (self) {
-        _hostFleet = [[Fleet alloc] initWithPlayerID:1];
-        _joinFleet = [[Fleet alloc] initWithPlayerID:2];
-        _hostsTurn = true;
+        _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID];
+        NSString* loc = _localPlayer.playerID;
+        if ([loc compare:[GCHelper sharedInstance:nil].match.playerIDs[0]] < 0) {
+            _myTurn = true;
+        }
+        else {
+            _myTurn = false;
+        }
+        NSLog(@"%d", _myTurn);
         self.hostView = [[Map alloc] init];
-        [self updateMap: _hostFleet];
-        [self updateMap: _joinFleet];
+        //[self updateMap: _hostFleet];
+        //[self updateMap: _joinFleet];
     }
     return self;
 }
 //must remove fleet and then add fleet back
-
+/*
 -(void)updateMap:(Fleet*) updatedFleet{
     for(Ship* ship in updatedFleet.shipArray) {
         for(ShipSegment* seg in ship.blocks) {
@@ -190,7 +195,6 @@
     }
     return impactCoord;
 }
-/*
 -(Coordinate*) getCoordOfShip: (NSString*) shipName {
     Fleet *currentFleet;
     if (_hostsTurn) {
@@ -206,7 +210,7 @@
     }
     return Nil;
 }
- */
+
 
 -(NSMutableArray*) getShipDamages:(Coordinate *)origin {
     Ship* s;

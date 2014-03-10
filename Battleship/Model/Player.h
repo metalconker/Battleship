@@ -15,6 +15,6 @@
 
 @property (strong, nonatomic) NSMutableArray* radarGrid;
 @property(strong, nonatomic) Fleet* playerFleet;
-@property int playerID;
-
+@property NSString* playerID;
+-initWith: (NSString*) playerID;
 @end
