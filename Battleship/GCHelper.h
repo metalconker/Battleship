@@ -16,5 +16,6 @@
 + (GCHelper *)sharedInstance:(UIViewController*) rootView;
 - (void)authenticateLocalUser;
 - (IBAction)joinBattleshipMatch: (id) sender;
+-(void) match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID;
 
 @end

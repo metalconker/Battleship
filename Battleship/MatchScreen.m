@@ -26,6 +26,8 @@
         [self addChild:startButton];
         [self addChild:backgroundSprite];
         [[GCHelper sharedInstance:nil] joinBattleshipMatch:[GKLocalPlayer localPlayer]];
+        //SKScene * scene = [MyScene sceneWithSize:self.scene.view.bounds.size];
+        //[self.scene.view presentScene:scene];
     }
     
     return self;

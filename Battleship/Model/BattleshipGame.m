@@ -55,10 +55,10 @@
 }
 
 -(void) match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
-    if (match != _gameCenter.match) return;
-    [self match:_gameCenter.match didReceiveData:data fromPlayer:playerID];
-    _gameMap = [data bytes];
+    NSLog(@"test");
+    //_gameMap = [data bytes];
 }
+
 //must remove fleet and then add fleet back
 /*
 -(void)updateMap:(Fleet*) updatedFleet{
