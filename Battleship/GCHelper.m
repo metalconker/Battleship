@@ -80,36 +80,14 @@ static GCHelper *sharedHelper = nil;
 -(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)theMatch {
     [_rootViewController dismissViewControllerAnimated:YES completion:nil];
     self.match = theMatch;
-    match.delegate = self;
-    if(theMatch.expectedPlayerCount == 0){
-    for (NSString* s in theMatch.playerIDs) {
-        NSLog(@"%@", s);
+    if (theMatch.expectedPlayerCount == 0) {
+        for (NSString* s in theMatch.playerIDs) {
+            NSLog(@"%@", s);
+        }
     }
     }
+
     
-}
 
-#pragma mark GKMatchDelegate
-
--(void)match:(GKMatch *)theMatch didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
-    if (match != theMatch) return;
-    [delegate match:theMatch didReceiveData:data fromPlayer:playerID];
-}
-
--(void)match: (GKMatch *) theMatch player:(NSString *)playerID didChangeState:(GKPlayerConnectionState)state {
-    switch (state) {
-        case GKPlayerStateConnected:
-            NSLog(@"Player connected");
-            if (!matchStarted && theMatch.expectedPlayerCount == 0) {
-                NSLog(@"Ready to start match!");
-            }
-            break;
-        case GKPlayerStateDisconnected:
-            NSLog(@"Player disconnected!");
-            matchStarted = NO;
-            [delegate matchEnded];
-            break;
-    }
-}
 
 @end
