@@ -17,4 +17,36 @@ static ShipActionHelper *sharedHelper = nil;
     }
     return sharedHelper;
 }
+
+-(NSMutableArray*) getRotationRangeOf: (Ship*) s{
+    NSMutableArray *validRotations = [[NSMutableArray alloc] init];
+    if ([s isKindOfClass:[Cruiser class]] || [s isKindOfClass:[Destroyer class]] || [s isKindOfClass:[MineLayer class]]) {
+        [self getRotationAroundTailAxis:s];
+    }
+    else if ([s isKindOfClass:[TorpedoBoat class]] || [s isKindOfClass:[RadarBoat class]]) {
+        [self getRotationAroundCenterAxis:s];
+    }
+    return validRotations;
+}
+/*
+-(NSMutableArray*) getRotationAroundCenterAxis: (Ship*) s{
+    switch (s.location.direction) {
+            
+    }
+}
+
+-(NSMutableArray*) getRotationAroundTailAxis: (Ship*) s{
+    NSMutableArray* headLocations = [[NSMutableArray alloc] init];
+    switch (s.location.direction) {
+        Coordinate* l = [Coordinate alloc] initWithXCoordinate:s.location.xCoord YCoordinate:s.location.yCoord initiallyFacing:<#(Direction)#>
+        case NORTH:
+            Coordinate* l
+            break;
+            
+        default:
+            break;
+    }
+}
+ */
 @end
+

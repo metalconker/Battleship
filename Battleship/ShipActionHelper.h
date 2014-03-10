@@ -21,4 +21,7 @@
 @property (strong, nonatomic) Fleet* hostFleet;
 @property (strong, nonatomic) Fleet* joinFleet;
 +(ShipActionHelper*) sharedInstance;
+-(NSMutableArray*) getRotationRangeOf: (Ship*) s;
+-(NSMutableArray*) getRotationAroundCenterAxis: (Ship*) s;
+-(NSMutableArray*) getRotationAroundTailAxis:(Ship *)s;
 @end

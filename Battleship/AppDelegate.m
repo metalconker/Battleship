@@ -15,9 +15,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
     viewController = (ViewController*) self.window.rootViewController;
-    [[GCHelper sharedInstance: self.window.rootViewController] authenticateLocalUser];
+    //[[GCHelper sharedInstance: self.window.rootViewController] authenticateLocalUser];
     return YES;
 }
 							
