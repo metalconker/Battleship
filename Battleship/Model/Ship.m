@@ -43,6 +43,7 @@
         switch (destination.direction) {
             case NORTH:
                 seg.location.yCoord = destination.yCoord - i;
+                NSLog(@"%d,%d", seg.location.xCoord, seg.location.yCoord);
                 break;
             case SOUTH:
                 seg.location.yCoord = destination.yCoord + i;
