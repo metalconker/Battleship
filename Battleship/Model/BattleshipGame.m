@@ -62,6 +62,19 @@ typedef struct {
     NSLog(@"test");
     NSMutableArray* grid = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     _gameMap.grid = grid;
+    for (int i = 0; i < GRID_SIZE; i++) {
+        for (int j = 0; j < GRID_SIZE; j++) {
+            if ([_gameMap.grid[i][j] isKindOfClass:[NSNumber class]]) {
+                if ([_gameMap.grid[i][j] isKindOfClass:[NSNumber class]]) {
+                    Terrain terType = [_gameMap.grid[i][j] intValue];
+                    if (terType == CORAL) {
+                        NSLog(@"%d, %d", i, j);
+                    }
+                }
+                
+            }
+        }
+    }
 }
 
 //must remove fleet and then add fleet back
