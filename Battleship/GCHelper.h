@@ -9,11 +9,13 @@
 #import <GameKit/GameKit.h>
 
 @protocol GCHelperDelegate
-
+//-(void)match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID;
 @end
 
+
+
 @interface GCHelper : NSObject <GKMatchmakerViewControllerDelegate, GKMatchDelegate> {
-    UIViewController *presentingViewController;
+    UIViewController *rootViewController;
     GKMatch *match;
     id <GCHelperDelegate> delegate;
     NSMutableDictionary *playersDict;

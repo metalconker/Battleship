@@ -19,8 +19,8 @@
 
 @implementation BattleshipGame
 
-typedef struct{
-    __unsafe_unretained Map* m;
+typedef struct {
+    __unsafe_unretained Map *m;
 }Message;
 
 -(instancetype) init {
@@ -36,7 +36,7 @@ typedef struct{
         else {
             _myTurn = false;
         }
-        self.gameMap = [[Map alloc] init];
+        _gameMap = [[Map alloc] init];
         if (_myTurn) {
             
             [self sendMap];
@@ -60,8 +60,8 @@ typedef struct{
 
 -(void) match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
     NSLog(@"test");
-    Message* msg = (Message *) [data bytes];
-    _gameMap = msg->m;
+    NSMutableArray* grid = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    _gameMap.grid = grid;
 }
 
 //must remove fleet and then add fleet back
