@@ -11,7 +11,7 @@
 #import "Fleet.h"
 #import "Ship.h"
 #import "Player.h"
-
+#import "GCHelper.h"
 @interface BattleshipGame : NSObject <GKMatchDelegate>
 
 @property (strong, nonatomic) Map* gameMap;
@@ -26,5 +26,6 @@
 -(Coordinate*) fireTorpedo: (Coordinate*) origin;
 -(NSMutableArray*) getShipDamages: (Coordinate*) origin;
 -(NSMutableArray*) getValidRotationsFrom:(Coordinate*)origin;
-    
+
+
 @end

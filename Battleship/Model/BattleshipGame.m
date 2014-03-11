@@ -49,8 +49,10 @@ typedef struct{
 
 -(void)sendMap {
     NSError* error;
-    NSData *packet = [NSData dataWithBytes:&_gameMap length:sizeof(_gameMap)];
-    [_gameCenter.match sendDataToAllPlayers: packet withDataMode:GKMatchSendDataUnreliable error:&error];
+    NSLog(@"send");
+    NSData *packet = [NSKeyedArchiver archivedDataWithRootObject:_gameMap.grid];
+    BOOL success = [_gameCenter.match sendDataToAllPlayers: packet withDataMode:GKMatchSendDataReliable error:&error];
+    NSLog(@"%d", success);
     if (error != nil) {
         NSLog(@"error");
     }

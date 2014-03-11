@@ -25,4 +25,6 @@
 -(void) setCoords: (NSMutableArray*) coords
                to: (Terrain) t;
 -(Coordinate*) collisionLocationOfTorpedo: (Coordinate*) firedFrom;
+-(void) encodeWithCoder: (NSCoder*) coder;
+-(id) initWithCoder:(NSCoder*)coder;
 @end
