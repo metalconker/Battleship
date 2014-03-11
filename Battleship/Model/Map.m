@@ -38,6 +38,16 @@
     return self;
 }
 
+
+-(void) encodeWithCoder: (NSCoder*) coder {
+    [coder encodeObject:_grid forKey:@"myArray"];
+}
+
+-(id) initWithCoder:(NSCoder *)coder {
+    id mapID = [coder decodeObjectForKey:@"myArray"];
+    return mapID;
+}
+
 -(void) initializeBase:(NSString*) player {
     int i;
     Terrain t;

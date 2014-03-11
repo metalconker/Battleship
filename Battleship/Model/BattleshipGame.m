@@ -19,6 +19,10 @@
 
 @implementation BattleshipGame
 
+typedef struct {
+    __unsafe_unretained Map *m;
+}Message;
+
 -(instancetype) init {
     self = [super init];
     if (self) {
@@ -32,8 +36,9 @@
         else {
             _myTurn = false;
         }
+        _gameMap = [[Map alloc] init];
         if (_myTurn) {
-            self.gameMap = [[Map alloc] init];
+            
             [self sendMap];
         }
         //[self updateMap: _hostFleet];
@@ -45,9 +50,8 @@
 -(void)sendMap {
     NSError* error;
     NSLog(@"send");
-    int i = 0;
-    NSData *packet = [NSData dataWithBytes:&i length:sizeof(_gameMap)];
-    BOOL success = [_gameCenter.match sendDataToAllPlayers: packet withDataMode:GKMatchSendDataUnreliable error:&error];
+    NSData *packet = [NSKeyedArchiver archivedDataWithRootObject:_gameMap.grid];
+    BOOL success = [_gameCenter.match sendDataToAllPlayers: packet withDataMode:GKMatchSendDataReliable error:&error];
     NSLog(@"%d", success);
     if (error != nil) {
         NSLog(@"error");
@@ -56,7 +60,8 @@
 
 -(void) match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
     NSLog(@"test");
-    //_gameMap = [data bytes];
+    NSMutableArray* grid = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    _gameMap.grid = grid;
 }
 
 //must remove fleet and then add fleet back
