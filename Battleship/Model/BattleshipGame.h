@@ -16,7 +16,6 @@
 
 @property (strong, nonatomic) Map* gameMap;
 
-
 -(instancetype) init;
 -(void)moveShipfrom: (Coordinate*) origin
                  to:(Coordinate*) destination;

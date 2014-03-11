@@ -63,8 +63,8 @@ static GCHelper *sharedHelper = nil;
     request.maxPlayers = 2;
     
     GKMatchmakerViewController *mmvc = [[GKMatchmakerViewController alloc] initWithMatchRequest:request];
-    //mmvc.matchmakerDelegate = _rootViewController;
     
+    mmvc.matchmakerDelegate = self;
     [_rootViewController presentViewController:mmvc animated:YES completion:nil];
 }
 
@@ -79,14 +79,15 @@ static GCHelper *sharedHelper = nil;
 
 -(void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindMatch:(GKMatch *)theMatch {
     [_rootViewController dismissViewControllerAnimated:YES completion:nil];
-    self.match = theMatch;
+     self.match = theMatch;
     match.delegate = self;
+   
     if (theMatch.expectedPlayerCount == 0) {
         for (NSString* s in theMatch.playerIDs) {
             NSLog(@"%@", s);
         }
     }
-    }
+}
 
 
 
