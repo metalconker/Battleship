@@ -10,6 +10,15 @@
 
 @implementation MyScene
 
+typedef enum messageType {
+    MAP,
+    SHIP_LOCATION
+}MessageType;
+
+typedef struct {
+    MessageType type;
+    __unsafe_unretained NSData* packet;
+}Message;
 
 -(id)initWithSize:(CGSize)size {
     self = [super initWithSize:size];
@@ -33,24 +42,51 @@
 
 -(BOOL)sendMap {
     NSError* error;
-    NSLog(@"send");
-    NSData *packet = [NSKeyedArchiver archivedDataWithRootObject:_game.gameMap.grid];
-    BOOL success = [_game.gameCenter.match sendDataToAllPlayers: packet withDataMode:GKMatchSendDataUnreliable error:&error];
-    NSLog(@"%d", success);
+    Message mapMessage;
+    mapMessage.type = MAP;
+    mapMessage.packet = [NSKeyedArchiver archivedDataWithRootObject:_game.gameMap.grid];
+    NSData* structPacket = [NSData dataWithBytes:&mapMessage length:sizeof(mapMessage)];
+    [_game.gameCenter.match sendDataToAllPlayers: structPacket withDataMode:GKMatchSendDataUnreliable error:&error];
     if (error != nil) {
         NSLog(@"error");
     }
     return false;
 }
 
+-(BOOL)sendFleetLocation {
+    NSError* error;
+    NSLog(@"send");
+    Message fleetMessage;
+    fleetMessage.type = SHIP_LOCATION;
+    /*NSMutableArray* headLocation = [[NSMutableArray alloc] init];
+    for (Ship* s in _game.localPlayer.playerFleet.shipArray) {
+        [headLocation addObject:[NSKeyedArchiver archivedDataWithRootObject:s.location]];
+    }
+    */
+    NSData *packet = [NSKeyedArchiver archivedDataWithRootObject:_game.localPlayer.playerFleet];
+    fleetMessage.packet = packet;
+    NSData* structPacket = [NSData dataWithBytes:&fleetMessage length:sizeof(fleetMessage)];
+    BOOL success = [_game.gameCenter.match sendDataToAllPlayers: structPacket withDataMode:GKMatchSendDataUnreliable error:&error];
+    NSLog(@"%d", success);
+    if (error != nil) {
+        NSLog(@"error");
+    }
+    return false;
+}
 -(void) match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
     NSLog(@"test");
-    NSMutableArray* grid = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    _game.gameMap.grid = grid;
-    [_game updateMap:_game.localPlayer.playerFleet];
-    _mainGameController = [[MainGameController alloc] initMainGameControllerWithGame:_game andFrame:self.frame.size];
-    [self addChild:_mainGameController.containers.overallNode];
-
+    Message* receivedMessage = (Message*) [data bytes];
+    if (receivedMessage->type == MAP) {
+        NSMutableArray* grid = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:receivedMessage->packet];
+        _game.gameMap.grid = grid;
+        [_game updateMap:_game.localPlayer.playerFleet];
+        _mainGameController = [[MainGameController alloc] initMainGameControllerWithGame:_game andFrame:self.frame.size];
+        [self addChild:_mainGameController.containers.overallNode];
+    }
+    if (receivedMessage->type == SHIP_LOCATION) {
+        Fleet* playerFleet = (Fleet*)[NSKeyedUnarchiver unarchiveObjectWithData:receivedMessage->packet];
+        [_game updateMap:playerFleet];
+    }
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
