@@ -29,6 +29,7 @@
 -(Coordinate*) fireTorpedo: (Coordinate*) origin;
 -(NSMutableArray*) getShipDamages: (Coordinate*) origin;
 -(NSMutableArray*) getValidRotationsFrom:(Coordinate*)origin;
+-(void)updateMap:(Fleet*) updatedFleet;
 
 
 @end

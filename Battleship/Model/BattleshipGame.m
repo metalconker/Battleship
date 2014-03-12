@@ -34,9 +34,7 @@ typedef struct {
         else {
             _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID andIsHost:FALSE];
             _myTurn = false;
-            
         }
-        [self updateMap: _localPlayer.playerFleet];
     }
     return self;
 }
