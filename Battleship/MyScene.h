@@ -21,7 +21,7 @@
 #import "Background.h"
 #import "MainGameController.h"
 
-@interface MyScene : SKScene
+@interface MyScene : SKScene <GKMatchDelegate>
 
 @property (nonatomic, strong) BattleshipGame *game;
 @property (nonatomic, strong) MainGameController *mainGameController;

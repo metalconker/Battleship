@@ -26,7 +26,6 @@ typedef struct {
     self = [super init];
     if (self) {
         _gameCenter = [GCHelper sharedInstance:nil];
-        _gameCenter.match.delegate = self;
         NSString* loc = [GKLocalPlayer localPlayer].playerID;
         if ([loc compare:_gameCenter.match.playerIDs[0]] < 0) {
             _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID andIsHost:TRUE];
