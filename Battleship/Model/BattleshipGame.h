@@ -14,6 +14,7 @@
 #import "GCHelper.h"
 @interface BattleshipGame : NSObject <GKMatchDelegate>
 
+@property BOOL myTurn;
 @property (strong, nonatomic) Map* gameMap;
 @property BOOL dataSent;
 @property(strong, nonatomic) GCHelper* gameCenter;

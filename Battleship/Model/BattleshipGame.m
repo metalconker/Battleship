@@ -23,7 +23,6 @@ typedef struct {
 }Message;
 
 -(instancetype) init {
-    _dataSent = TRUE;
     self = [super init];
     if (self) {
         _gameCenter = [GCHelper sharedInstance:nil];
@@ -33,7 +32,6 @@ typedef struct {
             _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID andIsHost:TRUE];
             _myTurn = true;
             _gameMap = [[Map alloc] init];
-            [self sendMap];
         }
         else {
             _dataSent = FALSE;
