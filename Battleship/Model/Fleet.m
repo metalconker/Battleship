@@ -12,7 +12,7 @@
 
 #pragma mark - TODO: the coordinate setting system is broken. please fix.
 
-- (instancetype)initWithPlayerID:(int)playerID
+- (instancetype)initWith:(BOOL)isHost
 {
     self = [super init];
     if(self){
@@ -26,7 +26,7 @@
         Coordinate *mineLayer1;
         Coordinate *mineLayer2;
         Coordinate *radar1;
-        if(playerID == 1){
+        if(isHost){
             cruiser1 = [[Coordinate alloc] initWithXCoordinate:19 YCoordinate:5 initiallyFacing:NORTH];
             cruiser2 = [[Coordinate alloc] initWithXCoordinate:18 YCoordinate:5 initiallyFacing:NORTH];
             destroyer1 = [[Coordinate alloc] initWithXCoordinate:17 YCoordinate:4 initiallyFacing:NORTH];
@@ -60,11 +60,7 @@
         MineLayer *m1 = [[MineLayer alloc] initWithLocation: mineLayer1 andName:@"m1"];
         MineLayer *m2 = [[MineLayer alloc] initWithLocation: mineLayer2 andName:@"m2"];
         RadarBoat *r1 = [[RadarBoat alloc] initWithLocation: radar1 andName:@"r1"];
-        
-       
-        // TODO: garbage code
-     
-        
+
         self.shipArray = [NSArray arrayWithObjects:c1,c2,d1,d2,d3,t1,t2,m1,m2,r1, nil];
     }
     return self;
