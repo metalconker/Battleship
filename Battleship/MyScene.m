@@ -12,20 +12,20 @@
 
 
 -(id)initWithSize:(CGSize)size {
-    if (self = [super initWithSize:size]) {
-        
+    self = [super initWithSize:size];
+    if (self) {
         // Initializing the background - more time efficient as only loads the textures once
         self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
         
         // Creates the battleship game
         _game = [[BattleshipGame alloc] init];
+        _game.gameCenter.match.delegate = self;
         if(_game.localPlayer.isHost) {
             [self sendMap];
             _mainGameController = [[MainGameController alloc] initMainGameControllerWithGame:_game andFrame:self.frame.size];
             [self addChild:_mainGameController.containers.overallNode];
         }
     }
-    
     return self;
 }
 

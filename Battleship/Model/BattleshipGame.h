@@ -12,7 +12,7 @@
 #import "Ship.h"
 #import "Player.h"
 #import "GCHelper.h"
-@interface BattleshipGame : NSObject <GKMatchDelegate>
+@interface BattleshipGame : NSObject 
 
 @property BOOL myTurn;
 @property (strong, nonatomic) Map* gameMap;
