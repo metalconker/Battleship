@@ -13,8 +13,7 @@
 
 -(id)initWithSize:(CGSize)size {
     self = [super initWithSize:size];
-    if(self){
-        
+    if (self) {
         // Initializing the background - more time efficient as only loads the textures once
         self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
         

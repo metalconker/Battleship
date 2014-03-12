@@ -22,7 +22,7 @@
                 [self.radarGrid[i] insertObject:[NSNumber numberWithBool:NO] atIndex:j];          }
         }
     }
-    self.playerFleet = [[Fleet alloc] initWithPlayerID:_playerID];
+    self.playerFleet = [[Fleet alloc] initWithPlayerID:_playe];
     return self;
 }
 
