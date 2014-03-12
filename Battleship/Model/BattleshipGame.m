@@ -42,7 +42,6 @@ typedef struct {
         if (_myTurn) {
             
         }
-        [self updateMap: _localPlayer.playerFleet];
     }
     return self;
 }

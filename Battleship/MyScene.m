@@ -22,6 +22,7 @@
         _game.gameCenter.match.delegate = self;
         if(_game.localPlayer.isHost) {
             [self sendMap];
+            [_game updateMap:_game.localPlayer.playerFleet];
             _mainGameController = [[MainGameController alloc] initMainGameControllerWithGame:_game andFrame:self.frame.size];
             [self addChild:_mainGameController.containers.overallNode];
         }
@@ -46,6 +47,7 @@
     NSLog(@"test");
     NSMutableArray* grid = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     _game.gameMap.grid = grid;
+    [_game updateMap:_game.localPlayer.playerFleet];
     _mainGameController = [[MainGameController alloc] initMainGameControllerWithGame:_game andFrame:self.frame.size];
     [self addChild:_mainGameController.containers.overallNode];
 
