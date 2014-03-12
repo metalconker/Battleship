@@ -36,5 +36,6 @@
 
 - (instancetype) initMainGameControllerWithGame:(BattleshipGame*)game
                                        andFrame:(CGSize)frame;
+-(void)initializeJoinPlayersController;
 
 @end
