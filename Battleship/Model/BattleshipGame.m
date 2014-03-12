@@ -13,7 +13,7 @@
 @property(strong, nonatomic) GCHelper* gameCenter;
 -(void)updateMap:(Fleet*) updatedFleet;
 -(void)removeShipFromMap: (Ship*) s;
--(void)sendMap;
+-(BOOL)sendMap;
 -(void)match:(GKMatch*)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID;
 @end
 
@@ -37,6 +37,19 @@ typedef struct {
             _myTurn = false;
         }
         _gameMap = [[Map alloc] init];
+        for (int i = 0; i < GRID_SIZE; i++) {
+            for (int j = 0; j < GRID_SIZE; j++) {
+                if ([_gameMap.grid[i][j] isKindOfClass:[NSNumber class]]) {
+                    if ([_gameMap.grid[i][j] isKindOfClass:[NSNumber class]]) {
+                        Terrain terType = [_gameMap.grid[i][j] intValue];
+                        if (terType == CORAL) {
+                            NSLog(@"%d, %d", i, j);
+                        }
+                    }
+                    
+                }
+            }
+        }
         if (_myTurn) {
             
             [self sendMap];
@@ -47,7 +60,7 @@ typedef struct {
     return self;
 }
 
--(void)sendMap {
+-(BOOL)sendMap {
     NSError* error;
     NSLog(@"send");
     NSData *packet = [NSKeyedArchiver archivedDataWithRootObject:_gameMap.grid];
@@ -56,6 +69,7 @@ typedef struct {
     if (error != nil) {
         NSLog(@"error");
     }
+    return false;
 }
 
 -(void) match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
