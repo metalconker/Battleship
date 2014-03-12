@@ -12,21 +12,17 @@
 
 
 -(id)initWithSize:(CGSize)size {
-    if (self = [super initWithSize:size]) {
+    self = [super initWithSize:size];
+    if(self){
         
         // Initializing the background - more time efficient as only loads the textures once
         self.backgroundColor = [SKColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
         
         // Creates the battleship game
         _game = [[BattleshipGame alloc] init];
-        if(_game.localPlayer.isHost){
+        if(_game.localPlayer.isHost) {
             [self sendMap];
-        }
-        
-        // Creates the main game controller
-        _mainGameController = [[MainGameController alloc] initMainGameControllerWithGame:_game andFrame:self.frame.size];
-        
-        if(_game.localPlayer.isHost){
+            _mainGameController = [[MainGameController alloc] initMainGameControllerWithGame:_game andFrame:self.frame.size];
             [self addChild:_mainGameController.containers.overallNode];
         }
         
@@ -165,25 +161,6 @@ NSInteger intervals = 100;
     [[self view] addGestureRecognizer:_pinchRecognizer];
 }
 
--(BOOL)sendMap {
-    NSError* error;
-    NSLog(@"send");
-    NSData *packet = [NSKeyedArchiver archivedDataWithRootObject:_game.gameMap.grid];
-    BOOL success = [_game.gameCenter.match sendDataToAllPlayers: packet withDataMode:GKMatchSendDataReliable error:&error];
-    NSLog(@"%d", success);
-    if (error != nil) {
-        NSLog(@"error");
-    }
-    return false;
-}
 
--(void) match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
-    NSLog(@"test");
-    NSMutableArray* grid = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    _game.gameMap.grid = grid;
-    [_mainGameController initializeJoinPlayersController];
-    [self addChild:_mainGameController.containers.overallNode];
-    
-}
 
 @end

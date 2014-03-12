@@ -18,7 +18,6 @@
 @property (strong, nonatomic) Map* gameMap;
 @property BOOL dataSent;
 @property(strong, nonatomic) GCHelper* gameCenter;
-@property BOOL myTurn;
 @property(strong, nonatomic) Player* localPlayer;
 
 -(instancetype) init;
