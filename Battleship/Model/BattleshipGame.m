@@ -24,6 +24,7 @@ typedef struct {
 }Message;
 
 -(instancetype) init {
+    _dataSent = FALSE;
     self = [super init];
     if (self) {
         _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID];
@@ -37,19 +38,7 @@ typedef struct {
             _myTurn = false;
         }
         _gameMap = [[Map alloc] init];
-        for (int i = 0; i < GRID_SIZE; i++) {
-            for (int j = 0; j < GRID_SIZE; j++) {
-                if ([_gameMap.grid[i][j] isKindOfClass:[NSNumber class]]) {
-                    if ([_gameMap.grid[i][j] isKindOfClass:[NSNumber class]]) {
-                        Terrain terType = [_gameMap.grid[i][j] intValue];
-                        if (terType == CORAL) {
-                            NSLog(@"%d, %d", i, j);
-                        }
-                    }
-                    
-                }
-            }
-        }
+
         if (_myTurn) {
             
             [self sendMap];
