@@ -8,9 +8,7 @@
 
 #import "BattleshipGame.h"
 @interface BattleshipGame()
-@property BOOL myTurn;
-@property(strong, nonatomic) Player* localPlayer;
-@property(strong, nonatomic) GCHelper* gameCenter;
+
 -(void)updateMap:(Fleet*) updatedFleet;
 -(void)removeShipFromMap: (Ship*) s;
 -(BOOL)sendMap;
@@ -24,21 +22,18 @@ typedef struct {
 }Message;
 
 -(instancetype) init {
-    _dataSent = TRUE;
     self = [super init];
     if (self) {
         _gameCenter = [GCHelper sharedInstance:nil];
         _gameCenter.match.delegate = self;
-        NSString* loc = _localPlayer.playerID;
+        NSString* loc = [GKLocalPlayer localPlayer].playerID;
         if ([loc compare:_gameCenter.match.playerIDs[0]] < 0) {
             _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID andIsHost:TRUE];
             _myTurn = true;
             _gameMap = [[Map alloc] init];
-            [self sendMap];
         }
         else {
-            _dataSent = FALSE;
-            _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID andIsHost:TRUE];
+            _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID andIsHost:FALSE];
             _myTurn = false;
             
         }
@@ -48,24 +43,6 @@ typedef struct {
     return self;
 }
 
--(BOOL)sendMap {
-    NSError* error;
-    NSLog(@"send");
-    NSData *packet = [NSKeyedArchiver archivedDataWithRootObject:_gameMap.grid];
-    BOOL success = [_gameCenter.match sendDataToAllPlayers: packet withDataMode:GKMatchSendDataReliable error:&error];
-    NSLog(@"%d", success);
-    if (error != nil) {
-        NSLog(@"error");
-    }
-    return false;
-}
-
--(void) match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
-    NSLog(@"test");
-    NSMutableArray* grid = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
-    _gameMap.grid = grid;
-    _dataSent = TRUE;
-}
 
 //must remove fleet and then add fleet back
 /*

@@ -19,15 +19,35 @@
         
         // Creates the battleship game
         _game = [[BattleshipGame alloc] init];
-        
-        // Creates the main game controller
-        _mainGameController = [[MainGameController alloc] initMainGameControllerWithGame:_game andFrame:self.frame.size];
-        
-        [self addChild:_mainGameController.containers.overallNode];
-        
+        if(_game.localPlayer.isHost) {
+            [self sendMap];
+            _mainGameController = [[MainGameController alloc] initMainGameControllerWithGame:_game andFrame:self.frame.size];
+            [self addChild:_mainGameController.containers.overallNode];
+        }
     }
     
     return self;
+}
+
+-(BOOL)sendMap {
+    NSError* error;
+    NSLog(@"send");
+    NSData *packet = [NSKeyedArchiver archivedDataWithRootObject:_game.gameMap.grid];
+    BOOL success = [_game.gameCenter.match sendDataToAllPlayers: packet withDataMode:GKMatchSendDataUnreliable error:&error];
+    NSLog(@"%d", success);
+    if (error != nil) {
+        NSLog(@"error");
+    }
+    return false;
+}
+
+-(void) match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
+    NSLog(@"test");
+    NSMutableArray* grid = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    _game.gameMap.grid = grid;
+    _mainGameController = [[MainGameController alloc] initMainGameControllerWithGame:_game andFrame:self.frame.size];
+    [self addChild:_mainGameController.containers.overallNode];
+
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
