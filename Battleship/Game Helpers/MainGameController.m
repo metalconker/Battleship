@@ -15,6 +15,9 @@
     self = [super init];
     if (self) {
         _game = game;
+        while (!_game.dataSent) {
+            //wait for data to be received
+        }
         _names = [[Names alloc] initNames];
         _containers = [[Containers alloc] initContainersWithNames:_names];
         _sizes = [[Sizes alloc] initSizesWithFrameSize:frame];

@@ -24,35 +24,23 @@ typedef struct {
 }Message;
 
 -(instancetype) init {
+    _dataSent = TRUE;
     self = [super init];
     if (self) {
-        _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID];
         _gameCenter = [GCHelper sharedInstance:nil];
         _gameCenter.match.delegate = self;
         NSString* loc = _localPlayer.playerID;
         if ([loc compare:_gameCenter.match.playerIDs[0]] < 0) {
+            _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID andIsHost:TRUE];
             _myTurn = true;
+            _gameMap = [[Map alloc] init];
+            [self sendMap];
         }
         else {
+            _dataSent = FALSE;
+            _localPlayer = [[Player alloc] initWith:[GKLocalPlayer localPlayer].playerID andIsHost:TRUE];
             _myTurn = false;
-        }
-        _gameMap = [[Map alloc] init];
-        for (int i = 0; i < GRID_SIZE; i++) {
-            for (int j = 0; j < GRID_SIZE; j++) {
-                if ([_gameMap.grid[i][j] isKindOfClass:[NSNumber class]]) {
-                    if ([_gameMap.grid[i][j] isKindOfClass:[NSNumber class]]) {
-                        Terrain terType = [_gameMap.grid[i][j] intValue];
-                        if (terType == CORAL) {
-                            NSLog(@"%d, %d", i, j);
-                        }
-                    }
-                    
-                }
-            }
-        }
-        if (_myTurn) {
             
-            [self sendMap];
         }
         //[self updateMap: _hostFleet];
         //[self updateMap: _joinFleet];
@@ -76,19 +64,7 @@ typedef struct {
     NSLog(@"test");
     NSMutableArray* grid = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
     _gameMap.grid = grid;
-    for (int i = 0; i < GRID_SIZE; i++) {
-        for (int j = 0; j < GRID_SIZE; j++) {
-            if ([_gameMap.grid[i][j] isKindOfClass:[NSNumber class]]) {
-                if ([_gameMap.grid[i][j] isKindOfClass:[NSNumber class]]) {
-                    Terrain terType = [_gameMap.grid[i][j] intValue];
-                    if (terType == CORAL) {
-                        NSLog(@"%d, %d", i, j);
-                    }
-                }
-                
-            }
-        }
-    }
+    _dataSent = TRUE;
 }
 
 //must remove fleet and then add fleet back

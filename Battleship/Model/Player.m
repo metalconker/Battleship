@@ -10,15 +10,15 @@
 
 @implementation Player
 
-- (instancetype) initWith: (NSString*) playerID {
+- (instancetype) initWith: (NSString*) playerID andIsHost:(BOOL)player {
     self = [super init];
     if (self) {
         _playerID = playerID;
+        _isHost = player;
         self.radarGrid = [[NSMutableArray alloc] init];
         for(int i = 0; i<GRID_SIZE; i++){
             self.radarGrid[i] = [[NSMutableArray alloc] init];
             for(int j = 0; j < GRID_SIZE; j++){
-                
                 [self.radarGrid[i] insertObject:[NSNumber numberWithBool:NO] atIndex:j];          }
         }
     }

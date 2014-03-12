@@ -15,7 +15,7 @@
 @interface BattleshipGame : NSObject <GKMatchDelegate>
 
 @property (strong, nonatomic) Map* gameMap;
-
+@property BOOL dataSent;
 
 -(instancetype) init;
 -(void)moveShipfrom: (Coordinate*) origin
