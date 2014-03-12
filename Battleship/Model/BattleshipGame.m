@@ -36,24 +36,23 @@ typedef struct {
             _myTurn = false;
             
         }
-        //[self updateMap: _hostFleet];
-        //[self updateMap: _joinFleet];
+        [self updateMap: _localPlayer.playerFleet];
     }
     return self;
 }
 
 
 //must remove fleet and then add fleet back
-/*
+
 -(void)updateMap:(Fleet*) updatedFleet{
     for(Ship* ship in updatedFleet.shipArray) {
         for(ShipSegment* seg in ship.blocks) {
-            [_hostView.grid[seg.location.xCoord] removeObjectAtIndex:seg.location.yCoord];
-            [_hostView.grid[seg.location.xCoord] insertObject:seg atIndex:seg.location.yCoord];
+            [_gameMap.grid[seg.location.xCoord] removeObjectAtIndex:seg.location.yCoord];
+            [_gameMap.grid[seg.location.xCoord] insertObject:seg atIndex:seg.location.yCoord];
         }
     }
 }
-
+/*
 -(void)removeShipFromMap: (Ship*) s {
     for(ShipSegment* seg in s.blocks) {
         NSLog(@"%d, %d\n", seg.location.xCoord, seg.location.yCoord);
