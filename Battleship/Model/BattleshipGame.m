@@ -17,10 +17,6 @@
 
 @implementation BattleshipGame
 
-typedef struct {
-    __unsafe_unretained Map *m;
-}Message;
-
 -(instancetype) init {
     self = [super init];
     if (self) {
