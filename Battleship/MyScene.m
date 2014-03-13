@@ -20,6 +20,8 @@ typedef struct {
     __unsafe_unretained NSData* packet;
 }Message;
 
+
+
 -(id)initWithSize:(CGSize)size {
     self = [super initWithSize:size];
     if (self) {
@@ -75,17 +77,27 @@ typedef struct {
 }
 -(void) match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID {
     NSLog(@"test");
-    Message* receivedMessage = (Message*) [data bytes];
-    if (receivedMessage->type == MAP) {
-        NSMutableArray* grid = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:receivedMessage->packet];
-        _game.gameMap.grid = grid;
+    
+    NSMutableArray* receivedMessage = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    NSString* type = (NSString*) [NSKeyedUnarchiver unarchiveObjectWithData:receivedMessage[0]];
+    if ([type isEqualToString:@"mapData"]) {
+    
+        _game.gameMap.grid = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:receivedMessage[1]];
         [_game updateMap:_game.localPlayer.playerFleet];
         _mainGameController = [[MainGameController alloc] initMainGameControllerWithGame:_game andFrame:self.frame.size];
         [self addChild:_mainGameController.containers.overallNode];
     }
-    if (receivedMessage->type == SHIP_LOCATION) {
-        Fleet* playerFleet = (Fleet*)[NSKeyedUnarchiver unarchiveObjectWithData:receivedMessage->packet];
-        [_game updateMap:playerFleet];
+    if ([type isEqualToString:@"fleetData"]) {
+        Fleet *newFleet = [[Fleet alloc]init];
+        for(int i=1; i<[receivedMessage count]; i++){
+            Ship *s = newFleet.shipArray[i-1];
+            NSMutableArray *shipsArray = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:receivedMessage[i]];
+            s.shipName = (NSString*)[NSKeyedUnarchiver unarchiveObjectWithData:shipsArray[0]];
+            s.location.xCoord = [(NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData: shipsArray[1]] intValue];
+            s.location.yCoord = [(NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:shipsArray[2]] intValue];
+            s.location.direction = [(NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:shipsArray[3]] intValue];
+        }
+        [_game updateMap:newFleet];
     }
 }
 
