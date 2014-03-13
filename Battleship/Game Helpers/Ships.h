@@ -39,5 +39,4 @@
 
 - (void) updateShipLocation:(SKNode*) newShipLocation;
 - (void) animateShips:(NSInteger)intervals;
-
 @end

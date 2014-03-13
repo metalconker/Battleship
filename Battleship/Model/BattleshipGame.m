@@ -54,50 +54,41 @@
         }
     }
 }
-/*
+
 -(void)removeShipFromMap: (Ship*) s {
     for(ShipSegment* seg in s.blocks) {
         NSLog(@"%d, %d\n", seg.location.xCoord, seg.location.yCoord);
-        [_hostView.grid[seg.location.xCoord] removeObjectAtIndex:seg.location.yCoord];
-        [_hostView.grid[seg.location.xCoord] insertObject:[NSNumber numberWithInt:WATER] atIndex:seg.location.yCoord];
+        [_gameMap.grid[seg.location.xCoord] removeObjectAtIndex:seg.location.yCoord];
+        [_gameMap.grid[seg.location.xCoord] insertObject:[NSNumber numberWithInt:WATER] atIndex:seg.location.yCoord];
     }
 }
 
 -(void)moveShipfrom:(Coordinate *)origin to:(Coordinate *)destination {
-    Ship* s;
-    if (_hostsTurn) {
-        s = [_hostFleet getShipWithCoord:origin];
+    Ship* s = [_localPlayer.playerFleet getShipWithCoord:origin];
         NSLog(@"%@", s.shipName);
-    }
-    else {
-        s = [_joinFleet getShipWithCoord:origin];
-    }
     [self removeShipFromMap: s];
     [s positionShip: destination];
-    [self updateMap:_hostFleet];
-    [self updateMap:_joinFleet];
+    [self updateMap:_localPlayer.playerFleet];
 }
 
+
 -(NSMutableArray*) getValidMovesFrom:(Coordinate*)origin withRadarPositions:(BOOL)radarPositions {
-    Ship* s;
-    if (_hostsTurn) {
-        s = [_hostFleet getShipWithCoord:origin];
-    }
-    else {
-        s = [_joinFleet getShipWithCoord:origin];
-    }
+    Ship* s = [_localPlayer.playerFleet getShipWithCoord:origin];
+  
+    
+   
     NSMutableArray *validMoves = [s getHeadLocationsOfMove];
     NSMutableArray *movesToBeRemoved = [[NSMutableArray alloc] init];
     for (NSMutableArray* move in validMoves) {
         for(Coordinate* segmentLocation in move) {
-            if ([_hostView.grid[segmentLocation.xCoord][segmentLocation.yCoord] isKindOfClass:[ShipSegment class]]) {
-                ShipSegment *seg =_hostView.grid[segmentLocation.xCoord][segmentLocation.yCoord];
+            if ([_gameMap.grid[segmentLocation.xCoord][segmentLocation.yCoord] isKindOfClass:[ShipSegment class]]) {
+                ShipSegment *seg =_gameMap.grid[segmentLocation.xCoord][segmentLocation.yCoord];
                 if (![seg.shipName isEqualToString:s.shipName]) {
                     [movesToBeRemoved addObject:move];
                 }
             }
-            else if ([_hostView.grid[segmentLocation.xCoord][segmentLocation.yCoord] isKindOfClass:[NSNumber class]]) {
-                if ([_hostView.grid[segmentLocation.xCoord][segmentLocation.yCoord] intValue] != WATER) {
+            else if ([_gameMap.grid[segmentLocation.xCoord][segmentLocation.yCoord] isKindOfClass:[NSNumber class]]) {
+                if ([_gameMap.grid[segmentLocation.xCoord][segmentLocation.yCoord] intValue] != WATER) {
                     [movesToBeRemoved addObject: move];
                 }
                 
@@ -172,46 +163,34 @@
 }
 
 -(NSMutableArray *)getValidActionsFrom:(Coordinate *)origin {
-    Ship* s;
-    if (_hostsTurn) {
-        s = [_hostFleet getShipWithCoord:origin];
-    }
-    else {
-        s = [_joinFleet getShipWithCoord:origin];
-    }    
+    Ship* s = [_localPlayer.playerFleet getShipWithCoord:origin];
+    
     return s.viableActions;
 }
 
 -(Coordinate*) fireTorpedo:(Coordinate *)origin {
-    Ship* s;
-    if (_hostsTurn) {
-        s = [_hostFleet getShipWithCoord:origin];
-    }
-    else {
-        s = [_joinFleet getShipWithCoord:origin];
-    }
-    Coordinate* impactCoord = [_hostView collisionLocationOfTorpedo:s.location];
-    if ([_hostView.grid[impactCoord.xCoord][impactCoord.yCoord] isKindOfClass:[ShipSegment class]]) {
-        ShipSegment *shipSeg = _hostView.grid[impactCoord.xCoord][impactCoord.yCoord];
+    Ship* s = [_localPlayer.playerFleet getShipWithCoord:origin];
+
+
+    Coordinate* impactCoord = [_gameMap collisionLocationOfTorpedo:s.location];
+    if ([_gameMap.grid[impactCoord.xCoord][impactCoord.yCoord] isKindOfClass:[ShipSegment class]]) {
+        ShipSegment *shipSeg = _gameMap.grid[impactCoord.xCoord][impactCoord.yCoord];
         int shipBlock = shipSeg.block;
-        if (_hostsTurn) {
-            s = [_hostFleet getShipWithCoord:origin];
-        }
-        else {
-            s = [_joinFleet getShipWithCoord:origin];
-        }
+   
+            s = [_localPlayer.playerFleet getShipWithCoord:origin];
+    
+
+      
         [s damageShipWithTorpedoAt:shipBlock];
     }
     return impactCoord;
 }
 -(Coordinate*) getCoordOfShip: (NSString*) shipName {
     Fleet *currentFleet;
-    if (_hostsTurn) {
-        currentFleet = _hostFleet;
-    }
-    else {
-        currentFleet = _joinFleet;
-    }
+   
+        currentFleet = _localPlayer.playerFleet;
+    
+
     for (Ship *s in currentFleet.shipArray) {
         if ([s.shipName isEqualToString:shipName]) {
             return s.location;
@@ -222,13 +201,9 @@
 
 
 -(NSMutableArray*) getShipDamages:(Coordinate *)origin {
-    Ship* s;
-    if (_hostsTurn) {
-        s = [_hostFleet getShipWithCoord:origin];
-    }
-    else {
-        s = [_joinFleet getShipWithCoord:origin];
-    }
+    Ship* s = [_localPlayer.playerFleet getShipWithCoord:origin];
+ 
+
     NSMutableArray* damages = [[NSMutableArray alloc] init];
     for (int i = 0; i < s.size; i++) {
         ShipSegment *shipSeg = s.blocks[i];

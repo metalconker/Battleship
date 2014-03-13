@@ -84,6 +84,7 @@ typedef struct {
     
         _game.gameMap.grid = (NSMutableArray*)[NSKeyedUnarchiver unarchiveObjectWithData:receivedMessage[1]];
         [_game updateMap:_game.localPlayer.playerFleet];
+        [_game updateMap:_game.localPlayer.enemyFleet];
         _mainGameController = [[MainGameController alloc] initMainGameControllerWithGame:_game andFrame:self.frame.size];
         [self addChild:_mainGameController.containers.overallNode];
     }
@@ -97,8 +98,26 @@ typedef struct {
             s.location.yCoord = [(NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:shipsArray[2]] intValue];
             s.location.direction = [(NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData:shipsArray[3]] intValue];
         }
+  
         [_game updateMap:newFleet];
+        
+        [_mainGameController redrawShips];
     }
+    /*if([type isEqualToString::@"moveData"]){
+        /* 1- NSNumber index of ship in flee
+           2- NSnumber new x cord
+           3- NSnumber new y cord
+           4- NSnumber new direction
+         
+        Coordinate *newPosition = [[Coordinate alloc]init];
+        newPosition.xCoord = [(NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData: receivedMessage[2]] intValue];
+        newPosition.yCoord = [(NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData: receivedMessage[3]] intValue];
+        newPosition.direction = [(NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData: receivedMessage[4]] intValue];
+        int shipIndex = [(NSNumber *)[NSKeyedUnarchiver unarchiveObjectWithData: receivedMessage[1]] intValue];
+        NSArray *localShips = _game.localPlayer.playerFleet.shipArray;
+        [localShips[shipIndex] positionShip:newPosition];
+        
+    }*/
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {

@@ -94,4 +94,8 @@
                                              andHelper:_helper];
 }
 
+-(void)redrawShips{
+    //[_ships initShipSprites];
+}
+
 @end

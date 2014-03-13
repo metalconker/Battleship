@@ -23,6 +23,7 @@
         }
     }
     self.playerFleet = [[Fleet alloc] initWith:_isHost];
+    self.enemyFleet = [[Fleet alloc] initWith:!_isHost];
     return self;
 }
 
